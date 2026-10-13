@@ -33,6 +33,12 @@ _Last updated: 2026-10-13 (UTC)_
 - Charts: sector index, finalists BTC-rebased, per-finalist history (catalyst annotations pending).
 - Methodology & data-quality notes (`sources/METHODOLOGY.md`); scenario engine scaffold.
 
+## Integrated so far
+- Brand PFPs (Pudgy/Azuki/Moonbirds) + Milady/Remilio/CDB culture & catalysts done (dossiers/_research, catalysts/*.csv).
+  Key: every token/celebrity catalyst retraced in 1–3 months; quiet windows since 2025 negative; Milady/Pudgy/Azuki/
+  Remilio fail founder-independence; CDB passes it (team gone 2023) but thin/contested IP; Moonbirds ≈ orphan baseline.
+  Verified independently: Abstract shutdown 2026-12-15 (ann. 2026-10-06); Vitalik holds Milady #9286 (2025-01-18) & #595.
+
 ## Active (background agents)
 - Culture/catalyst research ×3 (Milady/Remilio/CDB; Pudgy/Azuki/Moonbirds; Squiggle/Terraforms/V1 + Curio/MoonCats).
 - On-chain collector analyst (holders, retention, lending escrow incl. Blend + Gondi, sales classification).

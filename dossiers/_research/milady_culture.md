@@ -219,12 +219,12 @@ Historical base rate: **every such catalyst retraced within 1–3 months.**
 ## 11. Sources (all accessed 2026-10-13)
 
 **Primary and on-chain**
-- [OC] Ethereum mainnet via Tenderly public gateway `https://gateway.tenderly.co/public/mainnet`, queries 2026-10-13 21:52–22:06 UTC (block head 26,186,380). Methods are in `/tmp` scratch scripts, summarised here:
-  - Milady Transfer logs to/from 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045, blocks 21,300,000–head.
+- [OC] Ethereum mainnet via Tenderly public gateway `https://gateway.tenderly.co/public/mainnet`, queries 2026-10-13 21:52–22:17 UTC (block head 26,186,499). The script is `scripts/culture_onchain_checks.py` and the raw output is `data/raw/culture/onchain_checks.json`. It covers:
+  - Milady Transfer logs to/from 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045, blocks 21,300,000–head, plus `ownerOf`.
   - Milady first mints, blocks 12.9M–13.2M.
   - Remilio first mints, blocks 15.2M–15.4M.
-  - CULT `0x0000000000c5dc95539589fbD24BE07c6C14eCa4`: totalSupply/name/symbol; first Transfer logs, blocks 21.2M–21.42M; balanceOf at historical blocks (saved to `data/raw/culture/cult_holder_balances.json`).
-  - CULT/WETH Uni v3 pool `0xc4ce8e63921b8b6cbdb8fcb6bd64cc701fb926f2`: `slot0()` at 31 historical blocks (`data/processed/culture/cult_price_samples.csv`, raw `data/raw/culture/cult_pool_slot0_samples.json`).
+  - CULT `0x0000000000c5dc95539589fbD24BE07c6C14eCa4`: `totalSupply` = 100B. The genesis mint (block 21,318,642, 2024-12-03 01:17 UTC) and the first distribution (block 21,361,238, 2024-12-09 00:04 UTC) were located with `eth_getLogs` in 200–10k-block ranges (ad hoc query, 2026-10-13 21:52–21:53 UTC). `balanceOf` at historical blocks is also included.
+  - CULT/WETH Uni v3 pool `0xc4ce8e63921b8b6cbdb8fcb6bd64cc701fb926f2`: `slot0()` at 28 historical blocks (`data/processed/culture/cult_price_samples.csv`).
 - Etherscan transactions: Vitalik #9286 purchase https://etherscan.io/tx/0x8b52f966d7ec360050ccea1c2c13c4f6b42f826da16c118e43a4ad4950261e91 ; #595 transfer https://etherscan.io/tx/0x93b8b1c009d291f81f4bcbbb478d56e739193ee211e73d9726b64177db561882
 - CoinGecko public API, `milady-cult-coin` coin and 365d chart (`data/raw/culture/coingecko_cult_*.json`). **Caveat:** CoinGecko's Jan 10 – Mar 27, 2026 prices (~$0.0006) conflict with on-chain pool prices (~$0.00017) and are treated as a data error. GeckoTerminal OHLCV, last 364 days (`data/raw/culture/geckoterminal_cult_*.json`).
 - Remilia wiki (Remilia-run, so treat as self-interested): https://wiki.remilia.org/Milady_Maker (last edited 2026-09-09), /Remilia_Corporation (2026-06-25), /$CULT (2026-03-19), /Bonkler, /Milady_Raves, /Remilio_Babies.
@@ -264,6 +264,9 @@ Historical base rate: **every such catalyst retraced within 1–3 months.**
 - Cryptoticker (Oct 2026 snapshot citing CoinGecko ATH 7.35 ETH "Dec 2024", which conflicts with the NPF ATH of 6.34): https://cryptoticker.io/en/nft-prices-october-2026-bored-ape-cryptopunks-floor
 
 **UNVERIFIED / not found**
+- **No 2022 lawsuit over Remilio funds was found.** The Remilia disputes with former collaborators are the Sept 2023 "Bonkler 9/11" suits: Nevada, filed 2023-09-10/11, and the Delaware countersuit, 2023-09-22.
+- **No Binance-related factor around the May 2023 rally was found.** The only Binance link is the Binance Awards in July 2023. Bonkler launched in April 2023, before the Musk post.
+- **The CULT TGE was not delayed into 2025.** It happened 2024-12-09 00:04 UTC [OC], about 6 months after the June 2024 presale.
 - The "there's a Milady meme for everything" Musk quote (the actual text was "There is no meme. I love you."). No later Musk Milady posts were found.
 - The original CoinDesk May 2022 article.
 - Lawsuit outcomes.
