@@ -54,7 +54,10 @@ for f in sorted(glob.glob(os.path.join(PROC, "catalysts", "*.csv"))):
             d = pd.Timestamp(str(e["date"])[:10])
         except Exception:  # noqa
             continue
-        r = {"file": stem, "date": d.date(), "event": e.get("event"), "category": e.get("category")}
+        ev = str(e.get("event"))
+        r = {"file": stem, "date": d.date(), "event": e.get("event"), "category": e.get("category"),
+             # placeholder rows: scheduled/unverified events (e.g., CULT 'Manipulation Rounds' never evidenced)
+             "placeholder": ("scheduled" in ev.lower()) or ("Manipulation Round" in ev)}
         if d < s.index[0] + pd.Timedelta(days=3) or d > s.index[-1]:
             r["note"] = "outside NPF coverage"
             rows.append(r)
@@ -82,7 +85,32 @@ for f in sorted(glob.glob(os.path.join(PROC, "catalysts", "*.csv"))):
         rows.append(r)
 
 df = pd.DataFrame(rows)
+# Independent episodes: within a collection x category, keep only events >= 45 days after the previously kept one
+df = df.sort_values(["file", "category", "date"]).reset_index(drop=True)
+keep, last = [], {}
+for i, r in df.iterrows():
+    kk = (r.file, r.category)
+    d = pd.Timestamp(r.date)
+    ok = (not r.placeholder) and (kk not in last or (d - last[kk]).days >= 45)
+    if ok:
+        last[kk] = d
+    keep.append(ok)
+df["independent"] = keep
 df.to_csv(os.path.join(PROC, "event_study.csv"), index=False)
+# Category summary on independent, non-placeholder events with dispersion
+ind = df[df.independent & df.btc_90d.notna()]
+summ = ind.groupby("category").agg(n_independent=("btc_90d", "size"), btc30_med=("btc_30d", "median"),
+                                   btc90_med=("btc_90d", "median"), btc90_q25=("btc_90d", lambda x: x.quantile(.25)),
+                                   btc90_q75=("btc_90d", lambda x: x.quantile(.75)),
+                                   abn90_med=("abn_btc_90d", "median"), btc180_med=("btc_180d", "median"),
+                                   maxup90_med=("max_btc_within_90d", "median"))
+summ.to_csv(os.path.join(PROC, "event_study_summary.csv"))
+print(summ.round(2).to_string())
+TGE = [("pudgy", "2024-12-17"), ("milady", "2024-12-09"), ("azuki", "2025-01-23"), ("moonbirds", "2026-01-28"),
+       ("cryptodickbutts", "2023-05-05"), ("milady", "2023-05-07")]
+tg = df[[ (r.file, str(r.date)) in TGE for r in df.itertuples()]]
+print("TGE-only (one row per token):", len(tg), tg[["file", "date", "btc_90d", "abn_btc_90d"]].round(2).to_dict("records"))
+print("TGE-only medians: btc_90d", round(tg.btc_90d.median(), 3), "abn_90d", round(tg.abn_btc_90d.median(), 3))
 pd.set_option("display.width", 250)
 pd.set_option("display.max_colwidth", 60)
 pd.set_option("display.max_rows", 300)

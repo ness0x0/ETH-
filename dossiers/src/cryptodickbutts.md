@@ -36,7 +36,9 @@ Contract `0x42069abfe407c60cf4ae4112bedead391dba1cdb`. The full research with so
 
 - Best bid is 84% of floor, with zero funded bids at ≥90%.
 - A 5-item position costs ~29% above floor on the instant book, and the instant round trip loses ~41%.
-- The 90-day average sale was ~0.64× the NPF floor, so the quoted floor is not a reliable executable price.
+- Correction: an earlier draft cited NPF data implying sales at ~0.64× floor. On-chain sales show a trailing-12m
+  median sale price of 1.02× the NPF floor, so the floor is executable for single items. The problem is bid depth and
+  turnover at the investor's size.
 
 ## 5. Bull thesis / bear thesis
 
@@ -45,12 +47,13 @@ Contract `0x42069abfe407c60cf4ae4112bedead391dba1cdb`. The full research with so
   - A deep meme with a committed whale and DAO.
   - The highest convexity in the set in 2025 (+690% vs BTC trough to peak).
 - **Bear.**
-  - Not exitable at the quoted floor.
+  - Slow to exit at size: ~1.1 organic sales/day, and the best bid is 84% of floor.
   - Contested IP.
   - Governance concentrated in one whale.
   - No catalyst in its history created lasting value.
 
 ## 6. Verdict rationale
 
-It passes the founder test but fails the liquidity and executable-valuation tests at the investor's ticket size. It
-stays on the watchlist only.
+It passes the founder test, and its rule-based scenario profile is comparable to V1's: rule-B break-even 20%,
+hold-through break-even 30%. But it fails the exit-liquidity test at the investor's ticket size and has contested
+IP. A patient, bid-side accumulation of 1–2 items is the only sensible way to own it.

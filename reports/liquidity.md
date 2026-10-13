@@ -76,7 +76,7 @@ Position maths: `scripts/liquidity_position.py`._
 2. **Chromie Squiggle's 8.5% fees plus a ~22% bid gap make it a buy-and-hold asset by construction.** It needs a
    large move before a sale makes sense. That works against its role as a "survivability" pick, because survivability
    matters most to a holder who doesn't trade, and holding has not beaten BTC.
-3. **CryptoDickbutts is not exitable at the quoted floor:** a ~41% instant round trip and 11-hour organic sale gaps.
-   It is excluded from the shortlist on liquidity alone.
+3. **CryptoDickbutts is slow to exit at size:** a ~41% instant round trip (mostly from a thin ask stack above the floor)
+   and 11-hour organic sale gaps. Single items do clear near the floor: the on-chain median sale is 1.02× the floor.
 4. **Divisible positions (Milady 3–4 items, Lil Pudgys ~12) allow scaling out,** which suits disciplined exits better
    than a single high-priced item.
