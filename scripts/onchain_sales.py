@@ -303,9 +303,9 @@ def classify_tx(key, contract, rec, moves):
                     typ = "lending_lock"
                 elif cs == "lending":
                     typ = "lending_release"
-                elif cb in ("amm_pool", "fractional_vault", "staking", "bridge_wrapper"):
+                elif cb in ("amm_pool", "strategy_vault", "fractional_vault", "staking", "bridge_wrapper"):
                     typ = f"deposit_{cb}"
-                elif cs in ("amm_pool", "fractional_vault", "staking", "bridge_wrapper"):
+                elif cs in ("amm_pool", "strategy_vault", "fractional_vault", "staking", "bridge_wrapper"):
                     typ = f"withdraw_{cs}"
                 elif cs in L.WALLET_CATS and cb in L.WALLET_CATS:
                     typ = "wallet_transfer"

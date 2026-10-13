@@ -1,0 +1,124 @@
+{
+ "fetched_at_utc": "2026-10-13T22:40:00Z",
+ "rpc": "Tenderly public gateway / NodeReal public endpoint via scripts/common.py; Blockscout API v2 for creation txs, verified source, tx lists",
+ "scripts": "scripts/culture_onchain/*.py (keccak.py = pure-python keccak256 helper)",
+ "chromie_squiggle": {
+  "contract": "0x059edd72cd353df5106d2b9cc5ab83a52287ac3a",
+  "created_utc": "2020-11-27T05:59:43Z",
+  "projectTokenInfo0": {
+   "invocations": 10000,
+   "maxInvocations": 10000,
+   "block": 26186384
+  },
+  "projectScriptInfo0": {
+   "type": "p5js 1.0.0",
+   "locked": true
+  },
+  "first_mint": "2020-11-27T16:12:02Z block 11341538",
+  "minted_by_2022_01_01": 9247,
+  "reserve_mints_2022_2024": 753,
+  "token_9998_mint": "2024-07-23 block 20371482 to 0x9b917686dd68b68a780cb8bf70af46617a7b3f80 (contract 'Relic')",
+  "token_9999_mint": "2024-08-21T18:30:11Z block 20578795 to 0x6e9015340a4ae63abf829bc91a85a91def2fca90; moved 2024-09-06 to 0x652312881cbbbf5c521e0ec81ba1aa7de8c69d43",
+  "toledo_inferred_wallet": {
+   "address": "0x63c2645bfd81bfdfaa960fe1f91166e37f808bec",
+   "holds": [
+    "CryptoPunk #9833",
+    "Squiggle #1458 (received 2025-03-12)",
+    "Squiggle #7884"
+   ]
+  },
+  "toledo_exhibited_ids_in_private_wallets": {
+   "0x55faf0e5e6e532b1c5799bdeec1a0f193e54a92d": [
+    4697,
+    2394,
+    1698,
+    2557,
+    7583
+   ],
+   "0x95b9f6e91212014ed3224c8ccc17dcd5895a7f53": [
+    8929,
+    2685,
+    8064
+   ]
+  }
+ },
+ "terraforms": {
+  "contract": "0x4e1f41613c9084fdb9e34e11fae9412427480e56",
+  "totalSupply": 9911,
+  "MAX_SUPPLY": 11104,
+  "SUPPLY_public": 9904,
+  "OWNER_ALLOTMENT": 1200,
+  "PRICE_wei": 160000000000000000,
+  "dreamers": 1913,
+  "seed": 10196,
+  "owner": "0x7a822bce7b9fadd3ed4a533b48eb04eb22696405 (EOA)",
+  "remaining_owner_mintable": 1193,
+  "first_mint": "2021-12-17T15:21:26Z block 13823383",
+  "last_mint": "2023-09-08T07:01:47Z block 18090078",
+  "tokenURIAddresses": {
+   "0": "0xa5afc9fe76a28fb12c60954ed6e2e5f8cef64ff2 TerraformsData 2021-12-17",
+   "1": "0xb51a3bb80d50a3153c1b63b0e38fc200676f5ba5 ERC1967Proxy->TerraformsData_v1_0 (0xef274e6b...) 2023-12-24",
+   "2": "0x8af860c8f157f4e3b6a54913bfa6bb96ab2605c2 ERC1967Proxy->TerraformsData_v2_0 (0xeff6c0a4...) 2023-12-24"
+  },
+  "antenna_proxy": "0x331512a28a4cf80221af949b5d43041ff0fc7f01 -> TerraformsBeacon_v2_0 (0x08c57779...) 2023-12-24",
+  "deployer": "0x9f400619b85EACa2F1f76f4F7e44aB7e5eE12cFA",
+  "td_r_unes": {
+   "proxy": "0xC2C5f8aAD3428551c8ABb9C4Be62724Ea36C3717",
+   "impl": "0xFC9D80EF9FE382003Ce3eD900A8bAd387B46441B",
+   "deployed": "2026-07-14",
+   "verified_blockscout": "2026-09-20/25",
+   "version": "Version 1.0",
+   "segmentCounter": 1,
+   "signedByTDR": false,
+   "locked": false,
+   "owner": "0x9f400619b85eaca2f1f76f4f7e44ab7e5ee12cfa"
+  }
+ },
+ "v1_punks": {
+  "v1_contract": "0x6Ba6f2207e343923BA692e5Cae646Fb0F566DB8D created 2017-06-09T00:22:50Z",
+  "v2_contract": "0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB created 2017-06-22T19:40:00Z",
+  "wpv1": {
+   "address": "0x282bdd42f4eb70e7a9d9f40c8fea0825b7f68c5d",
+   "created": "2022-01-17T10:15:07Z",
+   "owner": "franknft.eth 0xF40Fd88ac59A206D009A07F8c09828a01e2ACC0d",
+   "totalSupply": 5125,
+   "v1_held": 5130,
+   "wraps_total": 5425,
+   "unwraps_total": 300,
+   "owner_powers": "setBaseTokenURI only"
+  },
+  "wpunks1": {
+   "address": "0xf4a4644e818c2843ba0aabea93af6c80b5984114",
+   "created": "2021-03-25",
+   "v1_held": 9
+  },
+  "distinct_v1_owner_addresses": 222,
+  "top_holders": {
+   "0xa858ddc0445d8131dac4d1de01f834ffcba52ef1 (Gnosis Safe; inferred Yuga; also 414 V2 Punks)": 1084,
+   "0x883dc31e122e2395d20a50e8ee0322a2e513caca": 1005,
+   "0x00bd9fd57c423a1b1c969823d409156d90974d77": 506,
+   "0xe45df57df7980d8219a5ea811aff949907d0a355": 195
+  },
+  "yuga_safe_receipt": "1,084 PunkTransfer from 0x5b098b00621eda6a96b7a476220661ad265f083f starting block 14406058 (2022-03-17); 0 outbound since",
+  "native_paid_sales_2026": {
+   "2026-05": 10,
+   "2026-06": 4,
+   "2026-07": 3,
+   "2026-08": 10,
+   "2026-09": 2
+  },
+  "notable_native_sales": [
+   "#1119 42.69 ETH ~2026-05-25",
+   "#2890 180 ETH ~2026-07-10 (wrapped 2026-07-15)"
+  ]
+ },
+ "curio": {
+  "wrapper": "0x73da73ef3a6982109c4d5bdb0db9dd3e3783f313 CurioERC1155Wrapper created 2021-03-28T17:58:21Z",
+  "sales_file": "curio_sales_180d.json"
+ },
+ "mooncats": {
+  "rescue": "0x60cd862c9C687A9dE49aecdC3A99b74A4fc54aB6 created 2017-08-09T04:36:06Z",
+  "acclimator": "0xc3f733ca98e0dad0386979eb96fb1722a1a05e69 created 2021-04-22T01:52:09Z totalSupply 20953",
+  "team": "team.mooncatrescue.eth 0xdf2e60af57c411f848b1ea12b10a404d194bce27; setBaseURI 2026-08-23; setAccessoryPrice 2026-09-04"
+ }
+}

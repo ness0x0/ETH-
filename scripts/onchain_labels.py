@@ -5,13 +5,13 @@ Sources  : Blockscout Ethereum API v2 GET https://eth.blockscout.com/api/v2/addr
            data/raw/onchain/blockscout/addresses.jsonl with fetch time.
            For contracts Blockscout cannot name: eth_getCode (EIP-1167 / clone-with-immutable-args implementation
            address -> Blockscout name of the implementation), EIP-1967 implementation slot, and eth_call probes
-           (Sudoswap `nft()`/`pairVariant()`, Safe `getThreshold()`, NFTX `assetAddress()`/`vaultId()`), via
-           Tenderly/NodeReal (common.RPC) at HEAD_BLOCK.
+           (Sudoswap `nft()`/`pairVariant()`, Safe `getThreshold()`, NFTX `assetAddress()`), at HEAD_BLOCK via
+           Tenderly, NodeReal, dRPC and Blast public endpoints (threaded single calls).
 Scope    : every address with contract code (non-EIP-7702) that ever received a token of any of the 9 collections,
            plus the top-60 holders at head of each collection (EOAs included, for ENS names).
 Output   : data/processed/onchain/address_labels.csv
            (address, is_contract, is_7702, name, impl_names, tags, ens, category, protocol, label_source)
-Category : lending | amm_pool | staking | bridge_wrapper | marketplace_escrow | fractional_vault | safe | smart_wallet
+Category : lending | amm_pool | strategy_vault (NFT 'Strategy' tokens that auto-buy floors) | staking | bridge_wrapper | marketplace_escrow | fractional_vault | safe | smart_wallet
            | burn | contract_unlabelled | eoa. Rules are keyword rules on verified names (see RULES) plus a small manual
            list of addresses verified by hand (MANUAL). Keyword classification can mislabel; labels are best-effort.
 """
@@ -27,7 +27,7 @@ import pandas as pd
 import requests
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from common import RPC, RPCS, utcnow  # noqa: E402
+from common import RECEIPT_RPCS, utcnow  # noqa: E402
 from onchain_config import BLEND, COLLECTIONS, DEAD, HEAD_BLOCK, PROC_ON, RAW_ON  # noqa: E402
 import onchain_lib as L  # noqa: E402
 
@@ -38,11 +38,15 @@ CACHE = os.path.join(RAW_ON, "blockscout", "addresses.jsonl")
 MANUAL = {
     BLEND: ("blur_blend", "lending"),
     "0x0000000000a39bb272e79075ade125fd351887ac": ("blur_pool", "marketplace_escrow"),
+    # "UUPSProxy" accounts deployed by an AccountFactory (0x665766368ee511ebd3cd5f9300520dac915e941c) — ERC-4337 wallets
+    "0xf37d69f29346bc633c71ef34a3e2b9d2152fc7e3": ("smart_wallet", "smart_wallet"),
+    "0x8ea0de226713ffd8f0f9a1a52fd275b141cc4b22": ("smart_wallet", "smart_wallet"),
 }
 
 # (regex on "name | impl names | tags", category, protocol) — first match wins
 RULES = [
-    (r"MultiSourceLoan|Gondi", "lending", "gondi"),
+    (r"MultiSourceLoan|(?i:gondi)", "lending", "gondi"),
+    (r"Strategy", "strategy_vault", "nft_strategy_token"),
     (r"\bBlend\b", "lending", "blur_blend"),
     (r"DirectLoan|NFTfi|LoanCoordinator|AssetOfferLoan|CollectionOfferLoan|NftfiHub|Nftfi", "lending", "nftfi"),
     (r"Arcade|AssetVault|LoanCore|OriginationController|VaultFactory", "lending", "arcade"),
@@ -60,6 +64,8 @@ RULES = [
     (r"NFTXVault|NFTX", "amm_pool", "nftx"),
     (r"LSSVMPair|Sudo", "amm_pool", "sudoswap"),
     (r"^FWA", "marketplace_escrow", "fwa_random_pool"),
+    (r"HibernationDen", "marketplace_escrow", "game_raffle_escrow"),
+    (r"IndexERC721|NFT Basket", "fractional_vault", "index_basket"),
     (r"Flooring|FloorGetter|^fp[A-Z]", "fractional_vault", "flooring"),
     (r"Collectionswap|Caviar|Pair\b|Pool\b|AMM", "amm_pool", "other_amm"),
     (r"GnosisSafe|SafeL2|^Safe\b|SafeProxy|\bSafe\b", "safe", "gnosis_safe"),
@@ -137,31 +143,54 @@ PROXY_PAT = re.compile(r"73([0-9a-f]{40})5af4")  # minimal proxy / clones: PUSH2
 CLONE_IA = re.compile(r"^0x3d3d3d3d363d3d37[0-9a-f]{0,40}?73([0-9a-f]{40})")
 
 
-def probe(addrs, rpc):
-    """On-chain probes for unnamed contracts. Returns addr -> dict."""
+def _post(sess, url, method, params):
+    r = sess.post(url, json={"jsonrpc": "2.0", "id": 1, "method": method, "params": params}, timeout=30).json()
+    if "result" not in r:
+        raise RuntimeError(str(r.get("error"))[:120])
+    return r["result"]
+
+
+def probe(addrs, urls):
+    """On-chain probes for unnamed contracts (threaded, one session per worker). Returns addr -> dict."""
     out = {}
-    for a in addrs:
+    local = threading.local()
+    counter = [0]
+
+    def one(a):
+        if not hasattr(local, "s"):
+            local.s = requests.Session()
+            with _lock:
+                counter[0] += 1
+                local.url = urls[counter[0] % len(urls)]
         d = {}
-        try:
-            code = rpc.call("eth_getCode", [a, hex(HEAD_BLOCK)])
-            m = PROXY_PAT.search(code[:400]) or CLONE_IA.search(code[:200])
-            if m:
-                d["impl"] = "0x" + m.group(1)
-            slot = rpc.call("eth_getStorageAt", [a, "0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc",
-                                                 hex(HEAD_BLOCK)])
-            if int(slot, 16):
-                d["impl1967"] = "0x" + slot[-40:]
-            for sel, nm in [("0x47ccca02", "nft"), ("0xe75235b8", "getThreshold"), ("0x1ba46cfd", "assetAddress"),
-                            ("0x3053fc58", "pairVariant")]:
-                try:
-                    res = rpc.call("eth_call", [{"to": a, "data": sel}, hex(HEAD_BLOCK)], retries=2)
-                    if res and res != "0x" and len(res) == 66:
-                        d[nm] = res
-                except Exception:  # noqa
-                    pass
-        except Exception as e:  # noqa
-            d["err"] = str(e)[:100]
-        out[a] = d
+        for attempt in range(3):
+            try:
+                code = _post(local.s, local.url, "eth_getCode", [a, hex(HEAD_BLOCK)])
+                m = PROXY_PAT.search(code[:400]) or CLONE_IA.search(code[:200])
+                if m:
+                    d["impl"] = "0x" + m.group(1)
+                slot = _post(local.s, local.url, "eth_getStorageAt",
+                             [a, "0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc", hex(HEAD_BLOCK)])
+                if int(slot, 16):
+                    d["impl1967"] = "0x" + slot[-40:]
+                for sel, nm in [("0x47ccca02", "nft"), ("0xe75235b8", "getThreshold"),
+                                ("0x1ba46cfd", "assetAddress"), ("0x3053fc58", "pairVariant")]:
+                    try:
+                        res = _post(local.s, local.url, "eth_call", [{"to": a, "data": sel}, hex(HEAD_BLOCK)])
+                        if res and res != "0x" and len(res) == 66:
+                            d[nm] = res
+                    except Exception:  # noqa — reverted call = function absent
+                        pass
+                d.pop("err", None)
+                break
+            except Exception as e:  # noqa
+                d["err"] = str(e)[:100]
+                time.sleep(1 + attempt)
+        return a, d
+
+    with ThreadPoolExecutor(12) as ex:
+        for a, d in ex.map(one, addrs):
+            out[a] = d
     return out
 
 
@@ -216,12 +245,12 @@ def main():
     print("probing unnamed contracts", len(unnamed), flush=True)
     pcache_p = os.path.join(RAW_ON, "blockscout", "probes.json")
     pcache = json.load(open(pcache_p)) if os.path.exists(pcache_p) else {}
-    rpc = RPC(RPCS, min_interval=0.05)
-    todo = [a for a in unnamed if a not in pcache]
-    for i in range(0, len(todo), 200):
-        pcache.update(probe(todo[i:i + 200], rpc))
+    todo = [a for a in unnamed if a not in pcache or pcache[a].get("err")]
+    urls = RECEIPT_RPCS[:2] + RECEIPT_RPCS[2:3] + RECEIPT_RPCS[4:5]
+    for i in range(0, len(todo), 300):
+        pcache.update(probe(todo[i:i + 300], urls))
         json.dump(pcache, open(pcache_p, "w"))
-        print("probed", i + 200, flush=True)
+        print("probed", i + 300, flush=True)
     impls = sorted({v.get("impl") or v.get("impl1967") for v in pcache.values()
                     if v.get("impl") or v.get("impl1967")} - set(cache))
     fetch_all(impls, cache)

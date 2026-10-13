@@ -27,7 +27,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from onchain_config import BLEND, COLLECTIONS, DEAD  # noqa: E402
 import onchain_lib as L  # noqa: E402
 
-CATS = ["lending", "amm_pool", "staking", "bridge_wrapper", "marketplace_escrow", "fractional_vault", "safe",
+CATS = ["lending", "amm_pool", "strategy_vault", "staking", "bridge_wrapper", "marketplace_escrow", "fractional_vault", "safe",
         "smart_wallet", "contract_unlabelled"]
 
 

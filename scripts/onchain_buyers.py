@@ -51,6 +51,8 @@ def npf_bars(slug):
     d = json.load(open(p))["data"]
     df = pd.DataFrame({"ts": pd.to_datetime(d["timestamps"], unit="ms", utc=True), "floor": d["floorNative"],
                        "sales": d["salesCount"], "vol": d["volumeNative"]})
+    # drop the live (partial, non-midnight) point NPF appends at fetch time; bars are at 00:00 UTC every 3 days
+    df = df[df["ts"] == df["ts"].dt.normalize()]
     return df.sort_values("ts").reset_index(drop=True)
 
 
@@ -86,7 +88,7 @@ def run(key, out):
     df = L.load_transfers(key)
     first_rx = df.groupby("to")["t"].min()
     sales = mv[mv["type"] == "sale"].copy()
-    sales["t"] = sales["ts"].astype("int64") // 10**9
+    sales["t"] = ((sales["ts"] - pd.Timestamp("1970-01-01", tz="UTC")) // pd.Timedelta(seconds=1)).astype("int64")
     bb = balances_before(df, set(sales["tx"]))
     sales["buyer_bal_before"] = [bb.get((tx, b), 0) for tx, b in zip(sales["tx"], sales["buyer"])]
     sales["seller_bal_before"] = [bb.get((tx, s), 0) for tx, s in zip(sales["tx"], sales["seller"])]

@@ -83,7 +83,8 @@ def protocol(addr):
     return lab["protocol"] if lab else ""
 
 
-ESCROW_CATS = {"lending", "amm_pool", "staking", "bridge_wrapper", "marketplace_escrow", "fractional_vault"}
+ESCROW_CATS = {"lending", "amm_pool", "strategy_vault", "staking", "bridge_wrapper", "marketplace_escrow",
+               "fractional_vault"}
 WALLET_CATS = {"eoa", "safe", "smart_wallet"}
 
 
