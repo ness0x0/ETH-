@@ -22,14 +22,32 @@ _Last updated: 2026-10-13 (UTC)_
 - NFTPriceFloor 3d series = primary historical floor source (2022→); on-chain for cross-check and 2021.
 
 ## Completed
-- Workspace skeleton; `scripts/common.py`, `fetch_prices.py` (prices_daily.csv), `universe_config.py` (47 names).
+- Workspace skeleton; prices; universe screening (47 collections) → `universe.csv` (8 finalists, 9 watchlist,
+  7 reference, 23 reject).
+- Base rates: EW sector floor index −90% vs BTC (Jun-2022→Oct-2026), negative vs BTC every calendar year;
+  sector rallies (2023/2024/2025) median trough→peak 1.6×/2.3×/2.9× in BTC terms, ~35–40% of peak retained 90–180d
+  later. Sector quarterly volume $67M (Q3-2026) vs $2.3B (Q1-2023).
+- Recent shock: Pudgy/Azuki/Milady/BAYC floors fell sharply over Oct 10–13 (Blur shutdown) on top of an Aug–Oct
+  downtrend; art collections (Squiggle, Terraforms) and Punks did not.
+- Finalists: Milady, Remilio, CryptoDickbutts, Pudgy, Azuki (incumbent), Chromie Squiggle, Terraforms, V1 Punks.
+- Charts: sector index, finalists BTC-rebased, per-finalist history (catalyst annotations pending).
+- Methodology & data-quality notes (`sources/METHODOLOGY.md`); scenario engine scaffold.
 
-## Active
-- `screen_universe.py` fetching OpenSea + NPF for universe.
+## Active (background agents)
+- Culture/catalyst research ×3 (Milady/Remilio/CDB; Pudgy/Azuki/Moonbirds; Squiggle/Terraforms/V1 + Curio/MoonCats).
+- On-chain collector analyst (holders, retention, lending escrow incl. Blend + Gondi, sales classification).
+- OpenSea free-key retry loop (key creation rate-limited) → then `liquidity_orderbook.py`.
 
 ## Next
-- Pick 6–10 finalists → launch: market historian, collector (on-chain) analyst, cultural researcher agents.
-- Build scenario model; critic; memo.
+- Integrate agent outputs → event study, annotated charts, dossiers.
+- Scenario parameters (`scripts/scenario_params.py`) → `scenario_model.py`.
+- Independent critic agent → revisions → memo, shortlist, uncertainties; commit, push, draft PR.
+
+## Open flags
+- CryptoDickbutts avg sale ≈0.64× floor (90d) → floor may not be executable; verify on-chain.
+- Quirkies rise looks concentrated/leveraged (Gondi escrow ~10%) → rejected.
+- OpenSea SEA token launch status unverified (possible marketplace-incentive catalyst).
+- Codex Blend loan-book findings not yet available (remote has no other branches as of 22:05 UTC).
 
 ## Blockers
 - None requiring the user.
