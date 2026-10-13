@@ -4,7 +4,7 @@ Contract `0xed5af388653567af2f388e6224dc7c4b3241c544` (Chiru Labs / Azuki Labs).
 [`_research/azuki_culture.md`](_research/azuki_culture.md). Catalysts are in `data/processed/catalysts/azuki.csv`.
 Chart: `reports/charts/azuki_history.png`.
 
-<!-- VERDICT -->
+> **Verdict on the held Azuki: exit patiently; do not sell into the current forced-selling bid.** It fails the mandate (founder-dependent; the company's IP strategy bypasses the NFT; −75% vs BTC in the weak scenario; beat BTC in 1% of historical 18-month windows held and 7% with rule B). Measured against selling at today's net bid (0.461 ETH), its rule-B scenario case is similar to the other PFPs, so there is no urgency. List near the prevailing floor after the 2026-11-12 Blend deadline clears (182 Blend + 158 BendDAO tokens in escrow), or on any rebound. If you want to keep one NFT as a mania ticket, V1 is the better ticket on every mandate criterion.
 
 ### Snapshot (2026-10-13)
 
@@ -40,18 +40,18 @@ Chart: `reports/charts/azuki_history.png`.
 |---|---|---|---|---|---|---|
 | 5 | 2.747 ETH | 2.280 ETH | 17.0% | 85% | 0 / 9 | 1.0% |
 
-### BTC-relative scenarios (18-month horizon; `reports/scenario_model.md`)
+### BTC-relative scenarios, ~18 months (v2 rule-based model; `reports/scenario_model.md`)
 
-| Scenario | ETH/BTC | Floor multiple (ETH) | Return vs BTC | Return in ETH | Return in USD |
-|---|---|---|---|---|---|
-| S1 weak | 0.024 | 0.45× | -71% | -63% | -75% |
-| S2 moderate | 0.032 | 0.80× | -23% | -28% | +1% |
-| S3 strong (disciplined) | 0.040 | 1.30× | +59% | +20% | +157% |
-| S3 strong (hold-through) | 0.040 | 0.34× | -59% | -69% | -33% |
-| S4 mania (disciplined) | 0.050 | 2.50× | +299% | +140% | +665% |
-| S4 mania (hold-through) | 0.050 | 0.61× | -2% | -41% | +87% |
+| Scenario (ETH/BTC) | Floor peak / end (ETH multiple) | Return vs BTC: hold | Return vs BTC: rule B | Return in USD: rule B |
+|---|---|---|---|---|
+| S1 weak (0.024) | 0.32× / 0.32× | -75% | -75% | -83% |
+| S2 moderate (0.032) | 0.90× / 0.90× | +3% | +3% | +45% |
+| S3 strong (0.040) | 1.11× / 0.25× | -64% | +12% | +141% |
+| S4 mania (0.050) | 3.40× / 0.76× | +45% | +355% | +1352% |
 
-For comparison, plain ETH vs BTC: S1 -20%, S2 +6%, S3 +33%, S4 +66%.
+Plain ETH vs BTC: S1 -20%, S2 +6%, S3 +33%, S4 +66%.
+Break-even weight on S3+S4 (base mix): rule B 22%, hold never (ETH: 14%). Rule B = once ≥1.5× vs BTC, sell on a 30% drawdown from peak.
+History (350 overlapping 18-month windows, 2022-06→2025-04 starts): beat BTC in 1% of windows holding, 7% with rule B; median multiple vs BTC 0.19× / 0.64× (`exit_rule_backtest.csv`).
 
 ## 1. Cultural durability thesis
 

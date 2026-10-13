@@ -4,7 +4,7 @@ Contract `0x5af0d9827e0c53e4799bb226655a1de152a425a5` (Remilia Corporation). The
 [`_research/milady_culture.md`](_research/milady_culture.md). Catalysts are in `data/processed/catalysts/milady.csv`.
 Quiet-window returns: `data/processed/culture/quiet_window_returns.csv`. Chart: `reports/charts/milady_history.png`.
 
-<!-- VERDICT -->
+> **Verdict: conditional shortlist #2 — a mandate exception.** It has the strongest living culture of any affordable ETH PFP, is divisible (3 items) and is liquid, but it fails the founder-independence test: its price has been driven by Remilia and celebrity events that fully retraced, and every quiet window since the CULT TGE lost 28–59% in ETH terms. Own it only with rule-B exit discipline.
 
 ### Snapshot (2026-10-13)
 
@@ -40,18 +40,18 @@ Quiet-window returns: `data/processed/culture/quiet_window_returns.csv`. Chart: 
 |---|---|---|---|---|---|---|
 | 3 | 2.435 ETH | 2.036 ETH | 16.4% | 92% | 7 / 10 | 1.0% |
 
-### BTC-relative scenarios (18-month horizon; `reports/scenario_model.md`)
+### BTC-relative scenarios, ~18 months (v2 rule-based model; `reports/scenario_model.md`)
 
-| Scenario | ETH/BTC | Floor multiple (ETH) | Return vs BTC | Return in ETH | Return in USD |
-|---|---|---|---|---|---|
-| S1 weak | 0.024 | 0.43× | -69% | -61% | -74% |
-| S2 moderate | 0.032 | 0.81× | -19% | -24% | +7% |
-| S3 strong (disciplined) | 0.040 | 1.39× | +75% | +32% | +184% |
-| S3 strong (hold-through) | 0.040 | 0.55× | -30% | -48% | +13% |
-| S4 mania (disciplined) | 0.050 | 3.11× | +401% | +202% | +862% |
-| S4 mania (hold-through) | 0.050 | 1.17× | +89% | +14% | +262% |
+| Scenario (ETH/BTC) | Floor peak / end (ETH multiple) | Return vs BTC: hold | Return vs BTC: rule B | Return in USD: rule B |
+|---|---|---|---|---|
+| S1 weak (0.024) | 0.47× / 0.47× | -67% | -67% | -78% |
+| S2 moderate (0.032) | 0.90× / 0.90× | -13% | -13% | +22% |
+| S3 strong (0.040) | 1.56× / 0.38× | -54% | +32% | +185% |
+| S4 mania (0.050) | 4.37× / 1.07× | +65% | +372% | +1404% |
 
-For comparison, plain ETH vs BTC: S1 -20%, S2 +6%, S3 +33%, S4 +66%.
+Plain ETH vs BTC: S1 -20%, S2 +6%, S3 +33%, S4 +66%.
+Break-even weight on S3+S4 (base mix): rule B 22%, hold never (ETH: 14%). Rule B = once ≥1.5× vs BTC, sell on a 30% drawdown from peak.
+History (350 overlapping 18-month windows, 2022-06→2025-04 starts): beat BTC in 31% of windows holding, 41% with rule B; median multiple vs BTC 0.50× / 0.83× (`exit_rule_backtest.csv`).
 
 ## 1. Cultural durability thesis
 
@@ -61,7 +61,8 @@ For comparison, plain ETH vs BTC: S1 -20%, S2 +6%, S3 +33%, S4 +66%.
   - IRL raves have run every year since 2021.
   - It was adopted by **Vitalik**: `vitalik.eth` received #9286 on 2025-01-18 and #595 on 2025-04-13 and still holds
     both. We verified this on-chain.
-  - Milady aesthetics appeared in the **Ethereum Foundation's 2026 Mandate** material.
+  - The **Ethereum Foundation's 2026 Mandate** used Milady-*inspired* design. This was not an adoption, and it was
+    followed by −25% vs BTC at 90 days.
 - **The founder-vanishes test: fails on price, passes on culture:**
   - Every positive price event since 2023 was Remilia-manufactured (Bonkler, CULT) or a celebrity gesture (Musk,
     Vitalik ×2).
@@ -112,8 +113,8 @@ For comparison, plain ETH vs BTC: S1 -20%, S2 +6%, S3 +33%, S4 +66%.
 ## 6. Bull thesis / bear thesis
 
 - **Bull.**
-  - The cultural moat is the deepest of any affordable PFP. Ethereum's founder twice chose it, and it is woven into
-    EF identity.
+  - The cultural moat is the deepest of any affordable PFP. Ethereum's founder holds two and twice used one as his
+    avatar, and EF material borrowed its aesthetic.
   - At 0.744 ETH it is back at its 2022 post-scandal range (−88% from the ETH peak), with the CULT overhang now tiny
     in dollars.
   - Its β to ETH/BTC is the lowest of the finalists (0.76), with high idiosyncratic convexity.

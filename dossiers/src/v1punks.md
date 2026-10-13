@@ -35,7 +35,8 @@ Chart: `reports/charts/v1punks_history.png`.
 
 ## 3. Collector behaviour
 
-- **Extreme concentration:**
+- **Extreme concentration.** Note: the holder metrics below cover only the 5,125 *wrapped* tokens. The other ~half of
+  supply is unwrapped on the original contract and is even more concentrated.
   - Top-10 wallets hold 48% of wrapped supply.
   - Three wallets (388 / 365 / 174) share a first-receipt date and look like one entity (~18%).
   - **A Gnosis Safe holds 1,084 *unwrapped* V1s**, with 414 V2 Punks in the same Safe. It is very likely Yuga, and it
@@ -63,8 +64,9 @@ Chart: `reports/charts/v1punks_history.png`.
 
 ## 6. Bull thesis / bear thesis
 
-- **Bull.** The cheapest exposure to CryptoPunks, the most resilient ETH NFT (−44% vs BTC 1y, against −73% for Pudgy),
-  plus an option on legitimacy. Any NODE or museum acknowledgement, or a Yuga burn or donation of its 1,084, would be
+- **Bull.** The cheapest exposure to CryptoPunks, the relatively most resilient ETH NFT (still −44% vs BTC over 1y,
+  against −73% for Pudgy), plus an option on legitimacy. PunksMarket improved tradability but did not change
+  legitimacy; V1 is back at its pre-PunksMarket BTC-terms level. Any NODE or museum acknowledgement, or a Yuga burn or donation of its 1,084, would be
   a step change. A return to a 10% ratio doubles the floor even with V2 flat. Scenario losses are the smallest of the
   finalists because the V2 anchor dampens the downside.
 - **Bear.** The artists disowned it, and the IP holder and every institution have chosen V2. Ownership is highly

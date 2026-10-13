@@ -16,7 +16,8 @@ Quiet-window returns: `data/processed/culture/quiet_window_returns.csv`. Chart: 
   - IRL raves have run every year since 2021.
   - It was adopted by **Vitalik**: `vitalik.eth` received #9286 on 2025-01-18 and #595 on 2025-04-13 and still holds
     both. We verified this on-chain.
-  - Milady aesthetics appeared in the **Ethereum Foundation's 2026 Mandate** material.
+  - The **Ethereum Foundation's 2026 Mandate** used Milady-*inspired* design. This was not an adoption, and it was
+    followed by −25% vs BTC at 90 days.
 - **The founder-vanishes test: fails on price, passes on culture:**
   - Every positive price event since 2023 was Remilia-manufactured (Bonkler, CULT) or a celebrity gesture (Musk,
     Vitalik ×2).
@@ -67,8 +68,8 @@ Quiet-window returns: `data/processed/culture/quiet_window_returns.csv`. Chart: 
 ## 6. Bull thesis / bear thesis
 
 - **Bull.**
-  - The cultural moat is the deepest of any affordable PFP. Ethereum's founder twice chose it, and it is woven into
-    EF identity.
+  - The cultural moat is the deepest of any affordable PFP. Ethereum's founder holds two and twice used one as his
+    avatar, and EF material borrowed its aesthetic.
   - At 0.744 ETH it is back at its 2022 post-scandal range (−88% from the ETH peak), with the CULT overhang now tiny
     in dollars.
   - Its β to ETH/BTC is the lowest of the finalists (0.76), with high idiosyncratic convexity.

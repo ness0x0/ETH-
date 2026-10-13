@@ -13,10 +13,51 @@ KEYS = {  # key: (universe name, opensea liquidity key)
     "remilio": "Redacted Remilio Babies", "azuki": "Azuki",
 }
 U = pd.read_csv(os.path.join(ROOT, "universe.csv")).set_index("name")
+VERDICT = {
+    "v1punks": ("> **Verdict: conditional shortlist #1 — only if an NFT is bought at all** (the headline recommendation is "
+                "no NFT purchase now; see `reports/EXECUTIVE_MEMO.md`). It has the smallest weak-scenario loss of the "
+                "finalists, one of only two attainable hold-through break-evens, no team to fail and 0% fees; one item "
+                "uses ~half the budget. Main risks: contested legitimacy (artists disowned it, the IP holder ignores it) "
+                "and concentrated dormant supply (27.9% of V1s in four wallets incl. a likely-Yuga Safe with 1,084)."),
+    "milady": ("> **Verdict: conditional shortlist #2 — a mandate exception.** It has the strongest living culture of "
+               "any affordable ETH PFP, is divisible (3 items) and is liquid, but it fails the founder-independence "
+               "test: its price has been driven by Remilia and celebrity events that fully retraced, and every quiet "
+               "window since the CULT TGE lost 28–59% in ETH terms. Own it only with rule-B exit discipline."),
+    "cryptodickbutts": ("> **Verdict: conditional shortlist #3 — small, patient, bid-side only.** It is the only "
+                        "finalist that has already passed the 'team vanished' test (handover 2023), with strong holder "
+                        "retention and an attainable hold-through break-even. But exit liquidity at size is poor "
+                        "(~1.1 organic sales/day, best bid 84% of floor) and its meme IP is contested."),
+    "chromie_squiggle": ("> **Verdict: conditional shortlist #4 — a collectible, not an investment.** It is the most "
+                         "durable cultural object in the set (locked on-chain script, project #0, museum gifts), but "
+                         "it is the worst investment case: rule-B break-even 55% (ETH 14%). It beat BTC in 2–13% of "
+                         "historical 18-month windows, carries 8.5% seller fees and has its best bid at 78% of floor. "
+                         "Buy one only if owning it is the goal, and expect it to under-perform BTC and ETH."),
+    "pudgy": ("> **Verdict: not ranked — a tactical alternative outside the mandate.** It is the most liquid finalist "
+              "and has the best historical exit-rule record (beat BTC in 80% of windows with rule B), but that record "
+              "was produced by operator catalysts (toys, PENGU, ETF hype) that have since reversed. It fails "
+              "founder-independence, holders have no claim on IP or revenue, PENGU insiders unlock through 2028, and "
+              "~58% of its trailing-year liquidity ran through Blur/Blend, which closes 2026-11-12. One item (81% of "
+              "budget) cannot be scaled in or out."),
+    "terraforms": ("> **Verdict: not recommended.** Engaged holders and genuine on-chain novelty, but founder-dependent "
+                   "'living' features, a latent 1,193-token owner mint controlled by a single EOA, one buyer making "
+                   "13.5% of purchases, a ~28% instant round trip and a rule-B break-even of 28%."),
+    "remilio": ("> **Verdict: not recommended.** A derivative of a founder-dependent parent (~1.3× Milady beta), "
+                "trading below its mint price, with no identity independent of Remilia. Its scenario value is almost "
+                "entirely the mania branch. Prefer Milady for Remilia exposure."),
+    "azuki": ("> **Verdict on the held Azuki: exit patiently; do not sell into the current forced-selling bid.** It "
+              "fails the mandate (founder-dependent; the company's IP strategy bypasses the NFT; −75% vs BTC in the "
+              "weak scenario; beat BTC in 1% of historical 18-month windows held and 7% with rule B). Measured against "
+              "selling at today's net bid (0.461 ETH), its rule-B scenario case is similar to the other PFPs, so there "
+              "is no urgency. List near the prevailing floor after the 2026-11-12 Blend deadline clears (182 Blend + "
+              "158 BendDAO tokens in escrow), or on any rebound. If you want to keep one NFT as a mania ticket, V1 is "
+              "the better ticket on every mandate criterion."),
+}
 OC = pd.read_csv(os.path.join(PROC, "onchain", "collector_comparison.csv")).set_index("collection")
 LP = pd.read_csv(os.path.join(PROC, "liquidity_position.csv")).set_index("key")
 OB = pd.read_csv(os.path.join(PROC, "liquidity_orderbook.csv")).set_index("key")
 SC = pd.read_csv(os.path.join(PROC, "scenarios.csv"))
+BE = pd.read_csv(os.path.join(PROC, "breakeven.csv"))
+EX = pd.read_csv(os.path.join(PROC, "exit_rule_backtest.csv"))
 RA = pd.read_csv(os.path.join(PROC, "rally_analysis.csv")).set_index("name")
 
 
@@ -53,17 +94,28 @@ def tables(key):
            "| Items | Entry cost | Instant exit (after fees) | Round-trip loss | Best bid / floor | Funded bids ≥90% / ≥80% of floor | Seller fees |",
            "|---|---|---|---|---|---|---|",
            f"| {int(lp.items_for_budget)} | {lp.entry_cost_eth:.3f} ETH | {lp.instant_exit_eth:.3f} ETH | {lp.roundtrip_haircut * 100:.1f}% | {ob.best_bid_pct_floor * 100:.0f}% | {int(ob.funded_bid_qty_ge_90pct_floor)} / {int(ob.funded_bid_qty_ge_80pct_floor)} | {lp.seller_fee * 100:.1f}% |",
-           "", "### BTC-relative scenarios (18-month horizon; `reports/scenario_model.md`)", "",
-           "| Scenario | ETH/BTC | Floor multiple (ETH) | Return vs BTC | Return in ETH | Return in USD |", "|---|---|---|---|---|---|"]
+           "", "### BTC-relative scenarios, ~18 months (v2 rule-based model; `reports/scenario_model.md`)", "",
+           "| Scenario (ETH/BTC) | Floor peak / end (ETH multiple) | Return vs BTC: hold | Return vs BTC: rule B | Return in USD: rule B |",
+           "|---|---|---|---|---|"]
     g = SC[SC.collection == key]
-    for _, r in g.iterrows():
-        lab = {"S1_weak": "S1 weak", "S2_moderate": "S2 moderate", "S3_strong": "S3 strong", "S4_mania": "S4 mania"}[r.scenario]
-        ex = "" if r.exit == "end-of-horizon" else f" ({r.exit})"
-        out.append(f"| {lab}{ex} | {r.eth_btc:.3f} | {r.M_eth:.2f}× | {pct(r.R_btc)} | {pct(r.R_eth)} | {pct(r.R_usd)} |")
-    e = SC[SC.collection == "ETH (benchmark)"].drop_duplicates("scenario")
+    for s, lab in [("S1_weak", "S1 weak (0.024)"), ("S2_moderate", "S2 moderate (0.032)"), ("S3_strong", "S3 strong (0.040)"),
+                   ("S4_mania", "S4 mania (0.050)")]:
+        h = g[(g.scenario == s) & (g.rule == "HOLD")].iloc[0]
+        b = g[(g.scenario == s) & (g.rule == "B")].iloc[0]
+        out.append(f"| {lab} | {h.P_eth:.2f}× / {h.E_eth:.2f}× | {pct(h.R_btc)} | {pct(b.R_btc)} | {pct(b.R_usd)} |")
+    e = SC[(SC.collection == "ETH") & (SC.rule == "HOLD")]
+    be = BE[(BE.collection == key) & (BE.variant == "base")].set_index("rule").breakeven
+    beth = BE[(BE.collection == "ETH") & (BE.variant == "base") & (BE.rule == "HOLD")].breakeven.iloc[0]
     out.append("")
-    out.append("For comparison, plain ETH vs BTC: " + ", ".join(
-        f"{s.split('_')[0]} {pct(v)}" for s, v in zip(e.scenario, e.R_btc)) + ".")
+    out.append("Plain ETH vs BTC: " + ", ".join(f"{s.split('_')[0]} {pct(v)}" for s, v in zip(e.scenario, e.R_btc)) + ".")
+    fmt = lambda v: "never" if pd.isna(v) else f"{v * 100:.0f}%"
+    out.append(f"Break-even weight on S3+S4 (base mix): rule B {fmt(be['B'])}, hold {fmt(be['HOLD'])} "
+               f"(ETH: {beth * 100:.0f}%). Rule B = once ≥1.5× vs BTC, sell on a 30% drawdown from peak.")
+    x = EX[EX.collection == key].set_index("rule")
+    out.append(f"History (350 overlapping 18-month windows, 2022-06→2025-04 starts): beat BTC in "
+               f"{x.loc['HOLD', 'p_beat_btc'] * 100:.0f}% of windows holding, {x.loc['B', 'p_beat_btc'] * 100:.0f}% "
+               f"with rule B; median multiple vs BTC {x.loc['HOLD', 'median_multiple_vs_btc']:.2f}× / "
+               f"{x.loc['B', 'median_multiple_vs_btc']:.2f}× (`exit_rule_backtest.csv`).")
     return "\n".join(out)
 
 
@@ -72,6 +124,6 @@ if __name__ == "__main__":
         src = os.path.join(ROOT, "dossiers", "src", f"{key}.md")
         if not os.path.exists(src):
             continue
-        txt = open(src).read().replace("<!-- TABLES -->", tables(key))
+        txt = open(src).read().replace("<!-- TABLES -->", tables(key)).replace("<!-- VERDICT -->", VERDICT.get(key, ""))
         open(os.path.join(ROOT, "dossiers", f"{key}.md"), "w").write(txt)
         print("built", key)

@@ -5,7 +5,7 @@ Wrapper `0x282bdd42f4eb70e7a9d9f40c8fea0825b7f68c5d` around the original 2017 La
 [`_research/v1punks_culture.md`](_research/v1punks_culture.md). Catalysts are in `data/processed/catalysts/v1punks.csv`.
 Chart: `reports/charts/v1punks_history.png`.
 
-<!-- VERDICT -->
+> **Verdict: conditional shortlist #1 — only if an NFT is bought at all** (the headline recommendation is no NFT purchase now; see `reports/EXECUTIVE_MEMO.md`). It has the smallest weak-scenario loss of the finalists, one of only two attainable hold-through break-evens, no team to fail and 0% fees; one item uses ~half the budget. Main risks: contested legitimacy (artists disowned it, the IP holder ignores it) and concentrated dormant supply (27.9% of V1s in four wallets incl. a likely-Yuga Safe with 1,084).
 
 ### Snapshot (2026-10-13)
 
@@ -41,18 +41,18 @@ Chart: `reports/charts/v1punks_history.png`.
 |---|---|---|---|---|---|---|
 | 1 | 1.700 ETH | 1.500 ETH | 11.8% | 88% | 0 / 1 | 0.0% |
 
-### BTC-relative scenarios (18-month horizon; `reports/scenario_model.md`)
+### BTC-relative scenarios, ~18 months (v2 rule-based model; `reports/scenario_model.md`)
 
-| Scenario | ETH/BTC | Floor multiple (ETH) | Return vs BTC | Return in ETH | Return in USD |
-|---|---|---|---|---|---|
-| S1 weak | 0.024 | 0.60× | -59% | -48% | -65% |
-| S2 moderate | 0.032 | 0.95× | -7% | -13% | +23% |
-| S3 strong (disciplined) | 0.040 | 1.75× | +119% | +64% | +254% |
-| S3 strong (hold-through) | 0.040 | 1.08× | +35% | +2% | +119% |
-| S4 mania (disciplined) | 0.050 | 2.20× | +251% | +111% | +573% |
-| S4 mania (hold-through) | 0.050 | 1.19× | +90% | +15% | +265% |
+| Scenario (ETH/BTC) | Floor peak / end (ETH multiple) | Return vs BTC: hold | Return vs BTC: rule B | Return in USD: rule B |
+|---|---|---|---|---|
+| S1 weak (0.024) | 0.70× / 0.70× | -51% | -51% | -67% |
+| S2 moderate (0.032) | 0.90× / 0.90× | -10% | -10% | +26% |
+| S3 strong (0.040) | 2.11× / 1.05× | +31% | +84% | +297% |
+| S4 mania (0.050) | 2.61× / 1.30× | +111% | +197% | +847% |
 
-For comparison, plain ETH vs BTC: S1 -20%, S2 +6%, S3 +33%, S4 +66%.
+Plain ETH vs BTC: S1 -20%, S2 +6%, S3 +33%, S4 +66%.
+Break-even weight on S3+S4 (base mix): rule B 20%, hold 34% (ETH: 14%). Rule B = once ≥1.5× vs BTC, sell on a 30% drawdown from peak.
+History (350 overlapping 18-month windows, 2022-06→2025-04 starts): beat BTC in 11% of windows holding, 32% with rule B; median multiple vs BTC 0.43× / 0.46× (`exit_rule_backtest.csv`).
 
 ## 1. Cultural durability thesis
 
@@ -80,7 +80,8 @@ For comparison, plain ETH vs BTC: S1 -20%, S2 +6%, S3 +33%, S4 +66%.
 
 ## 3. Collector behaviour
 
-- **Extreme concentration:**
+- **Extreme concentration.** Note: the holder metrics below cover only the 5,125 *wrapped* tokens. The other ~half of
+  supply is unwrapped on the original contract and is even more concentrated.
   - Top-10 wallets hold 48% of wrapped supply.
   - Three wallets (388 / 365 / 174) share a first-receipt date and look like one entity (~18%).
   - **A Gnosis Safe holds 1,084 *unwrapped* V1s**, with 414 V2 Punks in the same Safe. It is very likely Yuga, and it
@@ -108,8 +109,9 @@ For comparison, plain ETH vs BTC: S1 -20%, S2 +6%, S3 +33%, S4 +66%.
 
 ## 6. Bull thesis / bear thesis
 
-- **Bull.** The cheapest exposure to CryptoPunks, the most resilient ETH NFT (−44% vs BTC 1y, against −73% for Pudgy),
-  plus an option on legitimacy. Any NODE or museum acknowledgement, or a Yuga burn or donation of its 1,084, would be
+- **Bull.** The cheapest exposure to CryptoPunks, the relatively most resilient ETH NFT (still −44% vs BTC over 1y,
+  against −73% for Pudgy), plus an option on legitimacy. PunksMarket improved tradability but did not change
+  legitimacy; V1 is back at its pre-PunksMarket BTC-terms level. Any NODE or museum acknowledgement, or a Yuga burn or donation of its 1,084, would be
   a step change. A return to a 10% ratio doubles the floor even with V2 flat. Scenario losses are the smallest of the
   finalists because the V2 anchor dampens the downside.
 - **Bear.** The artists disowned it, and the IP holder and every institution have chosen V2. Ownership is highly

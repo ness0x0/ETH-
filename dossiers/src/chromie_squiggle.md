@@ -34,7 +34,7 @@ sources is in [`_research/chromie_squiggle_culture.md`](_research/chromie_squigg
   2021 record sale was 945 ETH for a rare token. The floor fell to ~3.2 ETH by Aug 2024, rose to ~5.75 ETH in the
   Aug-2025 ETH rally, and is 2.64 ETH now.
 - **What moved it.** Art Blocks' own events and institutional news produced **no durable effect**:
-  - MoMA donation: +18% vs BTC at 30 days, −5% at 90 days.
+  - MoMA donation (coordinated by holders and SquiggleDAO; not a purchase): +18% vs BTC at 30 days, −5% at 90 days.
   - LACMA announcement: −36% at 90 days.
   - Toledo opening: +114% at 30 days, but overlapping the Jul-2025 macro rally.
   - The only meaningful driver has been ETH/NFT beta (β ≈ 1.07 to ETH/BTC).
@@ -44,12 +44,16 @@ sources is in [`_research/chromie_squiggle_culture.md`](_research/chromie_squigg
 
 ## 3. Collector behaviour
 
-- **The stickiest holder base of the nine finalists:** median token age 1,848 days; 84% of supply untouched for 24
+- **The most dormant supply of the nine finalists:** median token age 1,848 days; 84% of supply untouched for 24
   months; 79% of EOA holders from two years ago still hold.
-- **The most genuine turnover:**
-  - Only 20% dealer churn.
-  - **45% of trailing-year purchases went to first-time wallets**, the highest share of the nine. This is the
-    clearest on-chain sign of new collector demand in the set.
+  - This is partly *illiquidity*, not demand. One minter entity holds 13.1% (990 tokens untouched in the minting
+    wallet since 2020–21), and Safes hold 10.5%.
+- **High-quality but small turnover:**
+  - Only 20% dealer churn. All of the 675 trailing-year sales went through Seaport and none through Blur. The 8.5%
+    seller fee makes dealer flipping uneconomic.
+  - **45% of purchases went to first-time wallets**, the highest *share* of the nine. In *level* terms that is
+    ~281 new buyers (402 unique), against ~1,460 for Pudgy and ~1,390 for Milady. New wallets absorbed a net +540
+    tokens.
 - **Concentration risk.** One original minter (`0xd110…e588`) still holds 990 (9.9%); with three linked wallets the
   entity holds 1,314 (13.1%). Identity is unverified. A sale programme by this holder would overwhelm ~1.5 organic
   sales/day.
@@ -76,8 +80,9 @@ Liquidity is the weakest point:
 
 ## 6. Bull thesis / bear thesis
 
-- **Bull.** The single most defensible "survives to 2029" asset under ~$8k on Ethereum. Museum-canonized, immutable,
-  founder-independent, held by long-term collectors and still attracting first-time buyers. At 0.08 BTC it sits 94%
+- **Bull.** The single most defensible "survives to 2029" *object* under ~$8k on Ethereum. The artwork is immutable
+  and founder-independent, the institutional holdings (mainly donations coordinated by the founder and holders)
+  canonize the category, and it still attracts first-time buyers. At 0.08 BTC it sits 94%
   below its BTC-terms peak. In an NFT revival, "blue-chip generative art at the first-page price" is an obvious
   rotation target, as in Jan 2023.
 - **Bear.** None of that has protected the price:

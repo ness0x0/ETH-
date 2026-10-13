@@ -4,7 +4,7 @@ Contract `0x42069abfe407c60cf4ae4112bedead391dba1cdb`. The full research with so
 [`_research/cryptodickbutts_culture.md`](_research/cryptodickbutts_culture.md). Catalysts are in
 `data/processed/catalysts/cryptodickbutts.csv`. Chart: `reports/charts/cryptodickbutts_history.png`.
 
-<!-- VERDICT -->
+> **Verdict: conditional shortlist #3 — small, patient, bid-side only.** It is the only finalist that has already passed the 'team vanished' test (handover 2023), with strong holder retention and an attainable hold-through break-even. But exit liquidity at size is poor (~1.1 organic sales/day, best bid 84% of floor) and its meme IP is contested.
 
 ### Snapshot (2026-10-13)
 
@@ -40,18 +40,18 @@ Contract `0x42069abfe407c60cf4ae4112bedead391dba1cdb`. The full research with so
 |---|---|---|---|---|---|---|
 | 5 | 3.040 ETH | 1.798 ETH | 40.9% | 84% | 0 / 3 | 1.0% |
 
-### BTC-relative scenarios (18-month horizon; `reports/scenario_model.md`)
+### BTC-relative scenarios, ~18 months (v2 rule-based model; `reports/scenario_model.md`)
 
-| Scenario | ETH/BTC | Floor multiple (ETH) | Return vs BTC | Return in ETH | Return in USD |
-|---|---|---|---|---|---|
-| S1 weak | 0.024 | 0.44× | -74% | -67% | -78% |
-| S2 moderate | 0.032 | 0.75× | -32% | -36% | -10% |
-| S3 strong (disciplined) | 0.040 | 1.86× | +123% | +68% | +261% |
-| S3 strong (hold-through) | 0.040 | 1.10× | +31% | -1% | +112% |
-| S4 mania (disciplined) | 0.050 | 2.85× | +350% | +171% | +764% |
-| S4 mania (hold-through) | 0.050 | 1.49× | +135% | +42% | +352% |
+| Scenario (ETH/BTC) | Floor peak / end (ETH multiple) | Return vs BTC: hold | Return vs BTC: rule B | Return in USD: rule B |
+|---|---|---|---|---|
+| S1 weak (0.024) | 0.68× / 0.68× | -64% | -64% | -76% |
+| S2 moderate (0.032) | 0.90× / 0.90× | -27% | -27% | +3% |
+| S3 strong (0.040) | 3.49× / 1.80× | +83% | +149% | +435% |
+| S4 mania (0.050) | 3.49× / 1.80× | +154% | +245% | +1000% |
 
-For comparison, plain ETH vs BTC: S1 -20%, S2 +6%, S3 +33%, S4 +66%.
+Plain ETH vs BTC: S1 -20%, S2 +6%, S3 +33%, S4 +66%.
+Break-even weight on S3+S4 (base mix): rule B 20%, hold 30% (ETH: 14%). Rule B = once ≥1.5× vs BTC, sell on a 30% drawdown from peak.
+History (350 overlapping 18-month windows, 2022-06→2025-04 starts): beat BTC in 31% of windows holding, 34% with rule B; median multiple vs BTC 0.45× / 0.78× (`exit_rule_backtest.csv`).
 
 ## 1. Cultural durability thesis
 
@@ -81,7 +81,9 @@ For comparison, plain ETH vs BTC: S1 -20%, S2 +6%, S3 +33%, S4 +66%.
 
 - Best bid is 84% of floor, with zero funded bids at ≥90%.
 - A 5-item position costs ~29% above floor on the instant book, and the instant round trip loses ~41%.
-- The 90-day average sale was ~0.64× the NPF floor, so the quoted floor is not a reliable executable price.
+- Correction: an earlier draft cited NPF data implying sales at ~0.64× floor. On-chain sales show a trailing-12m
+  median sale price of 1.02× the NPF floor, so the floor is executable for single items. The problem is bid depth and
+  turnover at the investor's size.
 
 ## 5. Bull thesis / bear thesis
 
@@ -90,12 +92,13 @@ For comparison, plain ETH vs BTC: S1 -20%, S2 +6%, S3 +33%, S4 +66%.
   - A deep meme with a committed whale and DAO.
   - The highest convexity in the set in 2025 (+690% vs BTC trough to peak).
 - **Bear.**
-  - Not exitable at the quoted floor.
+  - Slow to exit at size: ~1.1 organic sales/day, and the best bid is 84% of floor.
   - Contested IP.
   - Governance concentrated in one whale.
   - No catalyst in its history created lasting value.
 
 ## 6. Verdict rationale
 
-It passes the founder test but fails the liquidity and executable-valuation tests at the investor's ticket size. It
-stays on the watchlist only.
+It passes the founder test, and its rule-based scenario profile is comparable to V1's: rule-B break-even 20%,
+hold-through break-even 30%. But it fails the exit-liquidity test at the investor's ticket size and has contested
+IP. A patient, bid-side accumulation of 1–2 items is the only sensible way to own it.

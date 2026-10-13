@@ -4,7 +4,7 @@ Contract `0x4e1f41613c9084fdb9e34e11fae9412427480e56`. The full research with so
 [`_research/terraforms_culture.md`](_research/terraforms_culture.md). Catalysts are in
 `data/processed/catalysts/terraforms.csv`. Chart: `reports/charts/terraforms_history.png`.
 
-<!-- VERDICT -->
+> **Verdict: not recommended.** Engaged holders and genuine on-chain novelty, but founder-dependent 'living' features, a latent 1,193-token owner mint controlled by a single EOA, one buyer making 13.5% of purchases, a ~28% instant round trip and a rule-B break-even of 28%.
 
 ### Snapshot (2026-10-13)
 
@@ -40,18 +40,18 @@ Contract `0x4e1f41613c9084fdb9e34e11fae9412427480e56`. The full research with so
 |---|---|---|---|---|---|---|
 | 9 | 2.961 ETH | 2.142 ETH | 27.6% | 90% | 4 / 4 | 1.0% |
 
-### BTC-relative scenarios (18-month horizon; `reports/scenario_model.md`)
+### BTC-relative scenarios, ~18 months (v2 rule-based model; `reports/scenario_model.md`)
 
-| Scenario | ETH/BTC | Floor multiple (ETH) | Return vs BTC | Return in ETH | Return in USD |
-|---|---|---|---|---|---|
-| S1 weak | 0.024 | 0.52× | -68% | -60% | -73% |
-| S2 moderate | 0.032 | 0.90× | -16% | -21% | +10% |
-| S3 strong (disciplined) | 0.040 | 1.31× | +57% | +18% | +154% |
-| S3 strong (hold-through) | 0.040 | 0.66× | -21% | -41% | +27% |
-| S4 mania (disciplined) | 0.050 | 2.74× | +332% | +160% | +729% |
-| S4 mania (hold-through) | 0.050 | 1.30× | +106% | +24% | +295% |
+| Scenario (ETH/BTC) | Floor peak / end (ETH multiple) | Return vs BTC: hold | Return vs BTC: rule B | Return in USD: rule B |
+|---|---|---|---|---|
+| S1 weak (0.024) | 0.67× / 0.67× | -60% | -60% | -73% |
+| S2 moderate (0.032) | 0.90× / 0.90× | -19% | -19% | +14% |
+| S3 strong (0.040) | 1.49× / 0.50× | -44% | +18% | +154% |
+| S4 mania (0.050) | 3.46× / 1.15× | +76% | +272% | +1087% |
 
-For comparison, plain ETH vs BTC: S1 -20%, S2 +6%, S3 +33%, S4 +66%.
+Plain ETH vs BTC: S1 -20%, S2 +6%, S3 +33%, S4 +66%.
+Break-even weight on S3+S4 (base mix): rule B 28%, hold never (ETH: 14%). Rule B = once ≥1.5× vs BTC, sell on a 30% drawdown from peak.
+History (350 overlapping 18-month windows, 2022-06→2025-04 starts): beat BTC in 12% of windows holding, 27% with rule B; median multiple vs BTC 0.21× / 0.23× (`exit_rule_backtest.csv`).
 
 ## 1. Cultural durability thesis
 

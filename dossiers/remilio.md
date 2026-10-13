@@ -4,7 +4,7 @@ Contract `0xd3d9ddd0cf0a5f0bfb8f7fceae075df687eaebab` (Remilia). The full resear
 [`_research/remilio_culture.md`](_research/remilio_culture.md). Catalysts are in `data/processed/catalysts/remilio.csv`.
 Chart: `reports/charts/remilio_history.png`.
 
-<!-- VERDICT -->
+> **Verdict: not recommended.** A derivative of a founder-dependent parent (~1.3× Milady beta), trading below its mint price, with no identity independent of Remilia. Its scenario value is almost entirely the mania branch. Prefer Milady for Remilia exposure.
 
 ### Snapshot (2026-10-13)
 
@@ -40,18 +40,18 @@ Chart: `reports/charts/remilio_history.png`.
 |---|---|---|---|---|---|---|
 | 20 | 2.942 ETH | 2.086 ETH | 29.1% | 93% | 7 / 22 | 1.0% |
 
-### BTC-relative scenarios (18-month horizon; `reports/scenario_model.md`)
+### BTC-relative scenarios, ~18 months (v2 rule-based model; `reports/scenario_model.md`)
 
-| Scenario | ETH/BTC | Floor multiple (ETH) | Return vs BTC | Return in ETH | Return in USD |
-|---|---|---|---|---|---|
-| S1 weak | 0.024 | 0.31× | -79% | -73% | -82% |
-| S2 moderate | 0.032 | 0.67× | -35% | -38% | -14% |
-| S3 strong (disciplined) | 0.040 | 1.36× | +70% | +28% | +176% |
-| S3 strong (hold-through) | 0.040 | 0.39× | -51% | -63% | -20% |
-| S4 mania (disciplined) | 0.050 | 3.57× | +470% | +243% | +993% |
-| S4 mania (hold-through) | 0.050 | 0.99× | +57% | -5% | +202% |
+| Scenario (ETH/BTC) | Floor peak / end (ETH multiple) | Return vs BTC: hold | Return vs BTC: rule B | Return in USD: rule B |
+|---|---|---|---|---|
+| S1 weak (0.024) | 0.45× / 0.45× | -72% | -72% | -81% |
+| S2 moderate (0.032) | 0.90× / 0.90× | -20% | -20% | +12% |
+| S3 strong (0.040) | 1.70× / 0.30× | -66% | +32% | +183% |
+| S4 mania (0.050) | 6.50× / 1.16× | +67% | +553% | +1981% |
 
-For comparison, plain ETH vs BTC: S1 -20%, S2 +6%, S3 +33%, S4 +66%.
+Plain ETH vs BTC: S1 -20%, S2 +6%, S3 +33%, S4 +66%.
+Break-even weight on S3+S4 (base mix): rule B 18%, hold never (ETH: 14%). Rule B = once ≥1.5× vs BTC, sell on a 30% drawdown from peak.
+History (350 overlapping 18-month windows, 2022-06→2025-04 starts): beat BTC in 27% of windows holding, 27% with rule B; median multiple vs BTC 0.36× / 0.62× (`exit_rule_backtest.csv`).
 
 ## 1. Thesis in one paragraph
 

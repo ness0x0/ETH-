@@ -4,7 +4,7 @@ Contract `0xbd3531da5cf5857e7cfaa92426877b022e612cf8` (Lil Pudgys: `0x524cab2ec6
 The full research with sources is in [`_research/pudgy_culture.md`](_research/pudgy_culture.md). Catalysts are in
 `data/processed/catalysts/pudgy.csv`. Chart: `reports/charts/pudgy_history.png`.
 
-<!-- VERDICT -->
+> **Verdict: not ranked — a tactical alternative outside the mandate.** It is the most liquid finalist and has the best historical exit-rule record (beat BTC in 80% of windows with rule B), but that record was produced by operator catalysts (toys, PENGU, ETF hype) that have since reversed. It fails founder-independence, holders have no claim on IP or revenue, PENGU insiders unlock through 2028, and ~58% of its trailing-year liquidity ran through Blur/Blend, which closes 2026-11-12. One item (81% of budget) cannot be scaled in or out.
 
 ### Snapshot (2026-10-13)
 
@@ -40,18 +40,18 @@ The full research with sources is in [`_research/pudgy_culture.md`](_research/pu
 |---|---|---|---|---|---|---|
 | 1 | 2.430 ETH | 2.247 ETH | 7.5% | 93% | 5 / 12 | 1.0% |
 
-### BTC-relative scenarios (18-month horizon; `reports/scenario_model.md`)
+### BTC-relative scenarios, ~18 months (v2 rule-based model; `reports/scenario_model.md`)
 
-| Scenario | ETH/BTC | Floor multiple (ETH) | Return vs BTC | Return in ETH | Return in USD |
-|---|---|---|---|---|---|
-| S1 weak | 0.024 | 0.45× | -67% | -59% | -73% |
-| S2 moderate | 0.032 | 0.85× | -14% | -19% | +13% |
-| S3 strong (disciplined) | 0.040 | 1.60× | +104% | +54% | +231% |
-| S3 strong (hold-through) | 0.040 | 0.59× | -24% | -43% | +23% |
-| S4 mania (disciplined) | 0.050 | 3.25× | +424% | +215% | +905% |
-| S4 mania (hold-through) | 0.050 | 1.12× | +81% | +9% | +247% |
+| Scenario (ETH/BTC) | Floor peak / end (ETH multiple) | Return vs BTC: hold | Return vs BTC: rule B | Return in USD: rule B |
+|---|---|---|---|---|
+| S1 weak (0.024) | 0.45× / 0.45× | -67% | -67% | -78% |
+| S2 moderate (0.032) | 0.90× / 0.90× | -8% | -8% | +28% |
+| S3 strong (0.040) | 1.82× / 0.39× | -50% | +62% | +248% |
+| S4 mania (0.050) | 3.34× / 0.72× | +16% | +277% | +1102% |
 
-For comparison, plain ETH vs BTC: S1 -20%, S2 +6%, S3 +33%, S4 +66%.
+Plain ETH vs BTC: S1 -20%, S2 +6%, S3 +33%, S4 +66%.
+Break-even weight on S3+S4 (base mix): rule B 22%, hold never (ETH: 14%). Rule B = once ≥1.5× vs BTC, sell on a 30% drawdown from peak.
+History (350 overlapping 18-month windows, 2022-06→2025-04 starts): beat BTC in 42% of windows holding, 80% with rule B; median multiple vs BTC 0.70× / 1.51× (`exit_rule_backtest.csv`).
 
 ## 1. Cultural durability thesis
 
@@ -115,8 +115,9 @@ The best of all finalists:
 
 - **Bull.** The most liquid, most widely held, highest-β (1.43 to ETH/BTC) ETH PFP, now at a BTC-terms cycle low
   (0.069 BTC, −94% from peak) after a capitulation week that a large buyer absorbed. Igloo has cut its distractions to
-  focus on Pudgy. In any NFT risk-on phase it is the first PFP institutions and retail rotate into, and since Jul-2022
-  it has roughly matched BTC (0.94×), unlike almost everything else.
+  focus on Pudgy. One entity bought 131 in the sell-off (support, but concentrated in a single bidder).
+  In any NFT risk-on phase it is the first PFP that institutions and retail rotate into. Measured from its mid-2022
+  trough it roughly matched BTC. That is a start-date effect: from its Dec-2024 peak it is −94%.
 - **Bear.**
   - Every big move came from company-manufactured catalysts (toys, PENGU, ETF hype). The airdrop is spent.
   - Brand success now accrues to equity and PENGU, not to the NFT.

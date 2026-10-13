@@ -70,8 +70,9 @@ The best of all finalists:
 
 - **Bull.** The most liquid, most widely held, highest-β (1.43 to ETH/BTC) ETH PFP, now at a BTC-terms cycle low
   (0.069 BTC, −94% from peak) after a capitulation week that a large buyer absorbed. Igloo has cut its distractions to
-  focus on Pudgy. In any NFT risk-on phase it is the first PFP institutions and retail rotate into, and since Jul-2022
-  it has roughly matched BTC (0.94×), unlike almost everything else.
+  focus on Pudgy. One entity bought 131 in the sell-off (support, but concentrated in a single bidder).
+  In any NFT risk-on phase it is the first PFP that institutions and retail rotate into. Measured from its mid-2022
+  trough it roughly matched BTC. That is a start-date effect: from its Dec-2024 peak it is −94%.
 - **Bear.**
   - Every big move came from company-manufactured catalysts (toys, PENGU, ETF hype). The airdrop is spent.
   - Brand success now accrues to equity and PENGU, not to the NFT.
