@@ -21,6 +21,9 @@ Wash / affiliated-support indicators (flags, not proof):
   self_trade      : buyer == seller after escrow attribution.
   bid_cluster     : buyer took >=25% of the month's bid-fill sales and >=10 fills (one or two wallets absorbing
                     floor bids — liquidity support that may be affiliated or a market maker).
+  flip_7d         : buyer resold the same token within 7 days (dealer/arbitrage churn; not wash by itself).
+  suspect         : round_trip_30d OR self_trade OR linked_wallets (possible wash / affiliated trade).
+  churn           : hot_token_3in30 OR flip_7d (dealer turnover; inflates volume without new ownership).
 Outputs  : buyers_monthly_<key>.csv, buyers_summary.csv, wash_flags.csv, wash_summary.csv, liquidity_summary.csv,
            reconciliation.csv, reconciliation_bars_<key>.csv
 """
@@ -158,9 +161,21 @@ def run(key, out):
             if n >= 10 and n / len(g) >= 0.25:
                 for q in g.index[g["buyer"] == b]:
                     flags[q].add("bid_cluster")
+    # quick flip: the buyer resold the same token (as a sale) within 7 days — dealer / arbitrage churn indicator
+    nxt = sales.groupby("tokenId")["seller"].shift(-1)
+    nxt_t = sales.groupby("tokenId")["t"].shift(-1)
+    for i in sales.index:
+        if nxt.loc[i] == sales.at[i, "buyer"] and nxt_t.loc[i] - sales.at[i, "t"] <= 7 * 86400:
+            flags[i].add("flip_7d")
     sales["wash_flags"] = [";".join(sorted(flags[i])) for i in sales.index]
-    strong = {"round_trip_30d", "hot_token_3in30", "self_trade", "linked_wallets"}
+    # "suspect" = possible wash / affiliated trade. hot_token_3in30 and flip_7d describe dealer churn (bid-hit and
+    # relist arbitrage between Blur and OpenSea), which is real but non-organic turnover, so they are reported
+    # separately and NOT counted as wash.
+    strong = {"round_trip_30d", "self_trade", "linked_wallets"}
     sales["suspect"] = [bool(flags[i] & strong) for i in sales.index]
+    sales["churn"] = [bool(flags[i] & {"hot_token_3in30", "flip_7d"}) for i in sales.index]
+    sales["buyer_strategy"] = sales["buyer"].map(lambda a: L.category(a) == "strategy_vault")
+    sales["seller_strategy"] = sales["seller"].map(lambda a: L.category(a) == "strategy_vault")
 
     wf = sales[sales["wash_flags"] != ""][["block", "ts", "tx", "tokenId", "seller", "buyer", "price_eth", "method",
                                             "side", "trail30_median", "wash_flags"]].copy()
@@ -192,7 +207,8 @@ def run(key, out):
                  "top1_buyer_share": vc.iloc[0] / len(g), "top10_buyer_share": vc.iloc[:10].sum() / len(g),
                  "bid_fill_share": len(bids) / len(g),
                  "top2_bidder_share_of_bid_fills": (bvc.iloc[:2].sum() / len(bids)) if len(bids) else np.nan,
-                 "suspect_sales": int(g["suspect"].sum()),
+                 "suspect_sales": int(g["suspect"].sum()), "churn_sales": int(g["churn"].sum()),
+                 "strategy_buys": int(g["buyer_strategy"].sum()),
                  "blend_share_of_sales": g["method"].eq("blend_buy_locked").mean()
                  + g["flags"].str.contains("blend_buy_to_borrow").mean()}
             for coh in ("0", "1_4", "ge5"):
@@ -213,7 +229,11 @@ def run(key, out):
             "pct_sales_to_new_buyers": s["new_buyer"].mean(),
             "top1_buyer_share": vc.iloc[0] / len(s), "top10_buyer_share": vc.iloc[:10].sum() / len(s),
             "top1_buyer": vc.index[0], "bid_fill_share": (s["side"] == "bid").mean(),
-            "suspect_share": s["suspect"].mean(),
+            "suspect_share": s["suspect"].mean(), "churn_share": s["churn"].mean(),
+            "non_churn_sales": int((~s["churn"]).sum()),
+            "unique_tokens_sold": s["tokenId"].nunique(),
+            "strategy_contract_buys": int(s["buyer_strategy"].sum()),
+            "strategy_contract_sells": int(s["seller_strategy"].sum()),
             "net_size_ge5": int((s["buyer_bal_before"] >= 5).sum() - (s["seller_bal_before"] >= 5).sum()),
             "net_size_1_4": int(((s["buyer_bal_before"] >= 1) & (s["buyer_bal_before"] < 5)).sum()
                                 - ((s["seller_bal_before"] >= 1) & (s["seller_bal_before"] < 5)).sum()),
@@ -231,7 +251,8 @@ def run(key, out):
     # ---------------- liquidity (trailing windows from head)
     for days in (30, 90, 365):
         s = sales[sales["ts"] >= L.HEAD - pd.Timedelta(days=days)]
-        for variant, ss in (("all", s), ("ex_suspect", s[~s["suspect"]])):
+        for variant, ss in (("all", s), ("ex_suspect", s[~s["suspect"]]),
+                            ("ex_suspect_ex_churn", s[~s["suspect"] & ~s["churn"]])):
             gaps = ss["ts"].sort_values().diff().dt.total_seconds().dropna() / 3600
             out["liq"].append({"collection": key, "trailing_days": days, "variant": variant, "sales": len(ss),
                                "sales_per_day": len(ss) / days,
@@ -284,6 +305,20 @@ def run(key, out):
         "onchain_sales_unpriced": int(ss["price_eth"].isna().sum()),
         "onchain_sales_blend_buy_locked": int((ss["method"] == "blend_buy_locked").sum()),
         "onchain_sales_amm": int(ss["method"].isin(["nftx", "sudoswap_v2"]).sum())})
+    # OpenSea stats API cross-check (fetched 2026-10-13 ~21:33Z by screen_universe.py; all-marketplace? undocumented)
+    from universe_config import UNIVERSE
+    os_slug = {u[1]: u[2] for u in UNIVERSE}.get(slug)
+    osp = os.path.join(RAW, "opensea", f"stats_{os_slug}.json")
+    if os_slug and os.path.exists(osp):
+        osd = json.load(open(osp))
+        iv = {i["interval"]: i for i in osd["data"].get("intervals", [])}
+        s30 = sales[sales["ts"] >= L.HEAD - pd.Timedelta(days=30)]
+        out["recon"][-1].update({"opensea_sales_30d": iv.get("thirty_day", {}).get("sales"),
+                                 "opensea_volume_30d": iv.get("thirty_day", {}).get("volume"),
+                                 "opensea_owners": osd["data"]["total"].get("num_owners"),
+                                 "onchain_sales_30d": len(s30), "onchain_volume_30d": s30["price_eth"].sum(),
+                                 "onchain_sales_30d_seaport_only": int(s30["method"].str.startswith("seaport").sum()),
+                                 "opensea_fetched_utc": osd["fetched_at_utc"]})
     sales.to_csv(os.path.join(PROC_ON, f"sales_enriched_{key}.csv"), index=False)
     print(key, "sales", len(sales), "suspect", int(sales["suspect"].sum()), "recon", out["recon"][-1]["sales_gap_pct"],
           best, round(corr, 3) if pd.notna(corr) else None, flush=True)

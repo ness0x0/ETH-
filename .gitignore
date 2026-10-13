@@ -4,3 +4,5 @@ __pycache__/
 *.key
 # Raw on-chain log dumps are large (>300MB) and fully regenerable via scripts/onchain_*.py
 data/raw/onchain/
+# Large regenerable per-transfer movement tables (scripts/onchain_holders.py)
+data/processed/onchain/movements_*.csv
