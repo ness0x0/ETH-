@@ -15,6 +15,7 @@ import os
 import numpy as np
 import pandas as pd
 from common import PROC
+from npf_utils import load_series
 
 SLUG = {  # catalyst file stem -> NFTPriceFloor slug
     "milady": "milady", "remilio": "remilio-babies", "cryptodickbutts": "cryptodickbutts",
@@ -46,8 +47,7 @@ for f in sorted(glob.glob(os.path.join(PROC, "catalysts", "*.csv"))):
     slug = SLUG.get(stem)
     if not slug:
         continue
-    s = pd.read_csv(os.path.join(PROC, "npf_series", f"{slug}.csv"), index_col=0, parse_dates=True)
-    s = s[s.floorNative > 0]
+    s = load_series(slug)
     cat = pd.read_csv(f)
     for _, e in cat.iterrows():
         try:

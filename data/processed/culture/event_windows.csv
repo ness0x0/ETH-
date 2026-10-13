@@ -1,0 +1,79 @@
+collection,date,category,expected_direction,event,pre_bar,pre_floor_eth,ret_eth_3d,ret_btc_3d,ret_eth_30d,ret_btc_30d,ret_eth_90d,ret_btc_90d
+milady,2021-01-01,founder_announcement,none,Remilia Corporation founded (month-level date),,,,,,,,
+milady,2021-06-08,cultural_moment,none,'I Long For Network Spirituality' show opens at Hunters & Collectors (NZ) and online: Remilia's first public show,,,,,,,,
+milady,2021-08-24,supply_change,none,"Milady Maker mint opens (10,000 supply; 0.08 ETH public price)",,,,,,,,
+milady,2021-11-05,cultural_moment,up,Milady Rave 1 (NYC warehouse; police shut it down),,,,,,,,
+milady,2022-03-01,controversy,down,Twitter users allege Remilia is linked to Kaliacc (a defunct white-supremacist 'Kali Yuga accelerationism' collective),,,,,,,,
+milady,2022-04-19,supply_change,up,Milady Maker mint completes (sellout about 8 months after the mint opened),,,,,,,,
+milady,2022-05-05,controversy,down,CoinDesk story on the Milady founder's history (Miya / Remilia ties),,,,,,,,
+milady,2022-05-21,controversy,down,Charlotte Fang (Krishna Okhandiar) admits running the abusive 'Miya' account and announces stepping down from the Milady,2022-05-19,0.7,-0.7857,-0.7884,-0.6086,-0.6807,-0.4663,-0.4027
+milady,2022-05-23,controversy,down,0xngmi publishes a thread compiling Miya's posts; floor briefly falls below $500,2022-05-22,0.065,2.3846,2.098,3.3615,2.7305,4.6046,5.4286
+milady,2022-05-25,founder_announcement,ambiguous,Fang interviewed on Contain podcast defending Miya as 'performance art',2022-05-22,0.065,2.3846,2.098,3.3615,2.7305,4.6046,5.4286
+milady,2022-08-11,companion_collection,ambiguous,"Remilia launches companion collection Redacted Remilio Babies (10,000; 0.125 ETH)",2022-08-08,0.65,-0.2574,-0.2078,-0.4769,-0.4256,-0.4154,-0.4575
+milady,2022-11-17,founder_announcement,ambiguous,Milady/Remilia publishes a Substack rebuttal of the allegations against the project and its leadership,2022-11-15,0.36,0.2161,0.1507,0.775,0.6911,1.7778,1.6084
+milady,2023-04-11,companion_collection,up,Remilia announces Milady Rave Tokyo (Apr 14) and the new Bonkler NFT (launch party Apr 16; daily treasury-backed auction,2023-04-08,1.58757,-0.1056,-0.0683,0.6377,0.6465,0.6062,0.5005
+milady,2023-05-07,token_airdrop,up,LADYS memecoin launches (unaffiliated with Remilia); airdropped May 8-15 to Milady NFT and PEPE holders,2023-05-05,3.088,-0.158,-0.171,0.0363,0.0668,-0.1292,-0.189
+milady,2023-05-10,celebrity_influencer,up,Elon Musk posts a Milady meme image ('There is no meme. I love you.'),2023-05-08,3.29,0.1854,0.1867,-0.0517,-0.0373,0.0298,-0.0326
+milady,2023-07-14,cultural_moment,up,Milady Maker voted 'NFT Project of the Year' at the inaugural Binance Awards,2023-07-13,2.61,0.0843,0.0744,0.5249,0.4988,-0.3567,-0.4154
+milady,2023-09-11,controversy,down,'Bonkler 9/11': Remilia developer allegedly diverts about $1M of Bonkler fees and contractors seize codebases and three ,2023-09-08,3.234,-0.3352,-0.3545,-0.4295,-0.4732,0.0159,-0.1358
+milady,2023-09-22,controversy,down,"Countersuit by Roux, Duff, Smith and Nispel in Delaware Chancery accuses Fang of misappropriating more than $600k, then ",2023-09-20,2.41,-0.0871,-0.0722,-0.2946,-0.3703,-0.0249,-0.138
+milady,2024-01-01,partnership_product,up,Kagami Academy: Remilia collaboration with FRUiTS Magazine,2023-12-31,2.53,-0.0514,-0.1043,-0.0672,-0.0764,0.3672,0.2687
+milady,2024-03-16,controversy,down,Remilia treasury wallets drained: ETH and Milady-related NFTs (incl. NFTX-staked) moved and liquidated. Fang claims a ha,2024-03-15,3.69,-0.1154,-0.1238,0.173,0.0615,0.1924,0.2039
+milady,2024-05-22,other,none,Unexplained intraday Milady rally from 4 to 5.8 ETH while most blue chips fell,2024-05-20,3.998,0.1633,0.2673,0.1756,0.2474,-0.1171,-0.2593
+milady,2024-06-03,other,ambiguous,DWF Labs announces a $5M investment in the LADYS memecoin (unaffiliated with Remilia),2024-06-01,4.558,-0.1619,-0.2106,0.1406,0.0863,-0.2321,-0.4149
+milady,2024-06-13,token_airdrop,up,"CULT token presale announced, with holder tiers for Milady and Remilio holders and a 10% premium for BAYC/MAYC wallets",2024-06-10,4.298,0.0237,0.0551,0.098,0.1165,-0.2555,-0.4236
+milady,2024-11-05,market_macro,up,US election (Trump win); broad crypto rally,2024-11-04,4.09,0.0758,0.2057,0.5501,0.7553,0.0489,-0.1434
+milady,2024-12-03,token_airdrop,none,CULT ERC-20 deployed; entire 100B supply minted to Remilia deployer,2024-12-01,5.82004,0.0893,0.1433,-0.3129,-0.3378,-0.3746,-0.592
+milady,2024-12-09,token_airdrop,ambiguous,"CULT TGE and Remilia Achievements seed airdrop (half of the 50% Cult Fund) to Remilia NFT holders/traders, mainly Milady",2024-12-07,6.34,-0.2072,-0.2371,-0.4132,-0.4901,-0.4874,-0.6961
+milady,2024-12-11,token_airdrop,down,"Updated CULT whitepaper: supply x10 to 100B, roadmap pushed back two quarters, 'Manipulation Rounds' (later airdrops) ru",2024-12-10,4.999,0.048,0.0488,-0.2919,-0.3484,-0.3801,-0.6206
+milady,2024-12-30,marketplace_incentive,up,KuCoin lists CULT (ticker MILADYCULT) at 11:00 UTC,2024-12-28,4.19,-0.0456,-0.0178,0.0618,-0.0782,-0.2222,-0.5194
+milady,2025-01-18,celebrity_influencer,up,vitalik.eth wallet buys Milady #9286 for 5.82 ETH and adopts it as X/Farcaster PFP ('wartime' meme). Aave's Stani Kulech,2025-01-15,3.51177,-0.029,-0.1133,0.1931,-0.0043,-0.1771,-0.5491
+milady,2025-04-13,other,none,"Milady #595 transferred to vitalik.eth (zero-value transfer, likely a gift)",2025-04-12,2.95,-0.0203,-0.0442,0.0508,0.3386,-0.2203,0.0174
+milady,2025-04-21,market_macro,down,ETH/BTC cycle low 0.01805 (Binance daily close),2025-04-18,2.88999,-0.0035,-0.0019,0.0304,0.2747,-0.1765,0.4023
+milady,2025-06-30,token_airdrop,ambiguous,CULT 'Manipulation Round 1' (15% of supply) scheduled for Q2 2025,2025-06-29,2.06969,0.0142,0.0225,0.3821,0.8447,-0.1206,0.3856
+milady,2025-09-19,partnership_product,up,RemiliaNET alpha launches: identity layer with 'social credit score' leaderboard that will drive future CULT 'manipulati,2025-09-18,1.875,-0.1174,-0.1746,-0.2539,-0.3194,-0.4934,-0.5644
+milady,2025-10-10,market_macro,down,Record ~$19B crypto liquidation cascade after US-China tariff announcement,2025-10-09,1.68899,-0.1426,-0.1404,-0.3902,-0.4367,-0.3428,-0.3758
+milady,2026-01-01,celebrity_influencer,up,Vitalik posts 'Welcome to 2026! Milady is back.' and re-adopts a Milady PFP,2025-12-29,0.855,-0.1813,-0.1652,0.0916,0.009,0.3123,0.2242
+milady,2026-02-11,partnership_product,up,Remilia Atelier fashion line with designer Elena Velez announced (NYFW show; Le Bain afterparty/Milady Rave NY 2026-02-1,2026-02-09,1.025,0.122,0.0678,0.1951,0.1724,0.19,0.1294
+milady,2026-03-13,cultural_moment,ambiguous,Ethereum Foundation publishes 38-page 'EF Mandate' (CROPS) with Milady-inspired design; debate over loyalty pledge and ',2026-03-11,1.28996,-0.0025,0.0699,-0.0465,0.0387,-0.1707,-0.2561
+milady,2026-06-30,token_airdrop,ambiguous,CULT 'Manipulation Round 2' (20% of supply) scheduled for Q2 2026,2026-06-27,0.9893,0.0411,0.1162,0.0402,0.1756,-0.0701,0.1425
+milady,2026-07-15,founder_announcement,ambiguous,Remilia pre-release announcement: book 'The Exegesis of Miya Black Hearted Cyber Angel Baby',2026-07-12,1.0395390000000198,-0.065,-0.0514,0.0244,0.0798,-0.2844,-0.2394
+milady,2026-10-12,lending_leverage,down,Blur announces blur.io frontend closure on 2026-11-12. Blend stops new loans and borrowers must repay or default,2026-10-10,0.80495,,,,,,
+remilio,2022-08-11,supply_change,none,"Redacted Remilio Babies mint opens (10,000; 0.125 ETH; 5 for 0.6 ETH)",,,,,,,,
+remilio,2023-01-19,supply_change,up,Remilio mint completes (sellout ~5 months after launch),2023-01-17,0.05744,-0.0578,-0.0972,-0.2716,-0.3193,5.0933,4.6592
+remilio,2023-04-11,companion_collection,up,Milady Rave Tokyo / Bonkler announcement (Remilia-Con 2023),2023-04-08,0.15,0.7,0.7707,4.9333,4.965,2.5333,2.3009
+remilio,2023-05-10,celebrity_influencer,up,Elon Musk Milady meme post: Remilio sales +660% in 24h,2023-05-08,0.76,0.3158,0.3172,0.1972,0.2154,0.0816,0.016
+remilio,2023-09-11,controversy,down,'Bonkler 9/11' treasury/fee diversion and account seizures; Fang sues contractors (D. Nev.),2023-09-08,0.67,-0.6061,-0.6176,-0.509,-0.5466,-0.1294,-0.2594
+remilio,2023-09-22,controversy,down,Ex-colleagues' Delaware countersuit against Fang,2023-09-20,0.499,-0.1846,-0.1712,-0.3052,-0.3798,-0.1002,-0.2046
+remilio,2024-03-16,controversy,down,Remilia treasury drained; Fang claims hack,2024-03-15,0.93,-0.3118,-0.3183,0.5851,0.4344,0.3118,0.3245
+remilio,2024-06-13,token_airdrop,up,"CULT presale announced, with a Remilio-holder tier (250 'Community Entry' slots at 0.25 ETH plus holder curve)",2024-06-10,1.339,-0.0889,-0.0609,0.0269,0.0442,-0.4033,-0.538
+remilio,2024-11-05,market_macro,up,US election / crypto rally,2024-11-04,1.0,0.0958,0.2282,0.6,0.8118,-0.19,-0.3385
+remilio,2024-12-09,token_airdrop,ambiguous,CULT TGE: seed airdrop to Remilia NFT holders including Remilio,2024-12-07,1.6,-0.2813,-0.3084,-0.4437,-0.5166,-0.6188,-0.774
+remilio,2024-12-11,token_airdrop,down,"CULT whitepaper revision: supply x10, roadmap delayed two quarters",2024-12-10,1.23,0.0553,0.0561,-0.3343,-0.3875,-0.5683,-0.7358
+remilio,2025-01-18,celebrity_influencer,up,vitalik.eth buys Milady #9286 and adopts a Milady PFP (ecosystem spillover),2025-01-15,0.785,-0.0828,-0.1624,0.0297,-0.1407,-0.3758,-0.658
+remilio,2025-04-21,market_macro,down,ETH/BTC cycle low 0.01805,2025-04-18,0.49,0.0304,0.0321,0.032,0.2767,0.1327,0.9287
+remilio,2025-09-19,partnership_product,up,RemiliaNET alpha launch,2025-09-18,0.34417,-0.219,-0.2697,-0.4044,-0.4566,-0.6191,-0.6725
+remilio,2025-10-10,market_macro,down,Record crypto liquidation cascade,2025-10-09,0.282,-0.2589,-0.257,-0.3798,-0.4272,-0.4327,-0.4611
+remilio,2026-01-01,celebrity_influencer,up,Vitalik 'Milady is back' PFP,2025-12-29,0.133344,-0.1751,-0.1589,-0.0618,-0.1328,0.1249,0.0494
+remilio,2026-02-11,partnership_product,up,Remilia Atelier x Elena Velez announced,2026-02-09,0.159,0.0377,-0.0124,0.1447,0.1229,0.2453,0.1818
+remilio,2026-03-13,cultural_moment,ambiguous,EF Mandate with Milady-inspired design,2026-03-11,0.1849989,-0.027,0.0435,-0.1099,-0.0304,0.0,-0.103
+remilio,2026-10-12,lending_leverage,down,Blur frontend closure announced; Blend stops new loans,2026-10-10,0.117652,,,,,,
+cryptodickbutts,2006-07-02,cultural_moment,none,K.C. Green publishes the original 'Dickbutt' in the Horribleville webcomic 'Tree. You've Been Good to Us',,,,,,,,
+cryptodickbutts,2021-03-01,supply_change,none,OG CryptoDickbutts Series 1 & 2 (161 NFTs; 52 + 104 per Gooch Gazette) released as homage/gift for early CryptoPunks hol,,,,,,,,
+cryptodickbutts,2021-07-28,supply_change,none,"CryptoDickbutts Series 3 mint opens (5,200 supply; 0.052 ETH public, with bulk discounts and free claims)",,,,,,,,
+cryptodickbutts,2021-08-07,supply_change,up,"Series 3 mint completes (5,200 minted)",,,,,,,,
+cryptodickbutts,2021-11-24,founder_announcement,up,"CryptoDickbutt DAO announced: mission to buy a real-world 'Gooch Island'; on-chain voting, 1 vote per NFT",,,,,,,,
+cryptodickbutts,2021-12-30,partnership_product,ambiguous,Partnership with Naughty America announced (incl. VR 'Gooch Island'),,,,,,,,
+cryptodickbutts,2022-01-28,partnership_product,up,Silvr Jet private-charter partnership (15% off for OG and 10% for S3 holders),,,,,,,,
+cryptodickbutts,2022-02-02,founder_announcement,ambiguous,Series 3 royalty doubled to 5% to fund a Community Treasury,,,,,,,,
+cryptodickbutts,2022-03-18,other,ambiguous,Community votes to make CryptoDickbutts CC0 (public domain); treasury royalties unchanged,,,,,,,,
+cryptodickbutts,2022-08-07,celebrity_influencer,up,Meltem Demirors (CoinShares) hosts an 'emergency' Twitter Space; CDB volume +690-935% and floor at ATH ~3-3.6 ETH,2022-08-05,1.8234,0.5082,0.5901,0.6453,0.8657,0.2175,0.2259
+cryptodickbutts,2023-05-05,token_airdrop,up,"$gooch token snapshot (5:30pm ET) for CDB S1-3, CrypToadz and Babby holders; Uniswap pools created 2023-05-11",2023-05-02,1.089,0.0696,0.095,0.0284,0.0991,-0.3949,-0.4165
+cryptodickbutts,2023-07-29,founder_announcement,down,"Series 4 announced with ownership 'twist': control of X account, Discord, collections and multisig treasury seat goes to",2023-07-28,1.02,-0.3539,-0.3645,-0.3137,-0.3295,-0.4709,-0.5697
+cryptodickbutts,2023-08-01,supply_change,down,Series 4 mints out,2023-07-31,0.58,0.2759,0.2646,0.6587,0.6532,-0.0693,-0.2358
+cryptodickbutts,2023-08-31,founder_announcement,ambiguous,Scheduled handover of project control to largest holder (30 days after S4 mint-out),2023-08-30,0.7,0.3743,0.3941,-0.0304,-0.0618,-0.1444,-0.2611
+cryptodickbutts,2024-10-12,other,ambiguous,Unaffiliated DICKBUTT memecoin launched on Base via Farcaster's Clanker bot,2024-10-11,0.2486,-0.2361,-0.2434,-0.1107,-0.196,2.9747,2.5213
+cryptodickbutts,2025-04-21,market_macro,down,ETH/BTC cycle low 0.01805,2025-04-18,0.41686,0.6019,0.6045,2.5983,3.4515,2.2341,4.5071
+cryptodickbutts,2025-10-10,market_macro,down,Record crypto liquidation cascade,2025-10-09,1.3499,-0.1147,-0.1125,-0.3514,-0.4009,-0.4466,-0.4744
+cryptodickbutts,2025-11-03,founder_announcement,up,Project X account: the CDB community ('Penus DAO') together with collector Adam Weitsman 'have taken control of the proj,2025-11-02,1.0599,-0.1626,-0.2123,-0.3194,-0.3487,-0.4339,-0.5278
+cryptodickbutts,2026-10-12,lending_leverage,down,Blur frontend closure announced; Blend stops new loans,2026-10-10,0.45,,,,,,

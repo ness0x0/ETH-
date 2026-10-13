@@ -12,6 +12,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 from common import PROC, ROOT
+from npf_utils import load_series
 
 CH = os.path.join(ROOT, "reports", "charts")
 F = [  # key, npf slug, title
@@ -56,8 +57,7 @@ def load_events(key, s):
 
 
 def chart(key, slug, title):
-    s = pd.read_csv(os.path.join(PROC, "npf_series", f"{slug}.csv"), index_col=0, parse_dates=True)
-    s = s[(s.floorNative > 0) & (s.index >= "2022-06-01")]  # NPF bars before June 2022 contain glitches
+    s = load_series(slug)
     fig, axes = plt.subplots(3, 1, figsize=(12, 9.5), sharex=True, gridspec_kw={"height_ratios": [3, 1.6, 1.2]})
     ax = axes[0]
     ax.plot(s.index, s.floorNative, color="#2c3e50", lw=1.6, label="Floor (ETH)")

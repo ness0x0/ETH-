@@ -1,8 +1,8 @@
 """Classify every address that ever received a token of the 9 collections as EOA vs contract.
 
 Method   : "deployless" eth_call (no `to`; data = 40-byte init code + N 32-byte addresses). The init code copies the
-           appended addresses to memory, replaces each with EXTCODESIZE(address) and returns the array. 1,000
-           addresses per call (well under the 49,152-byte initcode cap and a 50M gas cap). Evaluated at HEAD_BLOCK.
+           appended addresses to memory, replaces each with EXTCODESIZE(address) and returns the array. 700
+           addresses per call (returned array must stay under the 24,576-byte EIP-170 code-size cap). Evaluated at HEAD_BLOCK.
            Addresses with code size 23 are re-checked with eth_getCode: code starting 0xef0100 is an EIP-7702
            delegation designator (an EOA that delegated to a smart-account implementation) and is treated as EOA.
 Endpoints: Tenderly public gateway (primary), NodeReal public (fallback) — via common.RPC.
@@ -43,8 +43,8 @@ def main():
     addrs = [a for a in all_addresses() if a not in have]
     print("to check", len(addrs), "cached", len(have), flush=True)
     rpc = RPC(RPCS, min_interval=0.2)
-    for i in range(0, len(addrs), 1000):
-        chunk = addrs[i:i + 1000]
+    for i in range(0, len(addrs), 700):
+        chunk = addrs[i:i + 700]
         data = "0x" + INIT + "".join(a[2:].rjust(64, "0") for a in chunk)
         res = rpc.call("eth_call", [{"data": data, "gas": hex(50_000_000)}, hex(HEAD_BLOCK)])
         sizes = [int(res[2 + 64 * j: 2 + 64 * (j + 1)], 16) for j in range(len(chunk))]
