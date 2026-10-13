@@ -8,6 +8,7 @@ import os
 from common import ROOT, RAW, PROC
 
 HEAD_BLOCK = 26_186_366
+HEAD_TS = 1_791_928_163  # block timestamp of HEAD_BLOCK = 2026-10-13T21:49:23Z (eth_getBlockByNumber, Tenderly)
 ANALYSIS_DATE = "2026-10-13"
 
 TRANSFER_TOPIC = "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"

@@ -15,7 +15,8 @@ import os
 import statistics
 import time
 import requests
-from common import save_raw, PROC, utcnow
+from common import save_raw, PROC, utcnow, RPC
+WETH = "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
 
 KEYF = "/root/.config/ethnft/opensea_key.json"
 BASE = "https://api.opensea.io/api/v2"
@@ -38,7 +39,7 @@ def get(path, params=None):
             time.sleep(5 * (i + 1))
             continue
         r.raise_for_status()
-        time.sleep(1.1)  # 60 req/min free tier
+        time.sleep(6.2)  # free key: 600 reads/hour
         return r.json()
     raise RuntimeError(path)
 
@@ -68,8 +69,8 @@ def eth(price):
 def main():
     rows = []
     for slug, k in FINALISTS.items():
-        listings = paged(f"/listings/collection/{slug}/best", "listings", {"limit": 100}, max_pages=3)
-        offers = paged(f"/offers/collection/{slug}/all", "offers", {"limit": 100}, max_pages=5)
+        listings = paged(f"/listings/collection/{slug}/best", "listings", {"limit": 100}, max_pages=2)
+        offers = paged(f"/offers/collection/{slug}", "offers", {"limit": 100}, max_pages=3)
         save_raw(f"opensea_book/{slug}_listings.json", listings)
         save_raw(f"opensea_book/{slug}_offers.json", offers)
         asks = sorted(p for p in (eth(l.get("price", {}).get("current", {})) for l in listings) if p)
@@ -82,27 +83,55 @@ def main():
             pr = o.get("price") or {}
             try:
                 total = int(pr["value"]) / 10 ** int(pr.get("decimals", 18))
-                qty = int(o.get("remaining_quantity") or o.get("quantity") or
-                          o["protocol_data"]["parameters"]["consideration"][0]["startAmount"])
+                orig_qty = int(o["protocol_data"]["parameters"]["consideration"][0]["startAmount"])
+                qty = int(o.get("remaining_quantity") or orig_qty)
+                bidder = o["protocol_data"]["parameters"]["offerer"]
             except Exception:  # noqa
                 continue
-            if qty <= 0:
+            if qty <= 0 or orig_qty <= 0:
                 continue
-            bids.append((total / qty, qty))
+            bids.append((total / orig_qty, qty, bidder))
         bids.sort(reverse=True)
+        # funding check: a bidder's WETH balance caps what their bids can actually pay (bids across collections
+        # share the same balance, so this is an upper bound on funded depth)
+        bal = {}
+        for _, _, b in bids[:60]:
+            if b not in bal:
+                try:
+                    data = "0x70a08231" + b[2:].lower().rjust(64, "0")
+                    bal[b] = int(RPC().call("eth_call", [{"to": WETH, "data": data}, "latest"]), 16) / 1e18
+                except Exception:  # noqa
+                    bal[b] = None
+        funded = []
+        used = {}
+        for p_, q_, b in bids:
+            cap = bal.get(b)
+            if cap is None:
+                funded.append((p_, q_))
+                continue
+            can = int(max(0.0, cap - used.get(b, 0.0)) // p_) if p_ > 0 else 0
+            take = min(q_, can)
+            if take > 0:
+                funded.append((p_, take))
+                used[b] = used.get(b, 0.0) + take * p_
+        r_bidders = len({b for _, _, b in bids})
+        bids = [(p_, q_) for p_, q_, _ in bids]
         floor = asks[0] if asks else None
         r = {"slug": slug, "key": k, "snapshot_utc": utcnow(), "floor_ask": floor, "n_listings_seen": len(asks),
              "cost_1": sum(asks[:1]) if asks else None, "cost_2": sum(asks[:2]) if len(asks) >= 2 else None,
              "cost_3": sum(asks[:3]) if len(asks) >= 3 else None,
-             "best_bid": bids[0][0] if bids else None}
+             "best_bid": bids[0][0] if bids else None, "unique_bidders": r_bidders,
+             "best_funded_bid": funded[0][0] if funded else None}
         if floor:
             for pct in (5, 10, 25):
                 r[f"listings_within_{pct}pct"] = sum(1 for a in asks if a <= floor * (1 + pct / 100))
             for pct in (95, 90, 80, 70, 50):
                 r[f"bid_qty_ge_{pct}pct_floor"] = sum(q for p, q in bids if p >= floor * pct / 100)
+            for pct in (95, 90, 80, 70, 50):
+                r[f"funded_bid_qty_ge_{pct}pct_floor"] = sum(q for p, q in funded if p >= floor * pct / 100)
             r["best_bid_pct_floor"] = bids[0][0] / floor if bids else None
             # proceeds selling 1..3 into bid ladder
-            ladder = [p for p, q in bids for _ in range(min(q, 10))]
+            ladder = [p for p, q in funded for _ in range(min(q, 10))]
             for n in (1, 2, 3):
                 r[f"proceeds_sell_{n}"] = sum(ladder[:n]) if len(ladder) >= n else None
         rows.append(r)
