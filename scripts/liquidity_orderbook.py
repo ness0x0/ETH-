@@ -21,7 +21,7 @@ WETH = "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
 KEYF = "/root/.config/ethnft/opensea_key.json"
 BASE = "https://api.opensea.io/api/v2"
 FINALISTS = {
-    "milady": "milady", "remilio-babies": "remilio-babies", "cryptodickbutts-s3": "cryptodickbutts",
+    "milady": "milady", "remilio-babies": "remilio", "cryptodickbutts-s3": "cryptodickbutts",
     "pudgypenguins": "pudgy", "lilpudgys": "lil_pudgys", "azuki": "azuki", "terraforms": "terraforms",
     "chromie-squiggle-by-snowfro": "chromie_squiggle", "official-v1-punks": "v1punks",
 }
