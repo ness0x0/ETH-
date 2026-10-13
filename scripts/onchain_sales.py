@@ -113,13 +113,12 @@ def classify_tx(key, contract, rec, moves):
 
     cand = {}   # tid -> (price_wei or None, method, flags set, seller_override, buyer_override)
 
-    def add(tid, price, method, flags=(), seller=None, buyer=None, prio=5):
+    def add(tid, price, method, flags=(), seller=None, buyer=None, prio=5, side=""):
         if tid not in path:
             return
         cur = cand.get(tid)
-        newv = (prio, price if price is not None else -1)
         if cur is None or (prio < cur[5]) or (prio == cur[5] and (price or 0) > (cur[0] or 0)):
-            cand[tid] = (price, method, set(flags), seller, buyer, prio)
+            cand[tid] = (price, method, set(flags), seller, buyer, prio, side)
 
     blend_loan_tokens = {}   # tid -> borrower (LoanOfferTaken in tx)
     erc20 = []   # (token, from, to, amount)
@@ -140,7 +139,7 @@ def classify_tx(key, contract, rec, moves):
                 trader = "0x%040x" % (tl & ((1 << 160) - 1))
                 price = (cps >> 160) & ((1 << 88) - 1)
                 side = cps >> 248
-                add(tid, price, "blur_v2", (), prio=1)
+                add(tid, price, "blur_v2", (), prio=1, side="bid" if side == 1 else "listing")
             elif t0 == T_BLUR2_EXEC and a == BLUR_V2:
                 w = words(data)  # Transfer(trader, id, amount, collection, assetType), orderHash, listingIndex, price
                 coll = w_addr(w[3])
@@ -157,7 +156,9 @@ def classify_tx(key, contract, rec, moves):
                 price = w_int(w[so + 7])
                 pay = w_addr(w[so + 6])
                 fl = () if pay in ETH_LIKE else ("non_eth_currency",)
-                add(tid, price if not fl else None, "blur_v1", fl, prio=1)
+                maker = w_addr(tp[1]) if len(tp) > 1 else ""
+                sd = "bid" if maker == w_addr(w[bo]) else "listing"
+                add(tid, price if not fl else None, "blur_v1", fl, prio=1, side=sd)
             elif t0 == T_SEAPORT and a in SEAPORT:
                 rcpt, offer, cons = dec_seaport(data, a)
                 nft_o = [i for i in offer if i[0] in (2, 4) and i[1] == contract]
@@ -166,10 +167,10 @@ def classify_tx(key, contract, rec, moves):
                 other_nft_c = [i for i in cons if i[0] in (2, 3, 4, 5) and i[1] != contract]
                 if nft_o:
                     cur = [i for i in cons if i[0] in (0, 1)]
-                    nfts, other = nft_o, other_nft_o
+                    nfts, other, sd = nft_o, other_nft_o, "listing"
                 elif nft_c:
                     cur = [i for i in offer if i[0] in (0, 1)]
-                    nfts, other = nft_c, other_nft_c
+                    nfts, other, sd = nft_c, other_nft_c, "bid"
                 else:
                     continue
                 if not cur:
@@ -187,7 +188,7 @@ def classify_tx(key, contract, rec, moves):
                 if non_eth:
                     fl.append("non_eth_currency")
                 for it in nfts:
-                    add(it[2], (total // n) if not non_eth else None, SEAPORT[a], fl, prio=2)
+                    add(it[2], (total // n) if not non_eth else None, SEAPORT[a], fl, prio=2, side=sd)
             elif t0 in (T_LR_BID, T_LR_ASK):
                 w = words(data)
                 # nonceInvalidationParameters(3) askUser/bidUser bidUser/bidRecipient strategyId currency collection
@@ -203,12 +204,14 @@ def classify_tx(key, contract, rec, moves):
                 if cur_tok not in ETH_LIKE:
                     fl.append("non_eth_currency")
                 for tid in ids:
-                    add(tid, total // len(ids) if cur_tok in ETH_LIKE else None, "looksrare_v2", fl, prio=2)
+                    add(tid, total // len(ids) if cur_tok in ETH_LIKE else None, "looksrare_v2", fl, prio=2,
+                        side="bid" if t0 == T_LR_ASK else "listing")
             elif t0 in (T_PP_BUY, T_PP_ACCEPT) and len(tp) == 4 and w_addr(tp[3]) == contract:
                 w = words(data)
                 pay, tid, price = w_addr(w[1]), w_int(w[2]), w_int(w[3])
                 fl = [] if pay in ETH_LIKE else ["non_eth_currency"]
-                add(tid, price if not fl else None, "payment_processor", fl, prio=2)
+                add(tid, price if not fl else None, "payment_processor", fl, prio=2,
+                    side="bid" if t0 == T_PP_ACCEPT else "listing")
             elif t0 == T_LOAN_TAKEN and a == BLEND:
                 w = words(data)
                 if w_addr(w[2]) == contract:
@@ -219,7 +222,7 @@ def classify_tx(key, contract, rec, moves):
                     buyer, seller, tid = w_addr(w[2]), w_addr(w[3]), w_int(w[4])
                     paid = sum(x[3] for x in erc20_all(logs) if x[1] == buyer and x[2] != ZERO)
                     add(tid, paid or None, "blend_buy_locked", ("escrow_seller_attributed",), seller=seller,
-                        buyer=buyer, prio=3)
+                        buyer=buyer, prio=3, side="listing")
             elif t0 in (T_NFTX_BUY, T_NFTX_SELL):
                 w = words(data)
                 cnt, eth = w_int(w[0]), w_int(w[1])
@@ -228,7 +231,7 @@ def classify_tx(key, contract, rec, moves):
                 for tid, p in path.items():
                     lab = L.labels().get(p["seller"] if t0 == T_NFTX_BUY else p["buyer"], {})
                     if lab.get("protocol") == "nftx":
-                        add(tid, eth // cnt, "nftx", ["amm"], prio=3)
+                        add(tid, eth // cnt, "nftx", ["amm"], prio=3, side="pool")
             elif t0 in (T_SUDO_OUT, T_SUDO_IN):
                 w = words(data)
                 if len(w) < 3:
@@ -239,7 +242,7 @@ def classify_tx(key, contract, rec, moves):
                 for tid in ids:
                     p = path.get(tid)
                     if p and a in (p["seller"], p["buyer"]):
-                        add(tid, amt // max(1, len(ids)), "sudoswap_v2", ["amm"], prio=3)
+                        add(tid, amt // max(1, len(ids)), "sudoswap_v2", ["amm"], prio=3, side="pool")
         except Exception:  # noqa — malformed / unexpected layout: skip this log
             continue
 
@@ -254,14 +257,14 @@ def classify_tx(key, contract, rec, moves):
         if not status_ok:
             flags.add("failed_tx")
         c = cand.get(tid)
-        typ, price, method = None, None, ""
+        typ, price, method, side = None, None, "", ""
         if seller == ZERO:
             typ = "mint"
         elif c is not None and c[1].endswith("_swap"):
             typ, method = "nft_swap_no_price", c[1]
             flags |= c[2]
         elif c is not None:
-            typ, price, method = "sale", c[0], c[1]
+            typ, price, method, side = "sale", c[0], c[1], c[6]
             flags |= c[2]
             if c[3]:
                 seller = c[3]
@@ -279,6 +282,9 @@ def classify_tx(key, contract, rec, moves):
             elif value > 0 and not loan_leg and txfrom == buyer and buyer != seller and buyer not in DEAD:
                 typ, price, method = "sale", value // same_buyer, "fallback_tx_value"
                 flags.add("price_from_fallback")
+        if typ == "sale" and price is not None and price <= 10 ** 15:
+            typ = "zero_price_trade"
+            flags.add("zero_or_dust_price")
         if typ == "sale":
             # escrow attribution
             if seller == BLEND and not c or (seller == BLEND and c and not c[3]):
@@ -307,7 +313,7 @@ def classify_tx(key, contract, rec, moves):
                     typ = "other_transfer"
         out.append({"id": tid, "seller": seller, "buyer": buyer, "type": typ,
                     "price_eth": (price / 1e18) if (price is not None and price >= 0) else None,
-                    "method": method, "flags": ";".join(sorted(flags)), "n_tokens_tx": n_tokens,
+                    "method": method, "side": side, "flags": ";".join(sorted(flags)), "n_tokens_tx": n_tokens,
                     "tx_from": txfrom, "tx_to": txto})
     return out
 
@@ -342,7 +348,7 @@ def run(key):
             r.update({"block": b, "ts": pd.Timestamp(t, unit="s", tz="UTC"), "tx": tx})
             rows.append(r)
     mv = pd.DataFrame(rows).sort_values(["block", "tx", "id"])
-    cols = ["block", "ts", "tx", "id", "seller", "buyer", "type", "price_eth", "method", "flags", "n_tokens_tx",
+    cols = ["block", "ts", "tx", "id", "seller", "buyer", "type", "price_eth", "method", "side", "flags", "n_tokens_tx",
             "tx_from", "tx_to"]
     mv = mv[cols].rename(columns={"id": "tokenId"})
     L.write_csv(mv, f"movements_{key}.csv")
