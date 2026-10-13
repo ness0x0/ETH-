@@ -2,7 +2,9 @@
 
 Source   : eth_getTransactionReceipt + eth_getTransactionByHash (single, throttled JSON-RPC calls — no batching).
 Endpoints: fan-out over public endpoints listed in common.RECEIPT_RPCS (Tenderly public gateway, NodeReal public
-           key, dRPC, MEV Blocker, Blast public, Nodies/POKT). Each endpoint has its own worker threads and a per-endpoint
+           key, MEV Blocker, Blast public, Nodies/POKT; dRPC was used in the 2026-10-13 run and then dropped after
+           onchain_validate_receipts.py caught it returning wrong logs for 82 receipts, all re-fetched).
+           ALWAYS run onchain_validate_receipts.py after this script. Each endpoint has its own worker threads and a per-endpoint
            minimum interval; failed/null responses are retried on a different endpoint. Responses are deterministic
            chain data, so the serving endpoint does not change content (endpoint recorded per record anyway).
 Windows  : trailing 12 months 2025-10-13T00:00Z .. HEAD_BLOCK (2026-10-13) for every collection, plus

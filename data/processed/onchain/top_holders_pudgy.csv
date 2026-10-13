@@ -1,7 +1,7 @@
 collection,rank,address,tokens,share,type,category,protocol,name,ens,first_received,median_token_age_days,in_top50
 pudgy,1,0x29469395eaf6f95920e59f858042f0e28d98a20b,194,0.021827182718271828,contract,lending,blur_blend,ERC1967Proxy,,2023-05-23,4.4,True
 pudgy,2,0x250dc85178fb6859e9ee02c925d46aab946a55e7,180,0.02025202520252025,contract,safe,gnosis_safe,SafeProxy,,2026-01-09,2.0,True
-pudgy,3,0x9ec9adc4fb9d901e72a0544835744fa976fa0c34,84,0.009450945094509451,eoa,eoa,,,pudgypenguins.liquidity.flooringlab.eth,2023-12-25,777.6,True
+pudgy,3,0x9ec9adc4fb9d901e72a0544835744fa976fa0c34,84,0.009450945094509451,eoa,fractional_vault,flooring_eoa_vault,,pudgypenguins.liquidity.flooringlab.eth,2023-12-25,777.6,True
 pudgy,4,0x4182a46c61c3ee40e61304f8b419f813eeced3b4,68,0.00765076507650765,eoa,eoa,,,,2022-12-23,1386.3,True
 pudgy,5,0xf41b389e0c1950dc0b16c9498eae77131cc08a56,61,0.006863186318631863,contract,lending,gondi,MultiSourceLoan,,2025-09-20,32.2,True
 pudgy,6,0xb3d6e9e142a785ea8a4f0050fee73bcc3438c5c5,58,0.0065256525652565255,contract,strategy_vault,nft_strategy_token,CryptoStrategy,,2025-09-19,374.2,True

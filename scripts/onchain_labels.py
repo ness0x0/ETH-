@@ -267,7 +267,12 @@ def main():
                         impl_names.append(t)
         cat, proto, src = classify(a, rec, prb, impl_names)
         if not L.is_contract(a) and a not in DEAD:
-            cat, proto, src = "eoa", "", "no code" + (" (EIP-7702 delegated)" if L.is_7702(a) else "")
+            ens = ((rec or {}).get("data") or {}).get("ens_domain_name") or ""
+            if re.search(r"\.flooringlab\.eth$", ens):
+                # EOA operated by Flooring Protocol as a collection liquidity vault (ENS *.liquidity.flooringlab.eth)
+                cat, proto, src = "fractional_vault", "flooring_eoa_vault", "ens:flooringlab.eth"
+            else:
+                cat, proto, src = "eoa", "", "no code" + (" (EIP-7702 delegated)" if L.is_7702(a) else "")
         d = (rec or {}).get("data") or {}
         rows.append({"address": a, "is_contract": L.is_contract(a), "is_7702": L.is_7702(a),
                      "name": d.get("name") or "", "impl_names": "; ".join(impl_names) or "; ".join(

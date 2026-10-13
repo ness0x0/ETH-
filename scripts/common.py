@@ -160,8 +160,9 @@ def rpc_multi(urls, min_interval=0.25):
 
 # Additional public endpoints verified 2026-10-13 to serve eth_getTransactionReceipt / eth_getTransactionByHash
 # for historical (post-merge) transactions. Used only for per-tx receipt fetching, not for log scans.
+# eth.drpc.org was used for the first receipt pass but returned a receipt whose logs belonged to another tx in ~0.26%
+# of calls (82 of ~31k, detected by onchain_validate_receipts.py and re-fetched); it is excluded from now on.
 RECEIPT_RPCS = RPCS + [
-    "https://eth.drpc.org",
     "https://rpc.mevblocker.io",
     "https://eth-mainnet.public.blastapi.io",
     "https://eth-pokt.nodies.app",

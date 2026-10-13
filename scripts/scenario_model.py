@@ -39,7 +39,8 @@ def run(params, retention=None):
     rows = []
     for c, p in params.items():
         for s, (eb, btc, _) in SCEN.items():
-            m = p["M"][s]
+            e = p.get("e", 1.0)
+            m = p["M"][s] / e
             h = p["h"][s]
             r_eth = m * (1 - h) - 1
             r_btc = m * (1 - h) * eb / ETHBTC_0 - 1
@@ -48,7 +49,7 @@ def run(params, retention=None):
                              eth_usd=eb * btc, R_eth=r_eth, R_btc=r_btc, R_usd=r_usd,
                              exit="disciplined" if s in ("S3_strong", "S4_mania") else "end-of-horizon"))
             if s in ("S3_strong", "S4_mania") and "hold" in p:
-                mh = p["hold"][s]
+                mh = p["hold"][s] / e
                 rows.append(dict(collection=c, scenario=s, M_eth=mh, haircut=h, eth_btc=eb, btc_usd=btc,
                                  eth_usd=eb * btc, R_eth=mh * (1 - h) - 1, R_btc=mh * (1 - h) * eb / ETHBTC_0 - 1,
                                  R_usd=mh * (1 - h) * (eb * btc) / ETHUSD_0 - 1, exit="hold-through"))
@@ -74,9 +75,18 @@ if __name__ == "__main__":
     df = run(P)
     df.to_csv(os.path.join(PROC, "scenarios.csv"), index=False)
     pd.set_option("display.width", 220)
+    # ETH itself as the clean alternative vehicle for the same macro view (no haircut)
+    for s, (eb, btc, _) in SCEN.items():
+        df.loc[len(df)] = dict(collection="ETH (benchmark)", scenario=s, M_eth=1.0, haircut=0.0, eth_btc=eb, btc_usd=btc,
+                               eth_usd=eb * btc, R_eth=0.0, R_btc=eb / ETHBTC_0 - 1, R_usd=eb * btc / ETHUSD_0 - 1,
+                               exit="end-of-horizon" if s in ("S1_weak", "S2_moderate") else "disciplined")
+        if s in ("S3_strong", "S4_mania"):
+            df.loc[len(df)] = dict(df.iloc[-1]) | {"exit": "hold-through"}
+    df.to_csv(os.path.join(PROC, "scenarios.csv"), index=False)
     piv = df.pivot_table(index=["collection"], columns=["scenario", "exit"], values="R_btc").round(2)
     print(piv.to_string())
     be = breakeven(df)
     print("\nBreak-even weight on S3/S4 (2:1) for E[R_btc]=0  [disciplined | hold-through]")
-    for c in P:
+    be.update(breakeven(df[df.collection == "ETH (benchmark)"]))
+    for c in list(P) + ["ETH (benchmark)"]:
         print(f"  {c:18s} {be[c]:.0%} | {be[c + '|hold']:.0%}")

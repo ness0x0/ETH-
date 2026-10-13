@@ -7,6 +7,9 @@ eth_getTransactionByHash, public endpoints as in onchain_fetch_receipts.py; cach
 data/raw/onchain/receipts/provenance_<key>.jsonl) and classified with onchain_sales.classify_tx. Transfers out of
 Blur Blend are typed with the Blend event in the same tx: Seize = lender took defaulted collateral; Repay = loan repaid
 and collateral returned to borrower; BuyLocked = purchase of a locked token.
+Finding (2026-10-13): at HEAD_BLOCK these wallets held only 1 / 1 / 2 / 6 tokens and had received only 4 / 1 / 5 / 12
+tokens of the respective collection in their whole history, so OpenSea "walls" of 90 / 52 / 46 / 27 listings attributed
+to them cannot be ownership-backed by these addresses (re-check the order-book attribution).
 Output: data/processed/onchain/wallet_provenance.csv (token-level) and wallet_provenance_summary.csv.
 """
 import json
@@ -41,7 +44,7 @@ def fetch(txs, path):
             except Exception:  # noqa
                 pass
     s = requests.Session()
-    urls = RECEIPT_RPCS[:3]
+    urls = RECEIPT_RPCS[:2]  # Tenderly + NodeReal
     with open(path, "a") as f:
         for i, (tx, b) in enumerate(t for t in txs if t[0] not in have):
             for k in range(8):
@@ -90,7 +93,7 @@ def main():
                             continue
                     break
                 r = h.loc[j]
-                acq.append((w, tid, r["tx"], r["b"], r["ts"], r["f"], first_in))
+                acq.append((w, int(tid), r["tx"], int(r["b"]), r["ts"], r["f"], first_in))
         recs = fetch(sorted({(a[2], a[3]) for a in acq}), os.path.join(RAW_ON, "receipts", f"provenance_{key}.jsonl"))
         for w, tid, tx, b, ts, src, first_in in acq:
             rec = recs.get(tx)
@@ -118,7 +121,10 @@ def main():
     summ = []
     for (k, w), g in out.groupby(["collection", "wallet"]):
         vc = g["acquisition"].value_counts()
+        dfk = L.load_transfers(k)
         summ.append({"collection": k, "wallet": w, "tokens_held": len(g),
+                     "lifetime_tokens_received": int((dfk["to"] == w).sum()),
+                     "lifetime_tokens_sent": int((dfk["f"] == w).sum()),
                      "wallet_type": "contract" if L.is_contract(w) else ("eoa_7702" if L.is_7702(w) else "eoa"),
                      "first_received": g["wallet_first_received_utc"].iloc[0],
                      "acq_first": g["acquired_utc"].min(), "acq_last": g["acquired_utc"].max(),

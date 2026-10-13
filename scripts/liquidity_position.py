@@ -21,7 +21,14 @@ rows = []
 for slug, k in S.items():
     L = json.load(open(os.path.join(RAW, "opensea_book", f"{slug}_listings.json")))["data"]
     O = json.load(open(os.path.join(RAW, "opensea_book", f"{slug}_offers.json")))["data"]
-    asks = sorted(int(l["price"]["current"]["value"]) / 1e18 for l in L)
+    # OpenSea returns many duplicate orders for the same token (bots re-list); keep the cheapest order per token
+    best = {}
+    for l in L:
+        o = l["protocol_data"]["parameters"]["offer"][0]
+        key = (o["token"].lower(), o["identifierOrCriteria"])
+        px = int(l["price"]["current"]["value"]) / 1e18
+        best[key] = min(px, best.get(key, 1e18))
+    asks = sorted(best.values())
     n, cost = 0, 0.0
     while n < len(asks) and (n == 0 or cost + asks[n] <= BUDGET_ETH * 1.02):
         cost += asks[n]; n += 1
@@ -37,7 +44,7 @@ for slug, k in S.items():
     ladder.sort(reverse=True)
     fee = FEE.get(k, 0.01)
     proceeds = sum(ladder[:n]) * (1 - fee) if len(ladder) >= n else float("nan")
-    rows.append(dict(key=k, floor_ask=asks[0], seller_fee=fee, items_for_budget=n, entry_cost_eth=round(cost, 4),
+    rows.append(dict(key=k, floor_ask=asks[0], distinct_tokens_listed=len(asks), seller_fee=fee, items_for_budget=n, entry_cost_eth=round(cost, 4),
                      instant_exit_eth=round(proceeds, 4), roundtrip_haircut=round(1 - proceeds / cost, 4) if cost else None,
                      sales_per_day_90d=round(act.loc[k, "sales_per_day_90d"], 2) if k in act.index else None,
                      days_of_typical_volume=round(n / act.loc[k, "sales_per_day_90d"], 2) if k in act.index else None))

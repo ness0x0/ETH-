@@ -1,0 +1,5 @@
+collection,wallet,tokens_held,lifetime_tokens_received,lifetime_tokens_sent,wallet_type,first_received,acq_first,acq_last,acq_median,breakdown,priced_purchases,median_purchase_price_eth,sum_purchase_price_eth
+remilio,0x163a9f0048a64b5bffca3a67d3084717bca22094,1,1,0,eoa,2026-10-13,2026-10-13 20:29,2026-10-13 20:29,2026-10-13,purchase:seaport1.6:1,1,0.111,0.111
+remilio,0x54c6d73baf9dd8612978b694b23a309263b54cfa,1,4,3,eoa,2026-09-26,2026-10-12 21:30,2026-10-12 21:30,2026-10-12,purchase:seaport1.6:1,1,0.114,0.114
+terraforms,0x00330fffa1ee8503d09fabed9bff204dc3cb3059,2,5,3,eoa,2026-10-02,2026-10-04 19:14,2026-10-12 21:03,2026-10-08,purchase:seaport1.6:1; purchase:blur_v2:1,2,0.2762495,0.552499
+terraforms,0xcd8c2549af5c59d84f6f2f1de15e5c4d5ea6c1ca,6,12,6,eoa,2024-01-01,2024-03-06 15:55,2024-04-12 04:16,2024-03-11,purchase:blur_v2:6,6,1.32,7.780000000000001

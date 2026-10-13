@@ -21,9 +21,10 @@ Method   : per transaction, the collection's Transfer logs are collapsed per tok
                 buyer in the tx; seller = borrower from the event.
              6. Fallback "value flow": WETH / Blur Pool Transfer from the recipient (or tx sender) to the token
                 sender, or tx.value when the recipient sent the tx — split equally over tokens moving to that recipient.
-           Escrow corrections: a token leaving Blur Blend in a sale is attributed to the borrower (tx.from when the tx
-           targets Blend, or the Blend event's seller); a token bought straight into Blend (buyToBorrow,
-           LoanOfferTaken in the same tx) is attributed to the borrower. Movements with no price are NON-SALE and
+           Escrow corrections: a token leaving a lending escrow (Blend, Gondi, NFTfi...) in a sale is attributed to the
+           borrower (first wallet hop after the escrow, else tx.from, or the Blend BuyLocked seller); a token bought
+           straight into an escrow (Blend buyToBorrow with LoanOfferTaken, Gondi buy-with-loan) is attributed to the
+           borrower (Blend event borrower, else last wallet hop before the escrow, else tx.from). Movements with no price are NON-SALE and
            typed: mint, burn, lending_lock / lending_release (Blend, Gondi, NFTfi... escrows), amm/vault deposit or
            withdrawal, wallet_transfer (EOA<->EOA, no payment), other.
 Flags    : multi_nft_tx (several tokens of the collection in the tx), bundle_price_split, price_from_fallback,
@@ -105,10 +106,12 @@ def classify_tx(key, contract, rec, moves):
     for m in moves:
         tid = m["id"]
         if tid not in path:
-            path[tid] = {"id": tid, "seller": m["f"], "buyer": m["to"], "li": m["li"], "hops": 1}
+            path[tid] = {"id": tid, "seller": m["f"], "buyer": m["to"], "li": m["li"], "hops": 1,
+                         "addrs": [m["f"], m["to"]]}
         else:
             path[tid]["buyer"] = m["to"]
             path[tid]["hops"] += 1
+            path[tid]["addrs"].append(m["to"])
     n_tokens = len(path)
 
     cand = {}   # tid -> (price_wei or None, method, flags set, seller_override, buyer_override)
@@ -273,6 +276,9 @@ def classify_tx(key, contract, rec, moves):
         else:
             # fallback value-flow
             loan_leg = "lending" in (L.category(seller), L.category(buyer)) or txto == BLEND
+            # NFTX vault legs without a zap Buy/Sell event are redeems/swaps paying a vault fee, not sales
+            loan_leg = loan_leg or "nftx" in (L.protocol(seller), L.protocol(buyer)) or \
+                L.protocol(txto) == "nftx"
             pay = 0 if loan_leg else sum(x[3] for x in erc20 if x[2] == seller and x[1] in (buyer, txfrom)
                                          and x[1] != ZERO)
             same_buyer = sum(1 for q in path.values() if q["buyer"] == buyer)
@@ -286,14 +292,25 @@ def classify_tx(key, contract, rec, moves):
             typ = "zero_price_trade"
             flags.add("zero_or_dust_price")
         if typ == "sale":
-            # escrow attribution
-            if seller == BLEND and not c or (seller == BLEND and c and not c[3]):
-                if txto == BLEND and txfrom != buyer:
+            # escrow attribution: a token sold OUT of a lending escrow is attributed to the borrower; a token bought
+            # straight INTO a lending escrow (buy-to-borrow / buy-now-pay-later) is attributed to the borrower.
+            inner = p["addrs"][1:-1]
+            if L.category(seller) == "lending" and not (c and c[3]):
+                w = [a for a in inner if L.category(a) in L.WALLET_CATS]
+                if w:
+                    seller = w[0]
+                elif txfrom and txfrom != buyer and L.category(txfrom) in L.WALLET_CATS:
                     seller = txfrom
-                    flags.add("escrow_seller_attributed")
-            if buyer == BLEND and tid in blend_loan_tokens:
-                buyer = blend_loan_tokens[tid]
-                flags.add("blend_buy_to_borrow")
+                flags.add("escrow_seller_attributed")
+            if L.category(buyer) == "lending" and not (c and c[4]):
+                w = [a for a in inner if L.category(a) in L.WALLET_CATS]
+                if buyer == BLEND and tid in blend_loan_tokens:
+                    buyer = blend_loan_tokens[tid]
+                elif w:
+                    buyer = w[-1]
+                elif txfrom and L.category(txfrom) in L.WALLET_CATS:
+                    buyer = txfrom
+                flags.add("blend_buy_to_borrow" if p["buyer"] == BLEND else "lending_buy_to_borrow")
         if typ is None:
             if buyer in DEAD:
                 typ = "burn"

@@ -24,7 +24,13 @@ Wash / affiliated-support indicators (flags, not proof):
   flip_7d         : buyer resold the same token within 7 days (dealer/arbitrage churn; not wash by itself).
   suspect         : round_trip_30d OR self_trade OR linked_wallets (possible wash / affiliated trade).
   churn           : hot_token_3in30 OR flip_7d (dealer turnover; inflates volume without new ownership).
-Outputs  : buyers_monthly_<key>.csv, buyers_summary.csv, wash_flags.csv, wash_summary.csv, liquidity_summary.csv,
+Cohort flows (cohort_flows.csv): position-based net change in tokens held between window start and end, by start
+           balance (0/new, 1-4, 5-19, >=20), tenure (first receipt >=1y before window start; before 2024 for t12m) and
+           infrastructure category; lending-escrow tokens are attributed to the depositing borrower. Sums to ~0
+           (supply is fixed apart from burns), so it shows who absorbed supply from whom, including gifts/transfers.
+Entities (entity_accumulators_t12m.csv): top-10 net accumulators and distributors per collection over t12m, with
+           wallets clustered when they moved >=2 tokens to each other via non-sale transfers in the window.
+Outputs  : buyers_monthly_<key>.csv, buyers_summary.csv, cohort_flows.csv, entity_accumulators_t12m.csv, wash_flags.csv, wash_summary.csv, liquidity_summary.csv,
            reconciliation.csv, reconciliation_bars_<key>.csv
 """
 import collections
@@ -320,19 +326,140 @@ def run(key, out):
                                  "onchain_sales_30d_seaport_only": int(s30["method"].str.startswith("seaport").sum()),
                                  "opensea_fetched_utc": osd["fetched_at_utc"]})
     sales.to_csv(os.path.join(PROC_ON, f"sales_enriched_{key}.csv"), index=False)
+    cohort_flows(key, df, out)
+    entity_accumulators(key, mv, sales, out)
     print(key, "sales", len(sales), "suspect", int(sales["suspect"].sum()), "recon", out["recon"][-1]["sales_gap_pct"],
           best, round(corr, 3) if pd.notna(corr) else None, flush=True)
+
+
+def cohort_flows(key, df, out):
+    """Position-based net accumulation by cohort between window start and end (escrow-adjusted: a token held by a
+    lending escrow is attributed to the address that deposited it, i.e. the borrower)."""
+    is_lend = {a: L.category(a) == "lending" for a in set(df["to"]) | set(df["f"])}
+    first_rx = df.groupby("to")["t"].min()
+    for w in WIN_KEYS.get(key, ["t12m"]):
+        a, b = win_bounds(w)
+        snaps = {}
+        dep = {}
+
+        def on_cp(ts, owner, bal, last_t):
+            ben = collections.Counter()
+            for tid, o in owner.items():
+                if o in L.DEAD:
+                    continue
+                ben[dep.get(tid, o) if is_lend.get(o) else o] += 1
+            snaps[ts] = ben
+        # replay with depositor tracking (inline, mirrors L.replay)
+        owner, cps, ci = {}, [a, min(b, L.HEAD)], 0
+        cpu = [int(x.timestamp()) for x in cps]
+        for t, f, to, tid in zip(df["t"].values, df["f"].values, df["to"].values, df["id"].values):
+            while ci < len(cps) and t >= cpu[ci]:
+                on_cp(cps[ci], owner, None, None)
+                ci += 1
+            if is_lend.get(to) and not is_lend.get(f):
+                dep[tid] = f
+            owner[tid] = to
+        while ci < len(cps):
+            on_cp(cps[ci], owner, None, None)
+            ci += 1
+        s0, s1 = snaps[cps[0]], snaps[cps[1]]
+        if w == "t12m":
+            out["_snaps"][key] = (s0, s1)
+        cut_1y = int((a - pd.DateOffset(years=1)).timestamp())
+        cut_2024 = int(pd.Timestamp("2024-01-01", tz="UTC").timestamp())
+        rows = collections.defaultdict(lambda: [0, 0, 0])
+        for addr in set(s0) | set(s1):
+            n0, n1 = s0.get(addr, 0), s1.get(addr, 0)
+            cat = L.category(addr)
+            if cat not in L.WALLET_CATS:
+                keys = [("infra_contract", cat)]
+            else:
+                size = "0_new" if n0 == 0 else ("1_4" if n0 < 5 else ("5_19" if n0 < 20 else "ge20"))
+                fr = first_rx.get(addr, 10**12)
+                keys = [("start_balance", size),
+                        ("tenure_1y_before_window", "held_1y+" if fr < cut_1y else "newer")]
+                if w == "t12m":
+                    keys.append(("tenure_pre2024", "pre2024" if fr < cut_2024 else "2024_or_later"))
+            for kk in keys:
+                r = rows[kk]
+                r[0] += 1
+                r[1] += n0
+                r[2] += n1
+        for (ct, c), (n, t0, t1) in sorted(rows.items()):
+            out["cohorts"].append({"collection": key, "window": w, "start": a.strftime("%Y-%m-%d"),
+                                   "end": min(b, L.HEAD).strftime("%Y-%m-%d"), "cohort_type": ct, "cohort": c,
+                                   "addresses": n, "tokens_start": t0, "tokens_end": t1, "net_change": t1 - t0})
+
+
+def entity_accumulators(key, mv, sales, out, top=10):
+    """Top net accumulators/distributors over t12m at ENTITY level: wallets joined (union-find) when they exchanged
+    >=2 tokens via non-sale wallet-to-wallet transfers inside the window (e.g. a bidding wallet that forwards to a
+    vault). Net change uses escrow-adjusted positions (cohort_flows). Wallet clusters are heuristic."""
+    s0, s1 = out["_snaps"][key]
+    a, b = win_bounds("t12m")
+    m = mv[(mv["ts"] >= a) & (mv["ts"] < b) & (mv["type"] == "wallet_transfer")]
+    parent = {}
+
+    def find(x):
+        while parent.get(x, x) != x:
+            parent[x] = parent.get(parent[x], parent[x])
+            x = parent[x]
+        return x
+    for (f, t), n in m.groupby(["seller", "buyer"]).size().items():
+        if n >= 2:
+            ra, rb = find(f), find(t)
+            if ra != rb:
+                parent[rb] = ra
+    ent = collections.defaultdict(lambda: {"wallets": set(), "start": 0, "end": 0, "buys": 0, "sells": 0,
+                                           "buy_eth": 0.0, "sell_eth": 0.0})
+    for addr in set(s0) | set(s1):
+        if L.category(addr) not in L.WALLET_CATS:
+            continue
+        e = ent[find(addr)]
+        e["wallets"].add(addr)
+        e["start"] += s0.get(addr, 0)
+        e["end"] += s1.get(addr, 0)
+    st = sales[(sales["ts"] >= a) & (sales["ts"] < b)]
+    for r in st.itertuples():
+        if L.category(r.buyer) in L.WALLET_CATS:
+            e = ent[find(r.buyer)]
+            e["wallets"].add(r.buyer)
+            e["buys"] += 1
+            e["buy_eth"] += r.price_eth if pd.notna(r.price_eth) else 0
+        if L.category(r.seller) in L.WALLET_CATS:
+            e = ent[find(r.seller)]
+            e["wallets"].add(r.seller)
+            e["sells"] += 1
+            e["sell_eth"] += r.price_eth if pd.notna(r.price_eth) else 0
+    supply = sum(s1.values())
+    rows = []
+    for root, e in ent.items():
+        rows.append({"collection": key, "entity_root": root, "n_wallets": len(e["wallets"]),
+                     "wallets": ";".join(sorted(e["wallets"]))[:420], "tokens_start": e["start"],
+                     "tokens_end": e["end"], "net_change": e["end"] - e["start"],
+                     "net_change_pct_supply": (e["end"] - e["start"]) / supply, "t12m_buys": e["buys"],
+                     "t12m_sells": e["sells"], "t12m_buy_share": e["buys"] / max(1, len(st)),
+                     "buy_eth": round(e["buy_eth"], 3), "sell_eth": round(e["sell_eth"], 3),
+                     "ens": "; ".join(sorted({L.labels().get(w_, {}).get("ens", "") for w_ in e["wallets"]} - {""}))})
+    d = pd.DataFrame(rows)
+    if len(d):
+        acc = d.sort_values("net_change", ascending=False).head(top).assign(side="accumulator")
+        dis = d.sort_values("net_change").head(top).assign(side="distributor")
+        out["entities"].append(pd.concat([acc, dis]))
 
 
 def main():
     keys = sys.argv[1:] or [k for k in COLLECTIONS if os.path.exists(os.path.join(PROC_ON, f"movements_{k}.csv"))]
     out = collections.defaultdict(list)
+    out["_snaps"] = {}
     for k in keys:
         run(k, out)
     L.write_csv(pd.DataFrame(out["buyers_summary"]), "buyers_summary.csv")
     L.write_csv(pd.concat(out["wash"]) if out["wash"] else pd.DataFrame(), "wash_flags.csv")
     L.write_csv(pd.DataFrame(out["liq"]), "liquidity_summary.csv")
     L.write_csv(pd.DataFrame(out["recon"]), "reconciliation.csv")
+    L.write_csv(pd.DataFrame(out["cohorts"]), "cohort_flows.csv")
+    L.write_csv(pd.concat(out["entities"]), "entity_accumulators_t12m.csv")
     w = pd.concat(out["wash"]) if out["wash"] else pd.DataFrame()
     if len(w):
         rows = []

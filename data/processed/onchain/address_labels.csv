@@ -2427,7 +2427,7 @@ address,is_contract,is_7702,name,impl_names,tags,ens,category,protocol,label_sou
 0x9ea9600dd3fd5ddb5f4cbd761c84eebb2a7ba4db,True,False,NonReceivableInitializedProxy,,,,contract_unlabelled,,none
 0x9ebfb53fa8526906738856848a27cb11b0285c3f,True,False,ReservoirV5_0_0,,,,marketplace_escrow,marketplace,name:Seaport
 0x9ec574469cb2bdec9ef4f9d300d2a17abc92c058,True,False,,CoreRouter,,,marketplace_escrow,marketplace,name:Seaport
-0x9ec9adc4fb9d901e72a0544835744fa976fa0c34,False,False,,,,pudgypenguins.liquidity.flooringlab.eth,eoa,,no code
+0x9ec9adc4fb9d901e72a0544835744fa976fa0c34,False,False,,,,pudgypenguins.liquidity.flooringlab.eth,fractional_vault,flooring_eoa_vault,ens:flooringlab.eth
 0x9eedbfcffa62587fa5e17d1f556d17308c4a049a,False,False,,,,,eoa,,no code
 0x9ef966126c8d741c003390b9e7e623524b940c92,True,False,,,,,contract_unlabelled,,none
 0x9f2cef1ddce04c88eb11ca4427d8b39469ca0bed,False,False,,,,,eoa,,no code
@@ -3159,7 +3159,7 @@ address,is_contract,is_7702,name,impl_names,tags,ens,category,protocol,label_sou
 0xce075767dec8929c668b253b1d801345cf704fcc,True,False,Proxy,,,,contract_unlabelled,,none
 0xce0e4e4d2dc0033ce2dbc35855251f4f3d086d0a,True,False,OptimizedTransparentUpgradeableProxy,NFT721Bridge,,,bridge_wrapper,bridge_wrapper,name:Bridge
 0xce1049a02ca550ccfa2d6ac6a411fe888919dba9,True,False,Proxy,,,,contract_unlabelled,,none
-0xce2a88bf4138c230a448646a6862428c01f31df3,False,False,,,,chirulabs.liquidity.flooringlab.eth,eoa,,no code
+0xce2a88bf4138c230a448646a6862428c01f31df3,False,False,,,,chirulabs.liquidity.flooringlab.eth,fractional_vault,flooring_eoa_vault,ens:flooringlab.eth
 0xce50008a05ae6b303d00e615bddf75a37df9f6a2,True,False,,AssetVault,,,lending,arcade,name:Arcade
 0xce5d9660f9585ce6e0b581129c97682779144ac6,True,False,дайте гроши,,,,contract_unlabelled,,none
 0xce7d186f83934c9a78529e568052aa0b76de9c23,True,False,GnosisSafeProxy,GnosisSafe,,,safe,gnosis_safe,name:GnosisSafe

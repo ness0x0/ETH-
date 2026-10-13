@@ -73,7 +73,14 @@ def main():
         offers = paged(f"/offers/collection/{slug}", "offers", {"limit": 100}, max_pages=3)
         save_raw(f"opensea_book/{slug}_listings.json", listings)
         save_raw(f"opensea_book/{slug}_offers.json", offers)
-        asks = sorted(p for p in (eth(l.get("price", {}).get("current", {})) for l in listings) if p)
+        best = {}  # dedupe: cheapest order per token (bots post many duplicate orders per token)
+        for l in listings:
+            o = l["protocol_data"]["parameters"]["offer"][0]
+            kk = (o["token"].lower(), o["identifierOrCriteria"])
+            p_ = eth(l.get("price", {}).get("current", {}))
+            if p_:
+                best[kk] = min(p_, best.get(kk, 1e18))
+        asks = sorted(best.values())
         # collection-wide offers: criteria with no trait / token restriction
         bids = []
         for o in offers:
@@ -117,7 +124,7 @@ def main():
         r_bidders = len({b for _, _, b in bids})
         bids = [(p_, q_) for p_, q_, _ in bids]
         floor = asks[0] if asks else None
-        r = {"slug": slug, "key": k, "snapshot_utc": utcnow(), "floor_ask": floor, "n_listings_seen": len(asks),
+        r = {"slug": slug, "key": k, "snapshot_utc": utcnow(), "floor_ask": floor, "n_listings_seen": len(listings), "distinct_tokens_listed": len(asks),
              "cost_1": sum(asks[:1]) if asks else None, "cost_2": sum(asks[:2]) if len(asks) >= 2 else None,
              "cost_3": sum(asks[:3]) if len(asks) >= 3 else None,
              "best_bid": bids[0][0] if bids else None, "unique_bidders": r_bidders,

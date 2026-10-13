@@ -2,7 +2,7 @@ collection,rank,address,tokens,share,type,category,protocol,name,ens,first_recei
 azuki,1,0x5d7aaa862681920ea4f350a670816b0977c80b37,189,0.0189,eoa,eoa,,,,2022-02-20,1253.0,True
 azuki,2,0x29469395eaf6f95920e59f858042f0e28d98a20b,182,0.0182,contract,lending,blur_blend,ERC1967Proxy,,2023-05-01,142.3,True
 azuki,3,0xd46c8648f2ac4ce1a1aace620460fbd24f640853,158,0.0158,contract,lending,benddao,BNFTUpgradeableProxy,azuki.benddao.eth,2022-04-05,628.3,True
-azuki,4,0xce2a88bf4138c230a448646a6862428c01f31df3,155,0.0155,eoa,eoa,,,chirulabs.liquidity.flooringlab.eth,2024-01-13,629.6,True
+azuki,4,0xce2a88bf4138c230a448646a6862428c01f31df3,155,0.0155,eoa,fractional_vault,flooring_eoa_vault,,chirulabs.liquidity.flooringlab.eth,2024-01-13,629.6,True
 azuki,5,0x9da1c48bdc304a223f9849127076100a9428f6ce,127,0.0127,eoa,eoa,,,,2023-11-15,1063.7,True
 azuki,6,0x66666f58de1bcd762a5e5c5aff9cc3c906d66666,118,0.0118,eoa,eoa,,,,2023-03-21,1004.5,True
 azuki,7,0x52434934895014cbeed22b8177fb359723c6c0a4,114,0.0114,eoa,eoa,,,,2025-07-06,464.7,True
