@@ -98,6 +98,26 @@ analog:
 
 **Azuki.** Unchanged: exit patiently after 2026-11-12.
 
+## Addendum 3 (2026-10-14): buy in the bear, sell into the 2028–29 halving euphoria
+
+The test: buy in Oct-2022 (the same point before the halving as today) and sell into the 2024–25 euphorias in thirds,
+rotating into BTC. ([Section F](cycle_analysis.md#f-halving-cycle-hold-buy-in-the-bear-sell-into-the-halving-and-post-halving-euphoria-follow-up-2026-10-14))
+
+- **Only 4 of 39 collections beat BTC** (median 0.26×). Two headwinds did the damage: ETH/BTC halved, and the median
+  collection lost ~60% vs ETH.
+- **Large and legacy names lost** (1 of 25 beat BTC; basket 0.31×).
+- **An equal-weight basket of the 13 small culture PFPs** (under $10M at entry) returned 1.8× vs BTC, even though 10 of
+  13 lost. Remilio, Milady and Lil Pudgys did 4.7–9.7×.
+- **Applied to today,** if ETH/BTC holds at 0.025–0.035, that basket shape gives 2.5–3.5× vs BTC.
+- **That result is fragile.**
+  - Without Remilia's two collections, the small caps averaged 0.82×.
+  - Dead small caps are missing from the data.
+  - It is one cycle.
+
+**Net.** Don't buy a legacy name to hold to 2028–29. The only version with a positive record is a venture-style
+basket: many tiny culture PFPs, each sized to zero, accumulated in stages rather than all now (the last cycle's lows
+came 6 months before and 4 months after the halving), and sold in thirds into the euphorias.
+
 ## Why
 
 **1. The base rate is brutal and has not turned.**

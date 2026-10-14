@@ -1,7 +1,7 @@
 # Cycle-timing analysis: buy near the NFT cycle low, sell into the euphoria — does it beat BTC?
 
 _Prepared 2026-10-14 in response to the investor's framing. Scripts: `scripts/cycle_2024.py`,
-`cycle_tail.py`, `cycle_analysis.py`, `cycle_forward.py`, `cycle_a_sales_sampler.py`, `cycle_a_analysis.py`,
+`cycle_tail.py`, `halving_cycle.py`, `cycle_analysis.py`, `cycle_forward.py`, `cycle_a_sales_sampler.py`, `cycle_a_analysis.py`,
 `punks_onchain_floor.py`, `chart_cycles.py`.
 Data: NFTPriceFloor 3-day floors (2022-06 →); OpenSea sampled sales (weekly 48-hour windows, 2020-12 → 2022-06);
 CryptoPunks on-chain PunkBought events (2017 →); Binance prices._
@@ -483,6 +483,98 @@ This uses rough entry near each low and deducts 10% costs (`cycle_tail_hold.csv`
 - Bought at the Oct-2023 low and held three years, none of 44 did.
 - The cycle trade works only because of the sell (E1). For legacy collections, buy-and-hold to 2028–29 is the idea
   the data argues against most clearly.
+
+## F. Halving-cycle hold: buy in the bear, sell into the halving and post-halving euphoria (follow-up, 2026-10-14)
+
+_Script: `scripts/halving_cycle.py`. Outputs: `data/processed/halving_cycle.csv`, `halving_cycle_summary.csv`,
+`halving_cycle_forward.csv`._
+
+**The strategy.**
+- Buy about 18 months before the halving, which is where we are now (the next halving is expected in Apr-2028).
+- Hold through the quiet stretch.
+- Sell into the on-chain euphorias of the halving and post-halving years, and rotate the proceeds into BTC.
+
+**The phase-matched test.** Buy in **Oct-2022**, 18 months before the Apr-2024 halving. Sell into the three euphorias
+that followed:
+- Feb–Mar 2024 (ETF);
+- Nov 2024 – Jan 2025 (tokens);
+- Jul–Sep 2025 (ETH all-time high).
+
+Each sale uses the window's average floor, i.e. scaling out without knowing the peak day. "Ladder" means selling a
+third in each window. Costs are 10%.
+
+### F1. Results (39 collections with history, vs BTC)
+
+| Bought Oct-2022, sold… | Beat BTC | ≥2× vs BTC (= 4× $ at BTC 2×) | Median vs BTC |
+|---|---|---|---|
+| All in the Feb–Mar 2024 euphoria | 15% | 10% | 0.36× |
+| **Ladder (a third in each euphoria)** | **10%** | 10% | 0.26× |
+| Best window (hindsight) | 15% | 10% | 0.39× |
+| Pre-set 2× target, else in Jul–Sep 2025 | 13% | 13% | 0.18× |
+
+| Ladder, by size at entry | n | Beat BTC | Median | **Equal-weight basket** |
+|---|---|---|---|---|
+| All | 39 | 4 (10%) | 0.26× | 0.81× |
+| Under $10M floor cap | 13 | 3 (23%): Remilio 9.7×, Milady 5.0×, Lil Pudgys 4.7× | 0.54× | **1.82×** |
+| $10M or more | 25 | 1 (4%): Pudgy 2.7× | 0.19× | 0.31× |
+| Art / historical | 11 | 0 | 0.30× | — |
+
+**The shape is binary.**
+- **Small caps.** The three that won returned 4.7–9.7× vs BTC; the other ten lost 18–89%. The equal-weight basket
+  still finished at 1.8× vs BTC.
+- **Large and legacy names.** These lost: CryptoPunks 0.38×, Squiggle 0.25×, BAYC 0.11×, Azuki 0.26×.
+- **Catching the actual low helped.** Buying at each collection's own 2022–23 low gave a ladder that beat BTC 21% of
+  the time, with a 1.19× basket. That takes timing skill.
+
+### F2. Why holding from 18 months out was hard
+
+There were two headwinds during the 16–35-month hold:
+- **ETH/BTC halved,** from 0.070 in Oct-2022 to 0.054, 0.036 and 0.034 at the three euphorias.
+- **The median collection also lost 53–64% against ETH.**
+
+**Oct-2022 was not the NFT low.** After an Oct-2022 entry, the median collection fell to 0.14× its entry in BTC terms
+before recovering, bottoming around Aug-2024. The lows that worked came 6 months before the halving (Oct-2023) and 4
+months after it (Aug-2024).
+
+### F3. Applied to today
+
+This applies each collection's NFT÷ETH path from the Oct-2022 entry to today's ETH/BTC of 0.0301, with ETH/BTC at the
+level shown during the euphorias.
+
+| ETH/BTC at the euphorias | 0.025 | 0.030 | 0.035 |
+|---|---|---|---|
+| All: beat BTC / basket | 13% / 1.12× | 15% / 1.35× | 21% / 1.57× |
+| Under $10M: beat BTC / basket | 31% / 2.54× | 38% / 3.05× | 54% / 3.55× |
+| ≥2× vs BTC (all / under $10M) | 10% / 23% | 10% / 23% | 10% / 23% |
+
+These numbers improve on F1 only because they assume ETH/BTC does not halve again.
+
+### F4. Read with care
+
+- **One project carried the small-cap basket.** Remilia's two collections, Milady and Remilio, did 5.0× and 9.7×.
+  Without them, the other 11 small caps averaged 0.82× vs BTC.
+- **Survivorship is worst here.** The universe was picked in 2026, so collections that were small in 2022 and later
+  died are missing. Each missing dead name pulls the basket toward zero.
+- **This is one cycle with broad data.** The 2018–21 cycle is where this strategy produced the outliers people
+  remember. CryptoPunks bought in Nov-2018 (~0.13 ETH, 18 months before the May-2020 halving) and sold into the 2021
+  euphoria returned ~600× in ETH and ~1,200× vs BTC. That was a brand-new category on a tiny base, with ETH/BTC
+  tripling.
+- **Today's market is much quieter than at the analog entry:** universe volume was $67M in Q3-2026, against $857M in
+  Q4-2022. It may be nearer a low, or further into decline.
+
+### F5. What this means
+
+1. **A single legacy or large name, bought now and sold in 2028–29, is not supported.** Only 1 of 25 beat BTC, and the
+   equal-weight basket finished at 0.31×.
+2. **One version has a positive record:** a venture-style basket.
+   - **Composition:** many tiny culture PFPs, equal weight, each sized to zero.
+   - **Exit:** sell in thirds into the halving and post-halving euphorias, rotating into BTC.
+   - **Record:** about 1.8× vs BTC last cycle, or 2.5–3.5× applied to today if ETH/BTC holds at 0.025–0.035.
+   - **Expect:** three in four names to lose, and the result to hinge on one or two.
+   - **Fragility:** it rests on one project's run and on data that leaves out the dead.
+3. **Timing:** buying 18 months early cost a further ~86% median drawdown before the euphoria. Staggering purchases
+   through 2027 into mid-2028 would follow the last cycle's pattern of lows (6 months before and 4 months after the
+   halving). That is one cycle's evidence.
 
 _The 2021 cycle (CryptoPunks on-chain; sampled OpenSea sales, `cycleA_summary.csv`) is kept only as context.
 Category-creation multiples are not a usable analog:_

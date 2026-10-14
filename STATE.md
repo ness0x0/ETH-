@@ -36,6 +36,10 @@ _Last updated: 2026-10-14 (UTC)_
   - Still no buy before the entry gates.
 - Buy-and-hold from a cycle low fails: from the Oct-2023 low, 0 of 44 beat BTC over three years; from the 2024 low,
   41% beat BTC by its Oct-2025 top and 5% to today (report E7).
+- Third follow-up, the halving-cycle hold (`scripts/halving_cycle.py`; report section F; memo addendum 3).
+  - Bought Oct-2022 and sold in thirds into the 2024–25 euphorias, 4 of 39 beat BTC.
+  - The small-cap basket returned 1.8× vs BTC (2.5–3.5× applied today if ETH/BTC is 0.025–0.035). It was carried by
+    Remilia's collections, and dead names are missing from the data. Large caps: 0.31×.
 
 ## Market context (verified)
 - 2026-10-13 closes: BTC $83,350; ETH $2,508.69; ETH/BTC 0.0301. BTC close ATH $124,659 (2025-10-06).

@@ -33,7 +33,8 @@ gates are met, buy one V1 CryptoPunk by bid with a pre-committed trailing-stop e
 - [`reports/cycle_analysis.md`](reports/cycle_analysis.md): buy at the cycle low, sell into the euphoria. Tested on
   the 2024–25 cycle (primary analog) and 2022–25, with forward odds vs BTC by ETH/BTC. Section E covers the "4× in
   dollars while BTC does 2×" bar: a pre-set sell rule, odds by size, single name vs basket, a candidate list, and
-  the 10× tail.
+  the 10× tail. Section F tests buying in the bear and selling into the halving and post-halving euphoria
+  (phase-matched to Oct-2022).
 
 ## Repository map
 
