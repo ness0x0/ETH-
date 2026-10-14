@@ -119,8 +119,26 @@ Two past episodes fit this description: the Dec-2024 crypto-wide euphoria, and t
 - From the Nov-2024 peak to Apr-2025, Puppets fell to 0.19× in BTC terms.
 - From ~Oct-2025 to now, it fell to 0.26×.
 
-**Consistency check.** The investor expects a milder cycle than 2024–25, whose risk-on included a BTC and ETH ATH and
-a memecoin mania. On that view, spillover should be no larger than these episodes.
+**These are mild-cycle numbers.** The investor expects risk-on to be at least mildly better than 2024–25, which ran
+under QT with no real alt season, and possibly much better. That puts the outcome outside this panel's sample.
+
+| What Puppets needs vs BTC (from 0.0102 BTC) | At BTC $180k | At BTC $210k |
+|---|---|---|
+| $5k | 2.7× | 2.3× |
+| $7.5k | 4.1× | 3.5× |
+| $10k | 5.4× | 4.7× |
+
+**Anchors.**
+- **2024–25 (mild):** 1.2–1.33× vs BTC with realistic timing; 3.0× at the exact peak.
+- **2021 (QE, real alt season):** CryptoPunks, then a 3½-year-old blue chip, went from its Jan-2021 floor (4.6 ETH) to
+  its Aug–Oct 2021 average (78 ETH). That is ~17× in ETH and ~30× vs BTC.
+  - It was NFTs' mainstream discovery, and ETH/BTC doubled. Ordinals, priced in BTC, get no such tailwind, and they
+    had their discovery in 2023–24.
+
+**Read.** $7.5–10k needs a spillover 1.2–1.8× stronger than 2024–25's at the exact peak, or 2.6–4× stronger with
+realistic timing. That is plausible in a genuinely stronger risk-on cycle and not in a repeat of 2024–25. The Puppets
+outcome is therefore mostly a bet on how strong the cycle gets. A stronger cycle also raises the odds of a new
+Bitcoin-native meta absorbing the flows, as new collections did in 2021.
 
 ## Read
 
