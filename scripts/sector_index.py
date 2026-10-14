@@ -44,9 +44,9 @@ out = pd.DataFrame({"n": fe.notna().sum(axis=1), "ew_floor_eth": idx_eth, "ew_fl
 out.to_csv(os.path.join(PROC, "sector_index.csv"))
 
 fig, ax = plt.subplots(figsize=(11, 5.5))
-ax.plot(out.index, out.ew_floor_eth, label="EW NFT floor index (ETH terms)", color="#4a6fa5", lw=1.8)
-ax.plot(out.index, out.ew_floor_btc, label="EW NFT floor index (BTC terms)", color="#c0392b", lw=2.2)
-ax.plot(out.index, out.eth_btc_rel, label="ETH/BTC", color="#7f8c8d", lw=1.4, ls="--")
+ax.plot(out.index, out.ew_floor_eth, label="EW NFT floor index (ETH terms)", color="#2a78d6", lw=1.8)
+ax.plot(out.index, out.ew_floor_btc, label="EW NFT floor index (BTC terms)", color="#eb6834", lw=2.2)
+ax.plot(out.index, out.eth_btc_rel, label="ETH/BTC", color="#8a8985", lw=1.4, ls="--")
 ax.set_yscale("log")
 ax.axhline(1, color="black", lw=0.6)
 ax.set_title(f"Equal-weight floor index of {fe.shape[1]} ETH NFT collections, rebased 2022-06-01 (log scale)")

@@ -97,7 +97,7 @@ History (350 overlapping 18-month windows, 2022-06→2025-04 starts): beat BTC i
   - Only 20% dealer churn. All of the 675 trailing-year sales went through Seaport and none through Blur. The 8.5%
     seller fee makes dealer flipping uneconomic.
   - **45% of purchases went to first-time wallets**, the highest *share* of the nine. In *level* terms that is
-    ~281 new buyers (402 unique), against ~1,460 for Pudgy and ~1,390 for Milady. New wallets absorbed a net +540
+    ~283 new buyers (402 unique), against ~1,460 for Pudgy and ~1,390 for Milady. New wallets absorbed a net +540
     tokens.
 - **Concentration risk.** One original minter (`0xd110…e588`) still holds 990 (9.9%); with three linked wallets the
   entity holds 1,314 (13.1%). Identity is unverified. A sale programme by this holder would overwhelm ~1.5 organic

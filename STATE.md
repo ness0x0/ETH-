@@ -1,59 +1,37 @@
-# STATE (operational — keep < 1,000 words)
+# STATE (operational)
 
-_Last updated: 2026-10-13 (UTC)_
+_Last updated: 2026-10-14 (UTC)_
 
-## Phase
-1. Infrastructure + universe screening — **in progress**
-2. Finalist deep research (parallel workstreams) — pending
-3. Scenario/valuation model — pending
-4. Independent critic review — pending
-5. Final package — pending
+## Phase: COMPLETE
+1. Infrastructure + universe screening (47 collections) — done
+2. Finalist deep research (culture ×3 agents, on-chain agent, liquidity, history) — done
+3. Scenario/valuation model — v2 rule-based (post-critic) — done
+4. Independent critic review — done; 22/23 challenges accepted in full, 1 in part
+5. Final package — done (memo, shortlist, dossiers, dataset, charts, methodology, sources, critic record, uncertainties)
+
+## Conclusion
+- No NFT purchase now.
+  - ETH is the cleaner vehicle for the macro view: break-even 14% vs 18–22% for the best NFTs under rule B.
+  - In S1, ETH loses 20% vs BTC; the NFTs lose 51–75%.
+- Azuki: exit patiently after the 2026-11-12 Blend deadline; don't hit the forced-selling bid.
+- Conditional shortlist, only if gates G1–G3 pass: V1 Punks > Milady (exception) > CryptoDickbutts (small) >
+  Chromie Squiggle (collectible only). Pudgy is not ranked (outside the mandate).
 
 ## Market context (verified)
-- 2026-10-13 Binance closes: BTC $83,350; ETH $2,508.69; ETH/BTC 0.03010.
-  BTC close ATH $124,659 (2025-10-06); ETH close ATH $4,832 (2025-08-22). ETH/BTC low 0.01805 (2025-04-21).
-- Blur announced 2026-10-12: blur.io frontend closes **2026-11-12**; Blend stops new loans; borrowers must
-  repay or default by that date (collateral to lender). On-chain marketplace contracts remain. (CoinDesk, The Block.)
-- Codex agent separately reconstructs Blend loan book — do not duplicate; integrate when available.
+- 2026-10-13 closes: BTC $83,350; ETH $2,508.69; ETH/BTC 0.0301. BTC close ATH $124,659 (2025-10-06).
+- Blur (announced 2026-10-12): frontend closes 2026-11-12; Blend stops new loans; borrowers repay or default by then.
+- Abstract L2 (Igloo) shuts 2026-12-15. PENGU ETF rule filing withdrawn 2026-01-23.
 
-## Data access decisions
-- Tenderly public RPC = archive logs (≤20k results/query); NodeReal public key (≤50k block range). publicnode
-  blocks archive. Batch receipts get rate-limited → throttle single calls.
-- NFTPriceFloor 3d series = primary historical floor source (2022→); on-chain for cross-check and 2021.
+## How to refresh (e.g., after 2026-11-12)
+1. `python3 scripts/fetch_prices.py && python3 scripts/screen_universe.py --refresh`
+2. Get a free OpenSea key (`POST https://api.opensea.io/api/v2/auth/keys`) into
+   `/root/.config/ethnft/opensea_key.json`, then run `python3 scripts/liquidity_orderbook.py` and
+   `python3 scripts/liquidity_position.py`. This is gate G1.
+3. Re-run the on-chain pipeline (`scripts/onchain_*.py`) to see where the Blend-escrowed tokens went.
+4. Run `python3 scripts/scenario_model.py`, `python3 scripts/build_dossiers.py` and `python3 scripts/sector_activity.py`
+   (gate G2 volume test).
 
-## Completed
-- Workspace skeleton; prices; universe screening (47 collections) → `universe.csv` (8 finalists, 9 watchlist,
-  7 reference, 23 reject).
-- Base rates: EW sector floor index −90% vs BTC (Jun-2022→Oct-2026), negative vs BTC every calendar year;
-  sector rallies (2023/2024/2025) median trough→peak 1.6×/2.3×/2.9× in BTC terms, ~35–40% of peak retained 90–180d
-  later. Sector quarterly volume $67M (Q3-2026) vs $2.3B (Q1-2023).
-- Recent shock: Pudgy/Azuki/Milady/BAYC floors fell sharply over Oct 10–13 (Blur shutdown) on top of an Aug–Oct
-  downtrend; art collections (Squiggle, Terraforms) and Punks did not.
-- Finalists: Milady, Remilio, CryptoDickbutts, Pudgy, Azuki (incumbent), Chromie Squiggle, Terraforms, V1 Punks.
-- Charts: sector index, finalists BTC-rebased, per-finalist history (catalyst annotations pending).
-- Methodology & data-quality notes (`sources/METHODOLOGY.md`); scenario engine scaffold.
-
-## Integrated so far
-- Brand PFPs (Pudgy/Azuki/Moonbirds) + Milady/Remilio/CDB culture & catalysts done (dossiers/_research, catalysts/*.csv).
-  Key: every token/celebrity catalyst retraced in 1–3 months; quiet windows since 2025 negative; Milady/Pudgy/Azuki/
-  Remilio fail founder-independence; CDB passes it (team gone 2023) but thin/contested IP; Moonbirds ≈ orphan baseline.
-  Verified independently: Abstract shutdown 2026-12-15 (ann. 2026-10-06); Vitalik holds Milady #9286 (2025-01-18) & #595.
-
-## Active (background agents)
-- Culture/catalyst research ×3 (Milady/Remilio/CDB; Pudgy/Azuki/Moonbirds; Squiggle/Terraforms/V1 + Curio/MoonCats).
-- On-chain collector analyst (holders, retention, lending escrow incl. Blend + Gondi, sales classification).
-- OpenSea free-key retry loop (key creation rate-limited) → then `liquidity_orderbook.py`.
-
-## Next
-- Integrate agent outputs → event study, annotated charts, dossiers.
-- Scenario parameters (`scripts/scenario_params.py`) → `scenario_model.py`.
-- Independent critic agent → revisions → memo, shortlist, uncertainties; commit, push, draft PR.
-
-## Open flags
-- CryptoDickbutts avg sale ≈0.64× floor (90d) → floor may not be executable; verify on-chain.
-- Quirkies rise looks concentrated/leveraged (Gondi escrow ~10%) → rejected.
-- OpenSea SEA token launch status unverified (possible marketplace-incentive catalyst).
-- Codex Blend loan-book findings not yet available (remote has no other branches as of 22:05 UTC).
-
-## Blockers
-- None requiring the user.
+## Open items
+- Integrate the Codex Blend loan-book reconstruction when available (not present in the repo as of 2026-10-14).
+- OpenSea SEA token launch status is unverified.
+- No draft PR: the repository has no base branch other than this work branch.

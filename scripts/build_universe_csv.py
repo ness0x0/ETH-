@@ -64,10 +64,22 @@ keep = ["name", "R2024_mult_btc", "R2024_retain180_btc", "R2025_mult_btc", "R202
 df = df.merge(ra[keep], on="name", how="left")
 df["decision"] = df["name"].map(lambda n: D.get(n, ("?", ""))[0])
 df["reason"] = df["name"].map(lambda n: D.get(n, ("?", ""))[1])
+FINAL = {  # post-research status (see reports/shortlist.md); screening decision kept in `decision`
+    "V1 CryptoPunks (wrapped)": ("SHORTLIST #1 (conditional)", "Founder-independent mania ticket; smallest weak-scenario loss; legitimacy contested"),
+    "Milady Maker": ("SHORTLIST #2 (conditional; mandate exception)", "Deepest living culture, divisible, liquid; founder-dependent"),
+    "CryptoDickbutts": ("SHORTLIST #3 (conditional; small, bid-side)", "Team gone since 2023, holders stayed; illiquid at size; IP contested"),
+    "Chromie Squiggle": ("SHORTLIST #4 (collectible only)", "Most durable object; worst investment case (break-even 55% vs ETH 14%)"),
+    "Pudgy Penguins": ("NOT RANKED (tactical, outside mandate)", "Most liquid; operator-dependent; holders have no IP/revenue claim"),
+    "Azuki": ("HELD: exit patiently after 2026-11-12", "Fails mandate; do not sell into the forced-selling bid"),
+    "Terraforms": ("REJECTED after research", "Latent 1,193-token owner mint; single-buyer bid dependence; ~28% round trip"),
+    "Redacted Remilio Babies": ("REJECTED after research", "Derivative of a founder-dependent parent; mania-branch-only value"),
+}
+df["final_status"] = df["name"].map(lambda n: FINAL.get(n, (df.loc[df.name == n, "decision"].iloc[0], ""))[0])
+df["final_note"] = df["name"].map(lambda n: FINAL.get(n, ("", ""))[1])
 df["affordable_1_item"] = df["floor_usd"] <= 8000
 order = {"FINALIST": 0, "WATCHLIST": 1, "REFERENCE": 2, "REJECT": 3}
 df = df.sort_values(["decision", "floor_cap_usd_m"], key=lambda c: c.map(order) if c.name == "decision" else -c)
-cols = ["name", "decision", "reason", "category", "contracts", "opensea_slug", "supply", "os_floor_eth", "floor_usd",
+cols = ["name", "final_status", "final_note", "decision", "reason", "category", "contracts", "opensea_slug", "supply", "os_floor_eth", "floor_usd",
         "floor_btc", "floor_cap_usd_m", "affordable_1_item", "os_owners", "owners_per_supply", "os_sales_1d",
         "os_sales_7d", "os_sales_30d", "os_vol_30d_eth", "avg_sale_30d_eth", "npf_sales_365d", "npf_vol_365d_eth",
         "npf_ath_floor_eth", "npf_ath_date", "drawdown_from_ath_eth", "drawdown_from_ath_btc", "chg_eth_1y",
