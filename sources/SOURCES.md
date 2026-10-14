@@ -256,6 +256,8 @@ Data APIs and on-chain endpoints are listed separately with what was fetched._
 
 - `https://api-bff.nftpricefloor.com/projects/bitcoin-puppets/charts/all`
 - `https://api.coingecko.com/api/v3/nfts/bitcoin-puppets`
+- `https://api.coingecko.com/api/v3/nfts/{id}` and `/nfts/list` (Ordinals panel; ids in `scripts/ordinals_check.py`)
+- `https://api-bff.nftpricefloor.com/projects` and `/projects/{slug}/charts/all` (Ordinals panel)
 - `https://api.pudgypenguins.io/lil/1`
 - `https://apis.io/providers/reservoir/`
 - `https://decrypt.co/96786/pudgy-penguins-ethereum-nft-collection-sold-to-netz-capital-for-2-5-million`

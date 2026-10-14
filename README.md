@@ -37,6 +37,8 @@ gates are met, buy one V1 CryptoPunk by bid with a pre-committed trailing-stop e
   (phase-matched to Oct-2022).
 - [`reports/puppets_check.md`](reports/puppets_check.md): quick out-of-mandate check of Bitcoin Puppets' floor in BTC
   terms (does a $180k BTC imply a $5k Puppet?).
+- [`reports/ordinals_check.md`](reports/ordinals_check.md): 47 Ordinals collections run through the same cycle and
+  hold tests as the Ethereum set, plus a launch-phase analysis.
 
 ## Repository map
 

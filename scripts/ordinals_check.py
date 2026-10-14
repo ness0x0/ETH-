@@ -12,6 +12,8 @@ Tests (same definitions as the Ethereum work; 10% costs):
                 (rough exit = mean +-15d around own peak); also a pre-set 2x-vs-BTC sell from 2024-11-01 to feed end
   hold          2024 low -> ~Oct-2025 (CoinGecko 1y-ago) and -> today
   peaks         ATH (BTC) -> Dec-2024 peak -> ~Oct-2025 -> today
+  launch phase  first tracked month (first 10 NPF bars; NPF coverage starts 2023-08-03, so older collections start
+                there) -> ATH, and today vs that first month
 Outputs: data/processed/ordinals_panel.csv, printed summary
 """
 import os
@@ -122,7 +124,7 @@ def run():
             continue
         f = s.floorNative
         r.update(first_bar=f.index[0].date(), feed_end=f.index[-1].date(), ath_btc=f.max(), ath_date=f.idxmax().date(),
-                 end_btc=f.iloc[-1])
+                 end_btc=f.iloc[-1], first_month_btc=f.iloc[:10].mean())
         low = f.loc[LOW[0]:LOW[1]]
         eu = f.loc[EUPH[0]:EUPH[1]]
         if len(low) >= 10 and len(eu) >= 5:
@@ -164,3 +166,9 @@ if __name__ == "__main__":
     b = df.dropna(subset=["dec_peak_btc", "oct2025_btc", "now_btc"])
     print(f"lower-highs: Dec-24 peak < ATH {(b.dec_peak_btc < b.ath_btc).mean():.0%}; Oct-25 < Dec-24 peak "
           f"{(b.oct2025_btc < b.dec_peak_btc).mean():.0%}; now < Oct-25 {(b.now_btc < b.oct2025_btc).mean():.0%}; n={len(b)}")
+    a = df.dropna(subset=["first_month_btc"])
+    ad = pd.to_datetime(a.ath_date)
+    print(f"ATH between Dec-2023 and May-2024: {((ad >= '2023-12-01') & (ad <= '2024-05-31')).sum()} of {len(a)}; "
+          f"first month -> ATH median {(a.ath_btc / a.first_month_btc).median():.2f}x, >=4x "
+          f"{(a.ath_btc / a.first_month_btc >= 4).mean():.0%}; today vs first month median "
+          f"{(a.now_btc / a.first_month_btc).median():.3f}, above 1: {(a.now_btc / a.first_month_btc > 1).mean():.0%}")
