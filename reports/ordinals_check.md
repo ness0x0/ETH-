@@ -105,6 +105,23 @@ its launch peak.
 
 $7–10k needs a bigger relative spike than the last cycle's, starting from a lower base.
 
+## Spillover scenario (investor's view: no Ordinals-specific mania, just liquidity spilling over in risk-on)
+
+Two past episodes fit this description: the Dec-2024 crypto-wide euphoria, and the Ethereum-led rally of mid-2025.
+
+| Episode | Panel median vs BTC | Puppets vs BTC | Puppets at BTC $180k / $210k (from 0.0102 BTC) |
+|---|---|---|---|
+| Dec-2024, rough timing | 0.76× (22% beat BTC) | 1.33× | ~$2.4k / ~$2.8k |
+| Dec-2024, exact peak | 1.65× | 3.0× | ~$5.6k / ~$6.5k |
+| ~Apr → ~Oct 2025 | 1.37× | 1.2× | ~$2.2k / ~$2.6k |
+
+**Each spillover was given back quickly.**
+- From the Nov-2024 peak to Apr-2025, Puppets fell to 0.19× in BTC terms.
+- From ~Oct-2025 to now, it fell to 0.26×.
+
+**Consistency check.** The investor expects a milder cycle than 2024–25, whose risk-on included a BTC and ETH ATH and
+a memecoin mania. On that view, spillover should be no larger than these episodes.
+
 ## Read
 
 - **Ordinals have been a stronger version of the Ethereum pattern, not an exception to it.** The multiples happened
