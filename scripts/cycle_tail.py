@@ -13,8 +13,11 @@ Parts:
   D  recent launches in the universe (created 2023+): first-month floor -> peak -> now, in BTC
   E  equal-weight baskets (every k-combination) from each cycle: P(basket >= 2x / 4x vs BTC), P(holds a 4x)
   F  collections matching the winners' pre-catalyst profile today (watchlist, not a buy list)
+  G  the investor's clarified bar (2026-10-14): "4x in dollars if BTC 2x" = 2x vs BTC (10x in dollars = 5x vs BTC).
+     Tested with a rule that needs no hindsight: buy near the low, list at the target (net of 10% costs) and let it
+     fill the first time the floor reaches it; otherwise hold to BTC's top (2025-10-06).
 Outputs: data/processed/cycle_tail_counts.csv, cycle_tail_profile.csv, cycle_tail_buckets.csv, recent_launches.csv,
-         cycle_tail_baskets.csv, cycle_tail_watchlist.csv
+         cycle_tail_baskets.csv, cycle_tail_watchlist.csv, cycle_tail_target_rule.csv, cycle_tail_target_summary.csv
 """
 import itertools
 import os
@@ -129,6 +132,60 @@ def profile_matches_now():
               "sales_per_day_30d", "owners_per_supply"]].sort_values("floor_cap_usd_m")
 
 
+TARGET_CYCLES = {"2024-25": (("2024-06-15", "2024-10-31"), ("2024-11-01", "2025-10-06")),
+                 "2022-25": (("2022-06-15", "2023-10-31"), ("2023-11-01", "2025-10-06"))}
+COST = 0.10
+
+
+def target_rule(targets=(2.0, 5.0)):
+    rows = []
+    for cyc, (lw, xw) in TARGET_CYCLES.items():
+        for name, npf, _, cat in UNIVERSE:
+            if not os.path.exists(os.path.join(PROC, "npf_series", f"{npf}.csv")):
+                continue
+            s = load_series(npf, start="2022-06-15")
+            low = s.loc[lw[0]:lw[1]]
+            if len(low) < 10:
+                continue
+            ld = low.floorUsd.idxmin()
+            path = s.floorBtc.loc[xw[0]:xw[1]]
+            if len(path) < 10:
+                continue
+            ent = {"rough": low.floorBtc.loc[ld - pd.Timedelta(days=45): ld + pd.Timedelta(days=45)].mean(),
+                   "blind": low.floorBtc.median()}
+            for tier, e in ent.items():
+                r = dict(cycle=cyc, name=name, category=cat, tier=tier, low_date=ld.date(),
+                         end_vs_btc=path.iloc[-1] / e * (1 - COST), max_vs_btc=path.max() / e * (1 - COST))
+                for T in targets:
+                    hit = path[path >= T / (1 - COST) * e]
+                    r[f"hit_{T:g}x"] = not hit.empty
+                    r[f"hit_{T:g}x_date"] = hit.index[0].date() if not hit.empty else None
+                    r[f"outcome_{T:g}x"] = T if not hit.empty else r["end_vs_btc"]
+                rows.append(r)
+    return pd.DataFrame(rows)
+
+
+def target_summary(tr, pr):
+    cap = pr.set_index(["cycle", "name"]).cap_at_low_usd_m
+    tr = tr.assign(cap_at_low_usd_m=[cap.get((c, n), np.nan) for c, n in zip(tr.cycle, tr.name)])
+    pfp = tr.category.str.contains("pfp")
+    rows = []
+    for (cyc, tier), g in tr.groupby(["cycle", "tier"], sort=False):
+        for lab, h in (("all", g), ("PFP", g[pfp.loc[g.index]]), ("cap<$5M at low", g[g.cap_at_low_usd_m < 5]),
+                       ("cap>=$15M at low", g[g.cap_at_low_usd_m >= 15])):
+            o = dict(cycle=cyc, tier=tier, sample=lab, n=len(h))
+            for T in (2, 5):
+                o[f"P_hit_{T}x"] = h[f"hit_{T}x"].mean()
+                o[f"median_outcome_{T}x_rule"] = h[f"outcome_{T}x"].median()
+                o[f"mean_outcome_{T}x_rule"] = h[f"outcome_{T}x"].mean()
+            o["P_lose_vs_btc_2x_rule"] = (h["outcome_2x"] < 1).mean()
+            o["median_if_missed_2x"] = h.loc[~h["hit_2x"], "end_vs_btc"].median()
+            o["median_days_to_hit_2x_from_xw_start"] = (pd.to_datetime(h["hit_2x_date"]).dropna()
+                                                         - pd.Timestamp(TARGET_CYCLES[cyc][1][0])).dt.days.median()
+            rows.append(o)
+    return pd.DataFrame(rows)
+
+
 if __name__ == "__main__":
     pd.set_option("display.width", 250)
     pd.set_option("display.max_columns", 30)
@@ -152,3 +209,11 @@ if __name__ == "__main__":
     print(rl.round(3).to_string())
     print(bk.round(3).to_string())
     print(wl.round(3).to_string())
+    tr = target_rule()
+    tr.to_csv(os.path.join(PROC, "cycle_tail_target_rule.csv"), index=False)
+    ts = target_summary(tr, pr)
+    ts.to_csv(os.path.join(PROC, "cycle_tail_target_summary.csv"), index=False)
+    print(ts.round(2).to_string())
+    print(tr[(tr.tier == "rough") & tr.hit_2x].sort_values(["cycle", "hit_2x_date"])[
+        ["cycle", "name", "low_date", "hit_2x_date", "hit_5x", "hit_5x_date", "max_vs_btc", "end_vs_btc"]].round(2)
+          .to_string())

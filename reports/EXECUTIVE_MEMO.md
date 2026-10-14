@@ -55,32 +55,43 @@ Oct-2025 top ([full analysis](cycle_analysis.md); chart `reports/charts/cycle202
   - Entry: tranches starting after 2026-11-12, adding as evidence of a low accumulates.
   - Exit: sell into the next euphoria and rotate into BTC.
 
-## Addendum 2 (2026-10-14): your bar is now 4–10× against a BTC 2×
+## Addendum 2 (2026-10-14): your bar is 4–10× in dollars while BTC does 2×
 
-That bar changes the answer. The cycle trade above has a realistic outcome of beating BTC by a median 1.3–1.6×; it
-does not reach 4×. ([section E of the cycle analysis](cycle_analysis.md#e-can-anything-plausibly-do-410-against-btc-follow-up-2026-10-14))
+If you rotate the proceeds into BTC when you sell, 4× in dollars means the NFT must double *against BTC*; 10× means
+5× against BTC. ([Section E of the cycle analysis](cycle_analysis.md#e-can-anything-do-410-in-dollars-while-btc-does-2-follow-ups-2026-10-14))
 
-- **4× or more vs BTC was a tail outcome.** With hindsight-generous timing:
-  - 2024–25: 2 of 44 collections (Moonbirds 6.6×, CryptoDickbutts 4.7×).
-  - 2022–25: 3 of 37 (Lil Pudgys 10.9×, Pudgy 6.5×, Milady 4.8×).
-  - Only the 2021 launch mania made it common.
-- **The winners shared a profile:**
-  - PFPs with a floor cap of $10M or less at the low, 70–98% below their prior peak.
-  - Each was moved by something new and unpriced (a new owner, a Musk post, a token) 10–30 months later.
-  - None above a $15M cap did it (0 of 29).
-  - The profile is common and the catalyst is rare. Today 17 PFPs fit the profile.
-- **Diversifying doesn't solve it.** Five small-cap picks raised the odds of *holding* a 4× name to ~50%, but no
-  five-pick basket reached 4× in 2024–25. Getting the position to 4× needs one concentrated name: roughly 1 in 8 to
-  1 in 6.
-- **New mints are where the 4–10× lives, and you can't project them.** Three of six notable 2023–26 launches peaked at
-  ≥4× vs BTC from their first month; none held more than 1.33×. Across all launches about 95% die.
-- **Net: stay in BTC.** Nothing in the ETH NFT universe can be projected to 4–10× vs BTC.
-  - **If you want lottery exposure anyway,** size it as a total loss and wait for a dated trigger on a name from the
-    watchlist. Triggers are a funded new owner or operator, or an IP or token deal.
-  - **The trigger usually fails.** Buying a week after Orange Cap Games bought Moonbirds still returned ~5–7× vs BTC,
-    but only 1 of 5 such ownership changes worked.
-  - **Discipline.** Concentrate in one name and pre-commit the exit into BTC.
-- **Azuki.** Unchanged: exit patiently after 2026-11-12.
+**The test.** Buy near the 2024 low and place a sell listing at the target in advance (no hindsight). In the 2024–25
+analog:
+
+| Sample | Hit 4× $ | Hit 10× $ | Lost to BTC |
+|---|---|---|---|
+| All 44 collections | 32% | 5% | 45% |
+| **Small PFPs** (under $5M floor cap at the low) | **8 of 12** | 2 of 12 | 1 of 12 |
+| $15M+ at the low | 21% | 0% | 64% |
+
+- **Fills.** Thirteen of the 14 hits held the target for days to weeks, so a listed order would plausibly have filled.
+- **The harsher 2022–25 test.** Small PFPs hit 4× in dollars 25–50% of the time; with a mistimed entry, most lost to
+  BTC.
+- **Today.** Applying the 2024–25 swings, small names hit 4× in dollars 53–82% of the time if ETH/BTC is 0.025–0.035 at
+  the euphoria, and 24% at 0.020. These are upper bounds: one cycle, a dozen small PFPs, survivors (the most biased
+  part), and a fresh low that hasn't arrived yet.
+
+**This changes the shortlist for this objective.**
+- V1, Milady, Pudgy and Squiggle peaked at 1.5–1.9× vs BTC in 2024–25: enough to beat BTC, not to reach 4× in
+  dollars.
+- The candidates are the 17 small, drawn-down PFPs in section E4; nine of them hit 2× vs BTC last cycle.
+
+**How it has to be run.**
+- **Entry.** Only after 2026-11-12, with evidence of a low.
+- **Size.** As a loss you can take.
+- **Exit, set on day one.** A sell listing at 2.2× entry in BTC terms, optionally half at ~5.5×, rotating fills
+  into BTC.
+- **Concentration.** One or two names for a real shot at 4× on the whole position; 3–5 names for a likely ~1.5× vs BTC
+  with little chance of losing to BTC.
+
+**10× in dollars stays a tail** (5–17%). New mints can't be projected.
+
+**Azuki.** Unchanged: exit patiently after 2026-11-12.
 
 ## Why
 

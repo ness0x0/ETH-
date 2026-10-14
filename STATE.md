@@ -27,11 +27,13 @@ _Last updated: 2026-10-14 (UTC)_
   `chart_cycles.py`; memo addendum.
 - 2021 context only: Punks on-chain floor (`punks_onchain_floor.py`); OpenSea sampled 2020–22 sales
   (`cycle_a_sales_sampler.py`, complete; `cycle_a_analysis.py` → `cycleA_summary.csv`).
-- Second follow-up: the investor wants "4–10× against a BTC 2×" (`scripts/cycle_tail.py`; report section E).
-  - ≥4× vs BTC was a tail: 2 of 44 (2024–25) and 3 of 37 (2022–25). All winners were PFPs with a floor cap of $10M or
-    less at the low, and a later unpriced catalyst moved each one.
-  - Five-pick baskets never reached 4×. New mints peak high but don't hold, and ~95% die.
-  - Conclusion: stay in BTC. Lottery exposure only on a dated trigger, sized as a total loss.
+- Second follow-up: the bar is "4× in dollars while BTC does 2×", i.e. 2× vs BTC (`scripts/cycle_tail.py`; report
+  section E; memo addendum 2).
+  - With a pre-set sell at 2× vs BTC in 2024–25: 32% of all collections hit it, 8 of 12 small PFPs, and 21% of names
+    above $15M. In 2022–25 small PFPs hit it 25–50% of the time.
+  - 10× in dollars is a tail (5–17%).
+  - The quality finalists peaked at 1.5–1.9× vs BTC, so the candidates for this bar are the small-cap watchlist.
+  - Still no buy before the entry gates.
 
 ## Market context (verified)
 - 2026-10-13 closes: BTC $83,350; ETH $2,508.69; ETH/BTC 0.0301. BTC close ATH $124,659 (2025-10-06).

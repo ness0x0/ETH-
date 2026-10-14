@@ -218,6 +218,9 @@ Swing-sample equivalents (171 episodes) are similar: 57% beat BTC at 0.030 and 8
 
 ## D. Implications for the recommendation
 
+_This section answers "beat BTC". For the investor's later bar, 4× in dollars while BTC does 2×, see E6: it
+changes which names fit._
+
 1. **The unconditional answer is unchanged.** If you are unsure about the macro, the weak scenarios dominate and
    "no purchase / ETH instead" stands (`reports/EXECUTIVE_MEMO.md`).
 2. **Conditional on your view** (BTC $180–210k this cycle, i.e. a repeat of the ~2.1× 2024→2025 leg) **and a
@@ -254,133 +257,216 @@ Swing-sample equivalents (171 episodes) are similar: 57% beat BTC at 0.030 and 8
      before BTC's.
    - *Size.* Only what you can lose entirely. It is one cycle's evidence, on survivors.
 
-## E. Can anything plausibly do 4–10× against BTC? (follow-up, 2026-10-14)
+## E. Can anything do 4–10× in dollars while BTC does 2×? (follow-ups, 2026-10-14)
 
-_Script: `scripts/cycle_tail.py`. Outputs: `data/processed/cycle_tail_{counts,profile,buckets,baskets,watchlist}.csv`,
-`recent_launches.csv`._
+_Script: `scripts/cycle_tail.py`. Outputs: `data/processed/cycle_tail_*.csv` and `recent_launches.csv`._
 
-The bar moved from "beat BTC" to "plausibly 4–10× against a BTC 2×". There are two readings:
-- **4–10× in USD while BTC does ~2×**, which is roughly 2–5× vs BTC.
-- **4–10× relative to BTC**, which is roughly 8–20× in USD.
+**The bar, translated.** Assume you rotate the NFT proceeds into BTC when you sell. Then ending with 4× in dollars
+while BTC does 2× means the NFT must **double against BTC** between your buy and your sell. 10× in dollars means 5×
+against BTC.
 
-**Short answer.** Among established ETH NFTs, neither has been a projectable outcome. It has been a tail: about
-5–8% of collections per cycle, even with hindsight-generous exit timing. It came from collections no one could have
-singled out at the low.
+_An earlier draft of this section answered a harder reading, 4–10× *against* BTC. Its material is kept in E5 for the
+10× end._
 
-### E1. How often it happened
+**Short answer.**
+- **4× in dollars.** In the 2024–25 analog this was common among *small* collections: about half of those under a
+  $5M floor cap at the low hit it with a sell order placed in advance, and 8 of 12 small PFPs. Among the larger
+  "quality" names it was rare.
+- **10× in dollars.** Only 5% of all collections got there (12–17% of small ones). That is a tail, not a plan.
 
-The table counts collections at each threshold. All tiers except the last use rough timing and deduct 10% costs. The
-rough exit is centred on each collection's actual peak, so these counts are upper bounds on what a real seller gets.
+### E1. A sell rule that needs no hindsight
 
-| Cycle | n | ≥4× USD | ≥2× vs BTC | **≥4× vs BTC** | ≥10× vs BTC | ≥4× vs BTC, perfect timing |
-|---|---|---|---|---|---|---|
-| **2024–25** (BTC ~2.1×) | 44 | 2 | 7 | **2**: Moonbirds 6.6×, CryptoDickbutts 4.7× | 0 | 8 |
-| 2022–25 (full cycle; BTC ~3.9× to the NFT exits) | 37 | 11 | 3 | **3**: Lil Pudgys 10.9×, Pudgy 6.5×, Milady 4.8× | 1 | 5 |
-| 2021 (12 sampled survivors, post-mint lows) | 12 | 9 | 10 | **8** | 4 | 10 |
+**The rule.**
+- **Buy** near the 2024 low.
+- **Place a sell listing** at 2.22× the entry price in BTC terms, which is 2× after 10% costs. It fills the first time
+  the floor reaches it.
+- **When it fills,** rotate the proceeds into BTC.
+- **If it never fills,** hold to BTC's top (2025-10-06).
 
-- **The 2024–25 near-misses gave it all back.** Five collections did 2.0–2.4× vs BTC (3.4–4.0× USD): Cool Cats,
-  Sappy Seals, Doodles, Rektguy and Sproto Gremlins. All five now trade at 17–74% of their 2024 lows.
-- **2021 is the only regime where ≥4× vs BTC was common.** It was a launch mania, with ETH/BTC going from 0.031 to
-  0.080, measured on survivors picked in hindsight. You have ruled it out as an analog.
+**Entry tiers.**
+- *Rough:* the average floor ±45 days around the low.
+- *Blind:* the median floor of the whole low period.
 
-### E2. What the winners had in common
+**2024–25 analog.** Cells show rough timing, with blind timing in brackets where they differ.
 
-| Winner | Cycle | Floor cap at the low | Below prior peak at the low | What moved it | Knowable at the low? |
+| Sample | n | Hit 2× vs BTC (= 4× $) | Hit 5× vs BTC (= 10× $) | Lost to BTC | Average outcome vs BTC |
 |---|---|---|---|---|---|
-| Moonbirds | 2024–25 | $5.0M | −98% | Orange Cap Games bought the IP from Yuga (2025-05-30), then a Jul–Aug 2025 revival; ETH/BTC +67% in the same window | No: came 10 months after the low |
-| CryptoDickbutts | 2024–25 | $1.8M | −94% | No dated project catalyst found. Coincided with an unaffiliated DICKBUTT memecoin (Oct-2024) and the 2025 meme and ETH rallies. The community/Weitsman takeover was announced in Nov-2025, after the peak, with no positive reaction | No |
-| Pudgy Penguins | 2022–25 | $9.5M | −82% (vs the Aug-2021 sampled peak) | New owner (Netz, Apr-2022), toys (2022–23), PENGU (Dec-2024) | Partly: the owner change came 2½ months before the low |
-| Lil Pudgys | 2022–25 | $1.2M | n/a (no 2021 data) | As Pudgy, plus a PENGU allocation | Partly |
-| Milady | 2022–25 | $2.75M | −71% (vs the Apr-2022 sampled peak) | Musk meme post (May-2023), LADYS, CULT (Dec-2024) | No |
+| All collections | 44 | 32% (36%) | 5% | 45% (43%) | 1.19× (1.24×) |
+| PFPs (incl. historical and artist PFPs) | 31 | 42% (48%) | 6% | 35% (32%) | 1.29× (1.37×) |
+| **Under $5M floor cap at the low** | 17 | **53%** | 12% | 18% | 1.53× (1.55×) |
+| **Small PFPs** | 12 | **67%** (8 of 12) | 17% | 8% | 1.68× (1.69×) |
+| $15M or more at the low | 14 | 21% (29%) | 0% | 64% | 0.95× (1.01×) |
 
-**Pattern.**
-- **All five were PFPs.** All had a floor cap of $10M or less at the low, and all were deeply drawn down.
-- **Something new and unpriced moved them:** an owner, a celebrity moment, a token. The move took 10–30 months.
-- **Cap mattered.** No collection with a floor cap above $15M at the low reached 4× vs BTC in either cycle (0 of 29).
-  The 2022–25 median vs BTC fell with size: 1.24× under $5M; 0.75× at $5–15M; 0.63× at $15–50M; 0.39× above $50M.
-- **The profile is common; the catalyst is rare.** In 2024–25, 17 collections were under $5M at the low and 2 did
-  ≥4× vs BTC (12%).
-- **Today 17 PFPs fit the pre-catalyst profile:** floor cap ≤$10M, ≥85% below their ATH in BTC, and at least one sale
-  a day. In cap order: Captainz, Sproto Gremlins, DeGods, Sappy Seals, World of Women, Wassies, Cool Cats, Hashmasks,
-  Rektguy, Remilio, Chimpers, mfers, CrypToadz, Doodles, CryptoDickbutts, Clone X, MoonCats
-  (`cycle_tail_watchlist.csv`). This is a watchlist for catalysts, not a buy list.
+- **Would the order have filled?** 13 of the 14 hits held at or above the target for at least two consecutive 3-day
+  readings, mostly for 9–33 days. World of Women touched it once. Excluding it, small PFPs drop to 7 of 12.
+- **When.**
+  - 10 of 14 hits came by 31 Dec 2024, inside two months of the euphoria starting and 3–5 months after the lows.
+  - The other four came in Jul–Aug 2025, during ETH's all-time-high run.
+- **Token dependence.**
+  - Three hits belonged to token-airdrop collections, a catalyst now spent: Azuki, Lil Pudgys and Doodles.
+  - None of the small-cap hits did. They were beta to the euphoria.
+- **The quality names mostly missed.** Of the eight finalists, only Azuki (2.14×) and CryptoDickbutts reached 2×. The
+  rest peaked at:
 
-### E3. Diversifying raises the odds of holding a winner, not of the position doing 4×
-
-Equal-weight baskets, testing every combination drawn from the 2024–25 collections under $5M at the low (n=17; rough
-timing):
-
-| Picks | P(position ≥2× vs BTC) | **P(position ≥4× vs BTC)** | P(holds at least one ≥4× name) | Median position |
-|---|---|---|---|---|
-| 1 | 29% | **12%** | 12% | 1.56× |
-| 3 | 35% | **2%** | 33% | 1.68× |
-| 5 | 45% | **0%** | 52% | 1.88× |
-
-- **2022–25 small caps (n=11)** gave 18% for one pick, 27% for three and 1% for five. That cycle had one 10.9×
-  outlier, Lil Pudgys.
-- **To get the whole position to 4× you need one concentrated name.** Historically that worked about 1 time in 8 to 1
-  in 6. That assumes you already knew to fish in the small-cap pond, and that you sold near the peak.
-
-### E4. Buying after the catalyst: the one version with a defined trigger
-
-- **Moonbirds 2025.** Buying on the first bar after the Orange Cap Games announcement would still have returned 7.1×
-  vs BTC (perfect exit; ~5.4× rough, after costs). By then the floor had already jumped 2.5×: entry 0.0176 BTC on
-  2025-06-05, exit 0.125 BTC on 2025-08-25. The floor then sat at 0.013–0.018 BTC for six weeks, so the entry was
-  available. In ETH terms the move was 4.3×; ETH/BTC rising from 0.024 to 0.040 supplied the rest.
-- **Pudgy.** The new owner arrived before the 2022 low.
-- **The trigger usually fails.** Moonbirds-OCG is 1 of 5 measurable ownership or operator changes in our event file.
-  The other four, with 90-day returns vs the sector:
-
-  | Event | 90-day result vs the sector |
+  | Finalist | Peak vs BTC in 2024–25 |
   |---|---|
-  | Yuga buys Moonbirds (Feb-2024) | −1%: a spike (floor 1.07 → 1.77 ETH) reversed within three weeks; −46% at 180 days |
-  | CryptoDickbutts Series 4 control "twist" (2023) | −44% |
-  | Penus DAO/Weitsman takeover (Nov-2025) | −23% |
-  | Infinite Node buys the Punks IP (May-2025) | +13% (for V1) |
+  | Pudgy | 1.90× |
+  | V1 Punks | 1.90× |
+  | Milady | 1.65× |
+  | Remilio | 1.62× |
+  | Squiggle | 1.54× |
+  | Terraforms | 1.14× |
 
-  The sample is too small to call this an edge.
+- **If the order never filled,** the median collection ended at 0.76× vs BTC (small caps 1.17×).
+- **The ones that hit and weren't sold gave it back.** Cool Cats, Sappy Seals, Doodles and Sproto Gremlins all hit 2×.
+  They now trade at 17–49% of their 2024 lows.
 
-### E5. New mints: the tail lives here, and so does the wreckage
+**A harsher check: the full 2022–25 cycle.** Low window Jun-2022 → Oct-2023; sell window Nov-2023 → Oct-2025.
+Cells show rough / blind.
 
-This covers the fresh launches in our universe since 2023 (two contract migrations excluded). Multiples are in BTC,
-against each collection's first-month floor.
-
-| Launch | Peak ÷ first month | Today ÷ first month | Today vs peak | Days to peak |
+| Sample | n | Hit 2× | Hit 5× | Lost to BTC |
 |---|---|---|---|---|
-| Opepen Edition (Jan-2023, free open edition) | 39× | 1.26× | −97% | 147 |
-| Sproto Gremlins (May-2023) | 11.5× | 0.44× | −96% | 507 |
-| Good Vibes Club (Mar-2025) | 6.1× | 1.33× | −78% | 321 |
-| NORMIES (Feb-2026) | 2.4× | 1.26× | −47% | 33 |
-| The Captainz (Jan-2023) | 2.1× | 0.002× | −99.9% | 150 |
-| Checks VV Originals (Feb-2023) | 1.3× | 0.08× | −94% | 18 |
+| All collections | 44 | 25% / 11% | 14% / 5% | 66% / 89% |
+| Under $5M at the low | 11 | 36% / 18% | 18% / 9% | 45% / 82% |
+| Small PFPs | 8 | 50% / 25% | 25% / 12% | 38% / 75% |
 
-- **Half peaked at ≥4× vs BTC from their first month. Held to today, none is above 1.33×.** The gain existed only
-  for someone who sold into the hype.
-- **These six are already the notable survivors.** Across all launches:
-  - A Sept-2023 dappGambl study found 69,795 of 73,257 collections (~95%) at zero market cap
-    ([The Fader, 2023-09-21](https://thefader.com/2023/09/21/95-percent-of-nfts-worthless-study-finds)).
+- **Entry timing decided this cycle.** The 2022–23 bottom was a 16-month slide, so buying anywhere but near the end
+  lost.
+- **What mattered was size at the low, not the name.** Pudgy, Lil Pudgys, Milady and Remilio did it from the 2022 low
+  while they were small. By the 2024 low they were $17–150M, and none repeated.
+
+### E2. Applied to today
+
+This applies each collection's 2024–25 swing in ETH terms to an entry at today's ETH/BTC (0.0301), with ETH/BTC at the
+level shown when the euphoria hits.
+
+| Probability of hitting 2× vs BTC (= 4× $) | ETH/BTC 0.020 | 0.025 | 0.030 | 0.035 |
+|---|---|---|---|---|
+| All collections | 16% | 34% | 52% | 64% |
+| Under $5M at the low | 24% | 53% | 76% | 82% |
+
+- **5× vs BTC (= 10× $)** comes out at 5% for all collections and 12% for small ones at ETH/BTC 0.025–0.035.
+- **These are upper bounds,** for the reasons in A3: one cycle, survivors only, spent tokens.
+- **They assume you buy near a fresh low, not today.** 59% of collections are below their 2024 lows, and the next low
+  may be lower still.
+- **The small-cap result is the most exposed to survivorship.** The universe was chosen in 2026, so small collections
+  that died after 2024 are missing from it.
+
+### E3. One name or a basket
+
+This uses the 2× sell rule on the 2024–25 collections under $5M at the low, testing every combination.
+
+| Names held | Position ≥2× vs BTC (= 4× $) | Position ≥1.5× | Position lost to BTC | Median position |
+|---|---|---|---|---|
+| 1 | 53% | 59% | 18% | 2.0× |
+| 3 | 12% | 53% | 7% | 1.52× |
+| 5 | 2% | 56% | 1% | 1.54× |
+
+- **A basket trades the 4×-in-dollars outcome for reliability.** It rarely lost to BTC, but it almost never doubled
+  vs BTC as a whole, because some names miss.
+- **Getting the whole position to 4× in dollars** means holding one or two names and accepting the higher loss rate.
+
+### E4. Today's candidates
+
+These are the PFPs that fit the small-cap profile today (`cycle_tail_watchlist.csv`):
+- floor cap of $10M or less;
+- at least 85% below their ATH in BTC;
+- at least one sale a day.
+
+Prices are as of 2026-10-13. Nine of the 17 hit 2× in 2024–25, but that does not predict a repeat: what mattered was
+being small and drawn down at the low.
+
+| Collection | Floor cap | Floor (ETH) | Sales/day (30d) | 2024–25 peak vs BTC (2× hit?) |
+|---|---|---|---|---|
+| The Captainz | $0.6M | 0.023 | 14.7 | 0.79× (no; $43M at the 2024 low) |
+| Sproto Gremlins | $1.2M | 0.141 | 4.2 | 2.60× (yes) |
+| DeGods (ETH) | $1.3M | 0.162 | 2.2 | 0.79× (no) |
+| Sappy Seals | $1.5M | 0.060 | 16.2 | 2.85× (yes) |
+| World of Women | $1.8M | 0.074 | 6.9 | 2.02× (one reading only) |
+| Wassies | $2.1M | 0.087 | 1.1 | 1.23× (no) |
+| Cool Cats | $2.3M | 0.091 | 10.7 | 3.45× (yes) |
+| Hashmasks | $2.6M | 0.064 | 10.2 | 1.66× (no) |
+| Rektguy | $2.9M | 0.132 | 11.2 | 2.56× (yes) |
+| Redacted Remilio Babies | $3.0M | 0.118 | 13.0 | 1.62× (no; $17M at the 2024 low) |
+| Chimpers | $3.2M | 0.319 | 3.0 | 2.42× (yes) |
+| mfers | $3.2M | 0.128 | 12.2 | 1.66× (no) |
+| CrypToadz | $4.4M | 0.247 | 3.3 | 1.68× (no) |
+| Doodles | $5.4M | 0.214 | 15.1 | 2.83× (yes; token) |
+| CryptoDickbutts | $6.2M | 0.472 | 1.8 | 6.30× (yes) |
+| Clone X | $6.2M | 0.125 | 16.3 | 0.72× (no) |
+| MoonCats | $6.5M | 0.124 | 8.4 | 2.29× (yes) |
+
+- **The misses were not far off.** The eight that missed peaked at 0.7–1.7× vs BTC.
+- **Size check.** $1,500 buys 1–26 floor items in these collections. In the names with 10 or more sales a day other
+  than Captainz, that is under a day's volume.
+
+### E5. The 10× end (5× vs BTC) is a tail
+
+Peak-centred rough timing (section A's method) gives the same picture as the sell rule.
+
+| Cycle | n | ≥4× vs BTC | ≥10× vs BTC |
+|---|---|---|---|
+| 2024–25 | 44 | 2: Moonbirds 6.6×, CryptoDickbutts 4.7× | 0 |
+| 2022–25 | 37 | 3: Lil Pudgys 10.9×, Pudgy 6.5×, Milady 4.8× | 1 |
+| 2021 (12 sampled survivors, post-mint lows; the launch mania you ruled out) | 12 | 8 | 4 |
+
+**What the big winners had in common:**
+- PFPs with a floor cap of $10M or less at the low, 70–98% below their prior peak.
+- Each was moved, 10–30 months later, by something new and unpriced:
+
+  | Winner | What moved it |
+  |---|---|
+  | Moonbirds | New owner (Orange Cap Games, 2025-05-30) |
+  | Milady | Musk meme post (May-2023), then the LADYS and CULT tokens |
+  | Pudgy | New owner (Netz, Apr-2022), toys, then the PENGU token |
+  | CryptoDickbutts | No dated catalyst; the holder takeover came after its peak, in Nov-2025 |
+
+- **No collection above a $15M cap at the low did it** (0 of 29).
+
+**Buying after a catalyst.**
+- *The case that worked:* buying Moonbirds on the first reading after the Orange Cap Games announcement still
+  returned 7.1× vs BTC (~5.4× with rough timing after costs). In ETH terms that was 4.3×; ETH/BTC rising from 0.024
+  to 0.040 did the rest.
+- *The usual outcome:* that was 1 of 5 measurable ownership changes. The other four, vs the sector at 90 days:
+
+  | Event | 90 days vs the sector |
+  |---|---|
+  | Yuga buys Moonbirds (Feb-2024) | −1% (the spike reversed within three weeks); −46% at 180 days |
+  | CryptoDickbutts Series 4 "control twist" | −44% |
+  | CryptoDickbutts Penus DAO/Weitsman takeover | −23% |
+  | Infinite Node buys the Punks IP (V1s) | +13% |
+
+**New mints.** Of six notable launches since 2023, three peaked at ≥4× vs BTC from their first month: Opepen 39×,
+Sproto 11.5×, Good Vibes Club 6.1×.
+- Held to today, none is above 1.33×. Captainz is at 0.002× and Checks VV at 0.08×.
+- Across all launches about 95% die:
+  - A Sept-2023 dappGambl study found 69,795 of 73,257 collections at zero market cap
+    ([The Fader](https://thefader.com/2023/09/21/95-percent-of-nfts-worthless-study-finds)).
   - An NFT Evening study classed 96% of 5,000 collections as "dead"
     ([ForkLog, 2024-09-04](https://forklog.com/en/?p=16686)).
-- **"Impossible to project" is the right description.** Nothing in this dataset identifies the winning launch in
-  advance.
+- This data cannot pick the winner in advance (`recent_launches.csv`).
 
 ### E6. What this means for the recommendation
 
-1. **A 4–10× vs BTC cannot be underwritten in ETH NFTs.** It has been a ~5–12%-per-name outcome, and only with
-   timing generous to the point of hindsight. It cannot be identified at the low. The base answer stays: **stay in
-   BTC**.
-2. **If you want lottery exposure anyway,** the data supports only this structure:
-   - **Size.** An amount you expect to lose.
-   - **Entry.** Not at a forecast. Start from the E2 watchlist and wait for a dated trigger: a funded new owner or
-     operator, or a credible IP or token deal. Buy within weeks of it.
-   - **Concentration.** One name per trigger, since baskets dilute the multiple. Accept roughly a 1-in-5 hit rate.
-   - **Exit.** Pre-commit to selling into the euphoria and rotating into BTC; the 2024–25 near-misses show the cost
-     of holding.
-3. **New mints are a separate game.** Their survivors show the 4–10×, but their base rate is roughly 95% mortality,
-   and this data offers no way to pick one. If played, it is a mint-and-sell-into-hype trade, sized as a total loss.
-4. **This does not raise the case for the 2024–25 cycle trade in section D.** That trade's realistic outcome is "beat
-   BTC" (median 1.3–1.6× vs BTC), not 4×. By your new bar it does not justify the risk, and the "stay in BTC"
-   conclusion now applies to it too.
+1. **On your bar, the cycle trade is plausible, but only in small, high-beta PFPs.**
+   - In the 2024–25 analog, half to two-thirds of small names hit 4× in dollars with a sell order set in advance.
+   - In the harsher 2022–25 test, a quarter to half did, and most lost to BTC when the entry was mistimed.
+   - The evidence base is about a dozen small PFPs over one or two cycles.
+2. **This changes the shortlist for this objective.** The earlier finalists (V1, Milady, Pudgy, Squiggle) peaked at
+   1.5–1.9× vs BTC in 2024–25. That is good enough to beat BTC, not to reach 4× in dollars. The candidates are the
+   E4 list.
+3. **How to run it, if you do:**
+   - **Entry gate, unchanged.** Not before 2026-11-12. Then wait for evidence of a low: ETH/BTC making a higher low
+     and NFT volume rising off its lows. Entry timing decided the 2022–25 result.
+   - **Size.** Only what you can lose. Hold 1–2 names for a real shot at 4× in dollars on the whole position, or 3–5
+     for a likely ~1.5× vs BTC with a low chance of losing to BTC.
+   - **Exit, set on day one.** List each name for sale at 2.2× its entry in BTC terms, repricing the ETH listing as
+     ETH/BTC moves. Optionally put half at ~5.5× for the 10× tail. Rotate fills into BTC.
+   - **Don't hold past the euphoria.** It came 3–5 months after the 2024 lows, and the names that weren't sold gave
+     it back.
+4. **10× in dollars is a tail (5–17%).** New mints are an unprojectable gamble.
+5. **Not a buy today.** "No purchase before the entry gates" still holds. Once they are met, and with your BTC view, a
+   small-cap sleeve with pre-set sells is the one version of this trade that has historically reached your bar.
 
 _The 2021 cycle (CryptoPunks on-chain; sampled OpenSea sales, `cycleA_summary.csv`) is kept only as context.
 Category-creation multiples are not a usable analog:_
