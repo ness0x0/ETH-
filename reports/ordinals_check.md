@@ -87,7 +87,16 @@ reading and the end point is derived from CoinGecko, so this is approximate.
 2024 launch cohort took the attention. There has been no Ordinals boom since, which is why the ranking has looked
 fixed.
 
-**Puppets arithmetic from 0.0102 BTC, if the Dec-2024 swing repeats:**
+**Puppets had two different moves last cycle:**
+- **Launch run.** From a near-free mint, with a first tracked floor of 0.0066 BTC (~$283) on 2024-01-06, to 0.397 BTC
+  (~$27.9k) on 2024-04-14. That was a new collection being discovered, which happens once.
+- **Established-collection swing.** From the post-launch low of 0.0565 BTC (~$2.9k) on 2024-08-06 to 0.172 BTC
+  (~$15.7k) on 2024-11-19: 3.0× vs BTC, or 5.4× in dollars because BTC rose 1.77× over the same months.
+
+Puppets is now an established collection, so the second move is the analog. No collection in this panel got back to
+its launch peak.
+
+**Puppets arithmetic from 0.0102 BTC, if the Aug→Nov 2024 swing repeats:**
 
 | Timing | Multiple vs BTC | At BTC $180k | At BTC $210k |
 |---|---|---|---|
