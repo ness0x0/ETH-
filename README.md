@@ -35,6 +35,8 @@ gates are met, buy one V1 CryptoPunk by bid with a pre-committed trailing-stop e
   dollars while BTC does 2×" bar: a pre-set sell rule, odds by size, single name vs basket, a candidate list, and
   the 10× tail. Section F tests buying in the bear and selling into the halving and post-halving euphoria
   (phase-matched to Oct-2022).
+- [`reports/puppets_check.md`](reports/puppets_check.md): quick out-of-mandate check of Bitcoin Puppets' floor in BTC
+  terms (does a $180k BTC imply a $5k Puppet?).
 
 ## Repository map
 

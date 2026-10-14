@@ -254,6 +254,8 @@ Data APIs and on-chain endpoints are listed separately with what was fetched._
 
 ## E. API/RPC URLs referenced in text
 
+- `https://api-bff.nftpricefloor.com/projects/bitcoin-puppets/charts/all`
+- `https://api.coingecko.com/api/v3/nfts/bitcoin-puppets`
 - `https://api.pudgypenguins.io/lil/1`
 - `https://apis.io/providers/reservoir/`
 - `https://decrypt.co/96786/pudgy-penguins-ethereum-nft-collection-sold-to-netz-capital-for-2-5-million`
