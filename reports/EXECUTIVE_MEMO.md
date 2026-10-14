@@ -55,6 +55,33 @@ Oct-2025 top ([full analysis](cycle_analysis.md); chart `reports/charts/cycle202
   - Entry: tranches starting after 2026-11-12, adding as evidence of a low accumulates.
   - Exit: sell into the next euphoria and rotate into BTC.
 
+## Addendum 2 (2026-10-14): your bar is now 4–10× against a BTC 2×
+
+That bar changes the answer. The cycle trade above has a realistic outcome of beating BTC by a median 1.3–1.6×; it
+does not reach 4×. ([section E of the cycle analysis](cycle_analysis.md#e-can-anything-plausibly-do-410-against-btc-follow-up-2026-10-14))
+
+- **4× or more vs BTC was a tail outcome.** With hindsight-generous timing:
+  - 2024–25: 2 of 44 collections (Moonbirds 6.6×, CryptoDickbutts 4.7×).
+  - 2022–25: 3 of 37 (Lil Pudgys 10.9×, Pudgy 6.5×, Milady 4.8×).
+  - Only the 2021 launch mania made it common.
+- **The winners shared a profile:**
+  - PFPs with a floor cap of $10M or less at the low, 70–98% below their prior peak.
+  - Each was moved by something new and unpriced (a new owner, a Musk post, a token) 10–30 months later.
+  - None above a $15M cap did it (0 of 29).
+  - The profile is common and the catalyst is rare. Today 17 PFPs fit the profile.
+- **Diversifying doesn't solve it.** Five small-cap picks raised the odds of *holding* a 4× name to ~50%, but no
+  five-pick basket reached 4× in 2024–25. Getting the position to 4× needs one concentrated name: roughly 1 in 8 to
+  1 in 6.
+- **New mints are where the 4–10× lives, and you can't project them.** Three of six notable 2023–26 launches peaked at
+  ≥4× vs BTC from their first month; none held more than 1.33×. Across all launches about 95% die.
+- **Net: stay in BTC.** Nothing in the ETH NFT universe can be projected to 4–10× vs BTC.
+  - **If you want lottery exposure anyway,** size it as a total loss and wait for a dated trigger on a name from the
+    watchlist. Triggers are a funded new owner or operator, or an IP or token deal.
+  - **The trigger usually fails.** Buying a week after Orange Cap Games bought Moonbirds still returned ~5–7× vs BTC,
+    but only 1 of 5 such ownership changes worked.
+  - **Discipline.** Concentrate in one name and pre-commit the exit into BTC.
+- **Azuki.** Unchanged: exit patiently after 2026-11-12.
+
 ## Why
 
 **1. The base rate is brutal and has not turned.**

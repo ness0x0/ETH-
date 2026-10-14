@@ -180,6 +180,7 @@ Data APIs and on-chain endpoints are listed separately with what was fetched._
 - https://finance.yahoo.com/news/moonbirds-nfts-soaring-again-whats-160103496.html
 - https://forbesjapan.com/articles/detail/45891
 - https://forkast.news/pudgy-penguins-licensing-nft-revenue-airdrops/
+- https://forklog.com/en/?p=16686 (NFT Evening '96% of NFTs dead' study, as reported 2024-09-04)
 - https://fortune.com/2022/04/18/moonbird-nft-collection-surge/
 - https://games.gg/news/orange-cap-games-raises-millions/
 - https://github.com/cryptopunksnotdead/awesome-cryptopunks-bubble/blob/master/PUNKS_V1_NOTES.md
@@ -208,6 +209,7 @@ Data APIs and on-chain endpoints are listed separately with what was fetched._
 - https://phemex.com/news/article/pudgy-penguins-targets-50-million-revenue-eyes-ipo-by-2027-16063
 - https://seanbonner.com/2022/02/13/explaining-cryptopunks-versions/
 - https://thedigitalarttimes.substack.com/p/cryptopunks-after-the-20-million
+- https://thefader.com/2023/09/21/95-percent-of-nfts-worthless-study-finds (dappGambl 'Dead NFTs' study, as reported)
 - https://thousandant.itch.io/hypercastle-explorer
 - https://threadreaderapp.com/thread/1439332605263032327.html
 - https://toledomuseum.org/about/leadership/snowfro

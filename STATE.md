@@ -25,8 +25,13 @@ _Last updated: 2026-10-14 (UTC)_
   now sit below their 2024 lows; tokens spent; survivors only. Full 2022–25 cycle: ~41%.
 - Files: `reports/cycle_analysis.md`, `scripts/cycle_2024.py`, `cycle_analysis.py`, `cycle_forward.py`,
   `chart_cycles.py`; memo addendum.
-- 2021 context: Punks on-chain floor (`punks_onchain_floor.py`); OpenSea sampled 2020–22 sales
-  (`cycle_a_sales_sampler.py`, running; raw dir locally excluded from git until finished).
+- 2021 context only: Punks on-chain floor (`punks_onchain_floor.py`); OpenSea sampled 2020–22 sales
+  (`cycle_a_sales_sampler.py`, complete; `cycle_a_analysis.py` → `cycleA_summary.csv`).
+- Second follow-up: the investor wants "4–10× against a BTC 2×" (`scripts/cycle_tail.py`; report section E).
+  - ≥4× vs BTC was a tail: 2 of 44 (2024–25) and 3 of 37 (2022–25). All winners were PFPs with a floor cap of $10M or
+    less at the low, and a later unpriced catalyst moved each one.
+  - Five-pick baskets never reached 4×. New mints peak high but don't hold, and ~95% die.
+  - Conclusion: stay in BTC. Lottery exposure only on a dated trigger, sized as a total loss.
 
 ## Market context (verified)
 - 2026-10-13 closes: BTC $83,350; ETH $2,508.69; ETH/BTC 0.0301. BTC close ATH $124,659 (2025-10-06).
