@@ -34,6 +34,8 @@ _Last updated: 2026-10-14 (UTC)_
   - 10× in dollars is a tail (5–17%).
   - The quality finalists peaked at 1.5–1.9× vs BTC, so the candidates for this bar are the small-cap watchlist.
   - Still no buy before the entry gates.
+- Buy-and-hold from a cycle low fails: from the Oct-2023 low, 0 of 44 beat BTC over three years; from the 2024 low,
+  41% beat BTC by its Oct-2025 top and 5% to today (report E7).
 
 ## Market context (verified)
 - 2026-10-13 closes: BTC $83,350; ETH $2,508.69; ETH/BTC 0.0301. BTC close ATH $124,659 (2025-10-06).

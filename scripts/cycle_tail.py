@@ -16,8 +16,11 @@ Parts:
   G  the investor's clarified bar (2026-10-14): "4x in dollars if BTC 2x" = 2x vs BTC (10x in dollars = 5x vs BTC).
      Tested with a rule that needs no hindsight: buy near the low, list at the target (net of 10% costs) and let it
      fill the first time the floor reaches it; otherwise hold to BTC's top (2025-10-06).
+  H  buy near a cycle low and *hold* (the investor's original "hold to 2028-29" idea): value vs BTC at BTC's top
+     (2025-10-06) and today, from the 2022-23, 2023 and 2024 lows
 Outputs: data/processed/cycle_tail_counts.csv, cycle_tail_profile.csv, cycle_tail_buckets.csv, recent_launches.csv,
-         cycle_tail_baskets.csv, cycle_tail_watchlist.csv, cycle_tail_target_rule.csv, cycle_tail_target_summary.csv
+         cycle_tail_baskets.csv, cycle_tail_watchlist.csv, cycle_tail_target_rule.csv, cycle_tail_target_summary.csv,
+         cycle_tail_hold.csv
 """
 import itertools
 import os
@@ -186,6 +189,35 @@ def target_summary(tr, pr):
     return pd.DataFrame(rows)
 
 
+HOLD_LOWS = {"2022-23 low": ("2022-06-15", "2023-10-31"), "Aug-Nov 2023 low": ("2023-08-01", "2023-11-15"),
+             "2024 low": ("2024-06-15", "2024-10-31")}
+
+
+def hold_from_low():
+    rows = []
+    for name, npf, _, cat in UNIVERSE:
+        if not os.path.exists(os.path.join(PROC, "npf_series", f"{npf}.csv")):
+            continue
+        s = load_series(npf, start="2022-06-15")
+        for lab, (a, b) in HOLD_LOWS.items():
+            low = s.loc[a:b]
+            if len(low) < 10:
+                continue
+            ld = low.floorUsd.idxmin()
+            e = low.floorBtc.loc[ld - pd.Timedelta(days=45): ld + pd.Timedelta(days=45)].mean()  # rough entry
+            rows.append(dict(low=lab, name=name, category=cat,
+                             at_btc_top=s.floorBtc.asof(pd.Timestamp("2025-10-06")) / e * (1 - COST),
+                             today=s.floorBtc.iloc[-1] / e * (1 - COST)))
+    d = pd.DataFrame(rows)
+    sm = d.groupby("low", sort=False).agg(n=("name", "size"),
+                                          beat_btc_at_top=("at_btc_top", lambda x: (x > 1).mean()),
+                                          median_at_top=("at_btc_top", "median"),
+                                          ge2_at_top=("at_btc_top", lambda x: (x >= 2).mean()),
+                                          beat_btc_today=("today", lambda x: (x > 1).mean()),
+                                          median_today=("today", "median"))
+    return d, sm
+
+
 if __name__ == "__main__":
     pd.set_option("display.width", 250)
     pd.set_option("display.max_columns", 30)
@@ -217,3 +249,6 @@ if __name__ == "__main__":
     print(tr[(tr.tier == "rough") & tr.hit_2x].sort_values(["cycle", "hit_2x_date"])[
         ["cycle", "name", "low_date", "hit_2x_date", "hit_5x", "hit_5x_date", "max_vs_btc", "end_vs_btc"]].round(2)
           .to_string())
+    hd, hs = hold_from_low()
+    hd.to_csv(os.path.join(PROC, "cycle_tail_hold.csv"), index=False)
+    print(hs.round(2).to_string())

@@ -91,6 +91,11 @@ analog:
 
 **10× in dollars stays a tail** (5–17%). New mints can't be projected.
 
+**Buy-and-hold doesn't work even from the low.**
+- Bought near the Oct-2023 low and held three years, none of 44 collections beat BTC.
+- Bought near the 2024 low and held to BTC's Oct-2025 top, 41% beat BTC; held to today, 5% have.
+- For legacy NFTs, the gain is in the sell, not the hold.
+
 **Azuki.** Unchanged: exit patiently after 2026-11-12.
 
 ## Why

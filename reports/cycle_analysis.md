@@ -468,6 +468,22 @@ Sproto 11.5×, Good Vibes Club 6.1×.
 5. **Not a buy today.** "No purchase before the entry gates" still holds. Once they are met, and with your BTC view, a
    small-cap sleeve with pre-set sells is the one version of this trade that has historically reached your bar.
 
+### E7. Buy at the low and hold? (the original "hold to 2028–29" idea)
+
+This uses rough entry near each low and deducts 10% costs (`cycle_tail_hold.csv`).
+
+| Bought near the… | Beat BTC, held to BTC's top (Oct-2025) | Median vs BTC at the top | ≥2× vs BTC at the top | Beat BTC, held to today | Median vs BTC today |
+|---|---|---|---|---|---|
+| 2024 low | 41% | 0.82× | 9% | 5% | 0.36× |
+| Aug–Nov 2023 low | 18% | 0.37× | 0% | **0%** | 0.14× |
+| 2022–23 low | 23% | 0.38× | 7% | 2% | 0.18× |
+
+**Buying the low did not rescue a hold.**
+- Even held only to BTC's top, most collections lost to BTC.
+- Bought at the Oct-2023 low and held three years, none of 44 did.
+- The cycle trade works only because of the sell (E1). For legacy collections, buy-and-hold to 2028–29 is the idea
+  the data argues against most clearly.
+
 _The 2021 cycle (CryptoPunks on-chain; sampled OpenSea sales, `cycleA_summary.csv`) is kept only as context.
 Category-creation multiples are not a usable analog:_
 - _CryptoPunks: ~0.3 → ~94 ETH (2019 → Nov-2021), 555× vs BTC (rough)._
