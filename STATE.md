@@ -17,6 +17,17 @@ _Last updated: 2026-10-14 (UTC)_
 - Conditional shortlist, only if gates G1–G3 pass: V1 Punks > Milady (exception) > CryptoDickbutts (small) >
   Chromie Squiggle (collectible only). Pudgy is not ranked (outside the mandate).
 
+## Follow-up (2026-10-14): cycle-timing framing
+- Investor asked: buy near the NFT cycle low, sell into the euphoria. Does it beat BTC going 2.16–2.52× to its top?
+  The 2024–25 leg is the primary analog (BTC ~2.1× from the Sep-2024 low to the Oct-2025 top).
+- Result: 75% of 44 collections beat BTC (rough timing, rotating into BTC). Applied to today: 77–91% beat BTC at
+  ETH/BTC 0.025–0.035, and roughly 1-in-3 to 1-in-2 double BTC's result. Upper bound: one cycle; 59% of collections
+  now sit below their 2024 lows; tokens spent; survivors only. Full 2022–25 cycle: ~41%.
+- Files: `reports/cycle_analysis.md`, `scripts/cycle_2024.py`, `cycle_analysis.py`, `cycle_forward.py`,
+  `chart_cycles.py`; memo addendum.
+- 2021 context: Punks on-chain floor (`punks_onchain_floor.py`); OpenSea sampled 2020–22 sales
+  (`cycle_a_sales_sampler.py`, running; raw dir locally excluded from git until finished).
+
 ## Market context (verified)
 - 2026-10-13 closes: BTC $83,350; ETH $2,508.69; ETH/BTC 0.0301. BTC close ATH $124,659 (2025-10-06).
 - Blur (announced 2026-10-12): frontend closes 2026-11-12; Blend stops new loans; borrowers repay or default by then.

@@ -23,7 +23,95 @@ CryptoPunks on-chain PunkBought events (2017 →); Binance prices._
 | **Rough** (your premise) | Average floor ±45 days around the low | Average floor ±15 days around the peak (selling in the euphoric month) |
 | Blind | Median floor of the whole low period (no idea where the bottom is) | Same as rough |
 
-## 1. The euphorias and the lows
+## A. Primary analog: the 2024–25 leg
+
+**Why this cycle.** It is the most recent, and its BTC move matches your hurdle: BTC went from ~$58k at the
+Aug–Sep 2024 low ($54k on 2024-09-06) to $124.7k on 2025-10-06, about **2.1×**, against your 2.16–2.52× from here. It
+had two NFT euphorias:
+- **Dec 2024:** post-election, plus the PENGU/CULT/ANIME token season. ETH ≈ $4.0k, ETH/BTC 0.038.
+- **Aug 2025:** ETH all-time high. ETH ≈ $4.8k, ETH/BTC 0.041.
+
+The entry low was in Aug–Oct 2024: ETH ≈ $2.2–2.6k, ETH/BTC 0.044.
+
+`scripts/cycle_2024.py` → `data/processed/cycle2024*.csv`; chart `reports/charts/cycle2024_low_to_high_vs_btc.png`.
+
+### A1. What happened: 44 collections, entry near the 2024 low, exit in the euphoric month (rough timing, −10% costs)
+
+| Exit | Median NFT gain (USD) | BTC from entry to its Oct-2025 top | Beat BTC if proceeds rotate into BTC at the NFT exit | Beat BTC holding cash to BTC's top | NFT gain ≥2.5× (USD) | Median NFT÷ETH |
+|---|---|---|---|---|---|---|
+| Dec-2024 euphoria only | 1.86× | 2.08× | **73%** | 36% | 25% | 1.45 |
+| Best euphoria before BTC's top (Dec-24 or Aug-25) | 2.40× | 2.08× | **75%** | 64% | 45% | 1.70 |
+
+| Sub-group (best exit) | n | Beat BTC (rotate) | Median NFT÷ETH |
+|---|---|---|---|
+| PFPs | 25 | 76% | 1.90 |
+| Art / historical | 19 | 74% | 1.45 |
+| Token-airdrop names (Pudgy, Lil Pudgys, Milady, Remilio, Azuki, Doodles) | 6 | 100% (Dec-24 exit) | 1.79 |
+| Excluding token names | 38 | 71% | 1.67 |
+| Finalists | 8 | 88% | 1.54 |
+
+**Finalists in the 2024–25 leg** (rough timing; "rotate" means NFT÷BTC between entry and exit):
+
+| Collection | 2024 low → peak | NFT gain (USD) | NFT÷BTC (rotate) | vs BTC held to its top | NFT÷ETH |
+|---|---|---|---|---|---|
+| CryptoDickbutts | Aug-24 → Oct-25 | 8.86× | **4.70×** | 4.24× | 5.94 |
+| Azuki (ANIME) | Aug-24 → Jan-25 | 3.03× | 1.88× | 1.45× | 2.53 |
+| V1 Punks | Aug-24 → Aug-25 | 2.86× | 1.57× | 1.39× | 1.89 |
+| Pudgy (PENGU) | Aug-24 → Dec-24 | 2.14× | 1.31× | 1.03× | 1.67 |
+| Milady (CULT) | Oct-24 → Dec-24 | 1.99× | 1.30× | 0.99× | 1.41 |
+| Chromie Squiggle | Oct-24 → Aug-25 | 2.34× | 1.30× | 1.17× | 1.39 |
+| Remilio (CULT) | Oct-24 → Dec-24 | 1.86× | 1.21× | 0.92× | 1.31 |
+| Terraforms | Aug-24 → Dec-24 | 1.54× | 0.96× | 0.74× | 1.22 |
+
+**Reading it**
+- In the most recent cycle, buying near the 2024 low and selling into the euphoria **beat BTC for about three
+  quarters of collections**. That held even though ETH/BTC *fell* (0.044 → ~0.04), because NFT floors outran ETH by a
+  median 1.7×.
+- Rotating back into BTC at the NFT exit matters. Most PFPs peaked in Dec 2024, ten months before BTC's top. Sitting
+  in cash after that would have lost to BTC for most of them.
+- The biggest winners were neglected names that received a new catalyst: Moonbirds (new owner, 6.6×) and
+  CryptoDickbutts (DAO/whale takeover, 4.7×). The token-airdrop names won on the run-up but crashed after (see the
+  event study).
+
+### A2. Applying the 2024–25 swing to today
+
+Each collection's own 2024–25 NFT÷ETH swing (rough timing) is applied from today's price. Cells show the share of
+collections that would beat BTC, by where ETH/BTC is at the next NFT euphoria. `data/processed/cycle2024_forward.csv`.
+
+| ETH/BTC at the next NFT euphoria (ETH at BTC $200k) | Beat BTC: all 44 | PFPs | Art / historical | Finalists | Chance of ≥2× BTC (all / PFPs) |
+|---|---|---|---|---|---|
+| 0.025 ($5,000) | 77% | 80% | 74% | 8 of 8 | 16% / 28% |
+| **0.030 ($6,000; today)** | **84%** | **80%** | **89%** | 8 of 8 | **32% / 40%** |
+| 0.035 ($7,000) | 91% | 88% | 95% | 8 of 8 | 50% / 56% |
+| 0.040 ($8,000) | 93% | 88% | 100% | 8 of 8 | 55% / 60% |
+
+In USD at BTC $200k and ETH/BTC 0.03, the median 2024-type swing (1.7× vs ETH) is a ~4× NFT against 2.4× for BTC.
+
+### A3. Why these odds are an upper bound
+
+1. **It is one cycle.** The 44 outcomes are cross-sectional results of a single macro episode: post-election
+   risk-on, memecoin season, then the ETH-treasury bid. They are not 44 independent trials. The real uncertainty is
+   whether the next cycle has a comparable NFT euphoria at all. You rightly call 2021 a special macro environment;
+   2024–25 also had special drivers, though milder ones.
+2. **Today's starting point is different.** 59% of collections are *below their 2024 low* in USD. PFPs sit at a median
+   0.49× of their 2024 low, and the token-airdrop PFPs at 0.23×:
+   - Pudgy 0.35×, Milady 0.29×, Azuki 0.15×, Remilio 0.17×.
+
+   Art/historical names are around or above their 2024 lows (median 1.22×):
+   - Squiggle 0.93×, V1 1.67×, CryptoDickbutts 3.4×.
+
+   The PFP lows of 2024 were later undercut by 50–85% after their token catalysts were spent. Today is a *lower* low
+   for them, which may mean a bigger rebound or continued secular decline.
+3. **Token catalysts are spent.** Six of the Dec-2024 winners were airdrop-driven, and post-TGE every one of them fell
+   (median −64% vs BTC at 90 days). Excluding them barely changes the odds (71% vs 75%), but the same names won't get
+   the same catalyst twice.
+4. **Survivorship and timing.** Survivors only, and "rough" timing assumes you buy within ~6 weeks of the low and sell
+   within ~2 weeks of the peak. Blind entry (buying anywhere in the low period) gave similar results in this cycle
+   (73% rotate), because the 2024 lows were broad and flat.
+
+## B. Context and robustness
+
+### B1. All NFT euphorias since 2021
 
 | Euphoria | Window | ETH/BTC (mean) | BTC (mean) | Preceding NFT low |
 |---|---|---|---|---|
@@ -39,11 +127,11 @@ roughly the same USD level** (1.55–1.65× its June-2022 value). Meanwhile BTC 
 the last. CryptoPunks has traded around $100k in USD since late 2021, while BTC went from $16k to $125k and back to
 $83k. NFTs have behaved like a range-bound, decaying oscillator, not a trending asset.
 
-<!-- CYCLE_A -->
 
-## 3. Cycle B (2022 → 2025): the realistic analog
 
-### 3a. Full cycle — cycle low (Jun-2022 → Oct-2023) to the best euphoria (Nov-2023 → Oct-2025)
+### B2. The full 2022–25 cycle (2022 low → best euphoria): a harder test
+
+#### Cycle low (Jun-2022 → Oct-2023) to the best euphoria (Nov-2023 → Oct-2025)
 
 37 collections with history. BTC rose 3.9× (median) between the same dates.
 
@@ -66,7 +154,7 @@ $83k. NFTs have behaved like a range-bound, decaying oscillator, not a trending 
 | Brand PFPs (operator-run) | 10 | 1.28 | 0.93 | 50% |
 | Historical / art | 17 | 0.85 | 0.59 | 24% |
 
-### 3b. Each low → the next euphoria (swing trades)
+#### Each low → the next euphoria (swing trades)
 
 Medians; rough timing, net of 10% costs.
 
@@ -83,7 +171,7 @@ Medians; rough timing, net of 10% costs.
 - Holding from the cycle low to the cycle's best euphoria beat BTC for 41% of collections. It did so only because a
   handful of culture PFPs exploded; the blue-chip art names lost even to ETH.
 
-## 4. Forward view under your assumptions
+### B3. Forward view using the full 2022–25 cycle (more conservative than A2)
 
 Assumptions: BTC to $180–210k at the top; NFTs bought near today's level, treated as the low; sold in the euphoric
 month; rough timing; survivors only. Cells show the share of Cycle-B observations (cycle low → best euphoria) that
@@ -106,7 +194,7 @@ Swing-sample equivalents (171 episodes) are similar: 57% beat BTC at 0.030 and 8
 - An **art/heritage name is roughly a coin flip or worse.**
 - **If you are early (not at the low), odds fall to 22–43%.**
 
-## 5. What these numbers do not capture
+## C. What these numbers do not capture
 
 1. **Is this the low?** No one can know.
    - *Toward a low:* BTC is ~12 months past its Oct-2025 top (the Nov-2022 low came 12 months after the 2021 top).
@@ -127,23 +215,43 @@ Swing-sample equivalents (171 episodes) are similar: 57% beat BTC at 0.030 and 8
 5. **Exit liquidity.** Euphorias are when bids are deepest, but Blur, the venue that supplied ~half of PFP liquidity,
    closes on 2026-11-12.
 
-## 6. Implications for the recommendation
+## D. Implications for the recommendation
 
-- **The earlier "no purchase" headline is the unconditional answer.** It weighted the chance that your macro view is
-  wrong or NFTs keep bleeding.
-- **Conditional on your view** (BTC $180–210k this cycle) **and a cycle-trade discipline** (buy near the low, sell into
-  the euphoria), the evidence is more constructive: a better-than-even chance that a liquid culture PFP beats BTC,
-  with meaningful odds of doubling BTC's result. That is a defensible speculative bet for a capped sleeve.
-- **It changes what to buy.** For a cycle trade, last cycle rewarded beta, not durability. Liquid culture and brand
-  PFPs led, and the durable art/heritage names (Squiggle, V1, Punks) lagged even ETH. Within the finalists:
-  - **Milady** is divisible, liquid and a culture PFP. Last cycle 4.8× BTC.
-  - **Pudgy, or Lil Pudgys for divisibility,** are the most liquid. Last cycle 6.5× / 10.9× BTC, but
-    operator-dependent and post-token.
-  - **CryptoDickbutts** had big swings (3.4× and 2.8× BTC in the last two euphorias), but is illiquid at size.
-  - **V1, Squiggle and Terraforms** are not cycle-trade vehicles on this evidence. Terraforms did beat BTC in Cycle B,
-    but its liquidity is thin.
-- **It changes how to buy and sell:**
-  - *Entry in tranches.* Today's level carries the "not yet the low" risk. Add on evidence of a low: ETH/BTC making a
-    higher low, NFT volume rising off series lows, and the post-Blend supply absorbed after 2026-11-12.
-  - *Exit into the euphoria, before the top tick.* Use the signs that marked past euphorias: sector volume spikes,
-    ETH/BTC breakouts, and token-airdrop announcements. Sell the run-up before any TGE.
+1. **The unconditional answer is unchanged.** If you are unsure about the macro, the weak scenarios dominate and
+   "no purchase / ETH instead" stands (`reports/EXECUTIVE_MEMO.md`).
+2. **Conditional on your view** (BTC $180–210k this cycle, i.e. a repeat of the ~2.1× 2024→2025 leg) **and a
+   cycle-trade discipline** (buy near the low, sell into the euphoria, rotate into BTC), the most recent cycle is
+   clearly favourable:
+   - In 2024–25, about **3 in 4 collections beat BTC**.
+   - Applying each collection's 2024–25 swing from today gives **~77–91%** odds of beating BTC and **~1-in-3 to
+     1-in-2** odds of doubling BTC's result, for ETH/BTC between 0.025 and 0.035 at the euphoria.
+   - The harder full-cycle test (2022 low → 2023–25 euphorias) gives ~2 in 5.
+
+   This is the strongest case in the package for a capped speculative position.
+3. **What decides it is not the collection.** In 2024–25 both PFPs and art beat BTC at similar rates (76% vs 74%).
+   Three things decide it:
+   - **(a) Being near the low.** Today's PFP floors are 50–85% *below* their 2024 lows; the art names sit near theirs.
+   - **(b) Selling into the euphoria and rotating into BTC.** Holding cash after a Dec-2024 exit would have cut the
+     win rate from 73% to 36%.
+   - **(c) ETH/BTC not collapsing** before the euphoria.
+4. **If you run it, prefer names that combine 2024–25 performance, exitability and no spent-catalyst overhang:**
+
+   | Name | 2024–25 vs BTC | Position | Notes |
+   |---|---|---|---|
+   | **V1 Punks** | 1.57× | One item, ~57% of budget | 0% fees; no team. Legitimacy and concentration risks as in the dossier |
+   | **Milady** | 1.30× | 2–3 items | Divisible, liquid, culture beta. Founder risk; 53% of CULT still undistributed |
+   | **CryptoDickbutts** | 4.70× | Small, by bids only | Best 2024–25 swing, but it started from a deep 2024 trough and now sits 3.4× above that low. Illiquid at size |
+   | Pudgy | 1.31× | One item | Most liquid alternative. Igloo/PENGU operator risk |
+
+   Squiggle (1.30×) works only if you accept its 8.5% sale fees. **Terraforms** (0.96×) was the one finalist that
+   lagged even in 2024–25.
+5. **Execution:**
+   - *Tranches.* The first tranche after the 2026-11-12 Blend deadline. Add more as evidence of a low accumulates:
+     ETH/BTC making a higher low; NFT volume rising off its series lows (> $35M/month); the post-Blend supply absorbed.
+   - *Exit into the euphoria.* The 2024–25 tells were sector volume spikes, ETH/BTC breakouts and token-airdrop
+     announcements; sell before any TGE. Rotate the proceeds into BTC immediately. Most NFT peaks came 2–10 months
+     before BTC's.
+   - *Size.* Only what you can lose entirely. It is one cycle's evidence, on survivors.
+
+_The 2021 cycle (CryptoPunks on-chain; sampled OpenSea sales) is kept only as context: category-creation multiples
+(Punks ~0.3 → ~94 ETH, 2019 → Nov-2021; Squiggle ~0.08 → ~10 ETH, Jan → Oct 2021) are not a usable analog._

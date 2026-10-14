@@ -102,6 +102,7 @@ def distribution():
     ax.set_xscale("log")
     ax.xaxis.set_major_formatter(FuncFormatter(lambda v, _: f"{v:g}×"))
     ax.xaxis.set_minor_formatter(NullFormatter())
+    ax.set_xticks([0.3, 0.5, 1, 2, 5, 10])
     ax.set_yticks(range(len(b)))
     ax.set_yticklabels(b.name, fontsize=8, color=INK)
     for i, v in enumerate(b.vs_btc_rough):
@@ -122,3 +123,45 @@ if __name__ == "__main__":
     overview()
     distribution()
     print("ok")
+
+
+def distribution_2024():
+    """2024–25 analog: NFT ÷ BTC from the 2024 low (rough entry) to the best euphoria before BTC's Oct-2025 top,
+    proceeds rotated into BTC at the NFT exit."""
+    d = pd.read_csv(os.path.join(PROC, "cycle2024.csv"))
+    b = d[d.exit == "BEST_to_btc_top"].sort_values("vs_btc_rough")
+    col = {"PFP": C2, "art/historical": C1}
+    fig, ax = plt.subplots(figsize=(10, 11), facecolor=SURF)
+    style(ax)
+    ax.barh(range(len(b)), b.vs_btc_rough, color=[col[g] for g in b.group], height=0.72,
+            hatch=["//" if t else "" for t in b.token], edgecolor=SURF)
+    ax.axvline(1, color=INK, lw=1)
+    ax.set_xscale("log")
+    ax.xaxis.set_major_formatter(FuncFormatter(lambda v, _: f"{v:g}×"))
+    ax.xaxis.set_minor_formatter(NullFormatter())
+    ax.set_xticks([0.5, 1, 2, 4])
+    ax.set_yticks(range(len(b)))
+    ax.set_yticklabels(b.name, fontsize=8, color=INK)
+    for lab, fin in zip(ax.get_yticklabels(), b.finalist):
+        if fin:
+            lab.set_fontweight("bold")
+    for i, v in enumerate(b.vs_btc_rough):
+        ax.text(v * 1.05, i, f"{v:.2f}×", va="center", fontsize=7, color=INK2)
+    ax.set_xlabel("NFT ÷ BTC: 2024 low (Jun–Oct) → best euphoria before BTC's Oct-2025 top; rough timing, −10% costs",
+                  color=INK2, fontsize=8.5)
+    n = (b.vs_btc_rough > 1).sum()
+    ax.set_title(f"2024–25 cycle: {n} of {len(b)} collections beat BTC (sell into the euphoria, rotate into BTC)",
+                 loc="left", color=INK, fontsize=10.5)
+    ax.legend(handles=[Patch(color=C2, label="PFP"), Patch(color=C1, label="Art / historical"),
+                       Patch(facecolor=NEUTRAL, hatch="//", edgecolor=SURF, label="Token airdrop in window")],
+              loc="lower right", fontsize=8, frameon=False)
+    fig.text(0.01, 0.005, "Bold = finalists. Entry = mean floor ±45d around each collection's Jun–Oct 2024 low; exit = "
+             "mean floor ±15d around its highest Nov-2024→Oct-2025 floor.\nSource: NFTPriceFloor, Binance; "
+             "scripts/cycle_2024.py. Survivors only; one cycle (outcomes are correlated, not independent trials).",
+             fontsize=7, color=INK2)
+    fig.tight_layout(rect=(0, 0.035, 1, 1))
+    fig.savefig(os.path.join(ROOT, "reports", "charts", "cycle2024_low_to_high_vs_btc.png"), dpi=125, facecolor=SURF)
+
+
+if __name__ == "__main__":
+    distribution_2024()

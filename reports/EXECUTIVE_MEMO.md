@@ -31,6 +31,30 @@ Market: BTC $83,350 · ETH $2,508.69 · ETH/BTC 0.0301 (Binance daily close). Su
    once it is ≥1.5× vs BTC, sell on a 30% drawdown from its peak. Alternatives in order: Milady (a mandate exception),
    CryptoDickbutts (small and patient), and Chromie Squiggle only as a collectible you want to own.
 
+## Addendum (2026-10-14): your cycle-timing framing — tested on the 2024–25 cycle
+
+You asked a different question: assume BTC goes 2.16–2.52× to its top ($180–210k), buy NFTs near the cycle low, sell
+into the euphoria. Does that beat BTC? The most recent analog is BTC's ~2.1× leg from the Sep-2024 low to the
+Oct-2025 top ([full analysis](cycle_analysis.md); chart `reports/charts/cycle2024_low_to_high_vs_btc.png`).
+
+- **In 2024–25, 33 of 44 collections (75%) beat BTC** when bought near the 2024 low, sold in the euphoric month and
+  rotated into BTC. That held even though ETH/BTC slipped from 0.044 to ~0.04. Finalists: 7 of 8.
+- **Applied to today,** using each collection's own 2024–25 swing:
+  - ~77–91% odds of beating BTC and ~1-in-3 to 1-in-2 odds of doubling BTC's result, for ETH/BTC 0.025–0.035 at
+    the next euphoria.
+  - The harder full-cycle test (from the 2022 low) gives ~2 in 5.
+- **Why that is an upper bound:**
+  - It is one cycle, so its outcomes are correlated, not independent trials.
+  - 59% of collections, including most PFPs, are now *below* their 2024 lows.
+  - The token catalysts that drove the Dec-2024 winners are spent.
+  - Survivors only.
+  - It depends on actually selling into the euphoria and rotating into BTC; holding cash instead halves the win rate.
+- **Net.** "No purchase" remains the unconditional answer. *If* you hold the BTC view with conviction, a capped,
+  fully losable cycle-trade sleeve is supportable:
+  - Names: V1 (1 item), Milady (2–3 items), and optionally a small CryptoDickbutts bid.
+  - Entry: tranches starting after 2026-11-12, adding as evidence of a low accumulates.
+  - Exit: sell into the next euphoria and rotate into BTC.
+
 ## Why
 
 **1. The base rate is brutal and has not turned.**
