@@ -61,6 +61,41 @@ On Ethereum, the most provenance-valued names did worst against BTC.
 - **Ordinals:** the art names here (Twelvefold, Harto, OCM, BTC Machines, INK, CC0) beat BTC in 1 of 7 cycle trades,
   and in none of the holds.
 
+## Status vs performance (follow-up: "what would knock the blue chips off?")
+
+**Keeping rank has not meant keeping value vs BTC.**
+- On Ethereum, CryptoPunks and BAYC have been #1 and #2 by floor cap throughout. Measured in BTC, they are 84% and
+  97.5% below their post-2022 highs.
+- The Ordinals leaders have held their rank since 2024 while falling 96–99% vs BTC from their highs.
+
+**In the last euphoria, two of the three named blue chips lost to BTC even when bought at the low.**
+
+| Collection | 2024 low → Dec-2024 peak, perfect timing | Same, rough timing (vs BTC) |
+|---|---|---|
+| Puppets | 3.0× | 1.33× |
+| NodeMonkes | 1.5× | 0.78× |
+| OMB | 1.3× | 0.77× |
+| Quantum Cats | 1.8× | 1.08× |
+| Bitcoin Frogs | 1.4× | 0.76× |
+
+**Ordinals did partly catch up during Ethereum's 2025 rally.** From ~Apr-2025 to ~Oct-2025, the median Ordinals
+collection rose 1.37× vs BTC (93% rose; NodeMonkes and Puppets 1.2×). Ethereum NFTs rose 1.58× over the same window
+(89% rose). Both then fell back below their Dec-2024 peaks and kept falling. The Ordinals start point is the last NPF
+reading and the end point is derived from CoinGecko, so this is approximate.
+
+**Leadership changes in booms.** Bitcoin Frogs, a 2023 flagship (peak 0.335 BTC, Dec-2023), is now 0.004 BTC. The
+2024 launch cohort took the attention. There has been no Ordinals boom since, which is why the ranking has looked
+fixed.
+
+**Puppets arithmetic from 0.0102 BTC, if the Dec-2024 swing repeats:**
+
+| Timing | Multiple vs BTC | At BTC $180k | At BTC $210k |
+|---|---|---|---|
+| Rough | 1.33× | ~$2.4k | ~$2.8k |
+| Exact peak | 3.0× | ~$5.6k | ~$6.5k |
+
+$7–10k needs a bigger relative spike than the last cycle's, starting from a lower base.
+
 ## Read
 
 - **Ordinals have been a stronger version of the Ethereum pattern, not an exception to it.** The multiples happened
