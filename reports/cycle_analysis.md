@@ -576,6 +576,27 @@ These numbers improve on F1 only because they assume ETH/BTC does not halve agai
    through 2027 into mid-2028 would follow the last cycle's pattern of lows (6 months before and 4 months after the
    halving). That is one cycle's evidence.
 
+## G. Midterm years (follow-up, 2026-10-16; `scripts/midterm_check.py`)
+
+**In the two US-midterm years with data, on-chain euphoria appeared only as a carryover from the prior year's mania,
+early in the year.**
+- **2018:** BTC −50% in Q1 and −44% in Q4. The low was $3,212 on 2018-12-15.
+- **2022:** 9 of the 13 sampled 2021-era collections peaked Jan–Apr 2022 (BAYC last, on Apr-23). BTC then fell 56% in
+  Q2. The low was $15,781 on 2022-11-21.
+- **Neither year started a fresh euphoria.**
+
+**Heat returned the following year.**
+- **2019:** BTC +164% in Q2, with no alt season.
+- **2023:** BTC +72% in Q1. ETH-NFT universe volume went from $0.86B in Q4-2022 to $2.29B in Q1-2023 (Blur airdrop
+  farming, partly wash). Memecoins/BRC-20 followed in the spring and the Ordinals boom late in the year.
+
+**2026 so far fits the pattern.**
+- BTC −22% in Q1, −14% in Q2, and a low of $58,625 on 2026-06-30, then +43% in Q3.
+- NFT universe volume fell every quarter: $111M → $86M → $67M. On-chain activity did not follow the bounce.
+
+**Limits.** This is two cycles, and 2014 predates the data. Earlier midterm-year lows came in Q4. On Ethereum, NFT
+lows kept coming after BTC's low, in Oct-2023 and Aug-2024.
+
 _The 2021 cycle (CryptoPunks on-chain; sampled OpenSea sales, `cycleA_summary.csv`) is kept only as context.
 Category-creation multiples are not a usable analog:_
 - _CryptoPunks: ~0.3 → ~94 ETH (2019 → Nov-2021), 555× vs BTC (rough)._
