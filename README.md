@@ -39,6 +39,7 @@ gates are met, buy one V1 CryptoPunk by bid with a pre-committed trailing-stop e
   terms (does a $180k BTC imply a $5k Puppet?).
 - [`reports/ordinals_check.md`](reports/ordinals_check.md): 47 Ordinals collections run through the same cycle and
   hold tests as the Ethereum set, plus a launch-phase analysis.
+- [`reports/cyberkongz_check.md`](reports/cyberkongz_check.md): CyberKongz (Genesis, Babies, VX) through the same tests.
 
 ## Repository map
 

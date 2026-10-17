@@ -82,9 +82,11 @@ Data APIs and on-chain endpoints are listed separately with what was fetched._
 - https://decrypt.co/293720/art-blocks-nft-project-major-leap-ethereum
 - https://decrypt.co/295800/milady-cult-coin-finally-launched-why-did-it-take-so-long-and-whats-next
 - https://decrypt.co/296507/pengu-pudgy-penguins-solana-token-airdrop-tokenomics
+- https://decrypt.co/297027/sec-serves-nft-project-cyberkongz-with-wells-notice-citing-securities-violations
 - https://decrypt.co/300647/azuki-linked-anime-token-ethereum
 - https://decrypt.co/301080/anime-azuki-ethereum-token-airdrop-tokenomics
 - https://decrypt.co/309506/what-is-milady-edgy-ethereum-nft-community
+- https://decrypt.co/314888/cyberkongz-sec-ends-investigation
 - https://decrypt.co/323189/bored-ape-maker-sells-moonbirds-gaming-startup
 - https://decrypt.co/330150/pudgy-penguins-pengu-token-doubles-in-a-week-amid-etf-hype
 - https://decrypt.co/337273/pudgy-penguins-game-pudgy-party-launches-on-ios-and-android
@@ -145,6 +147,7 @@ Data APIs and on-chain endpoints are listed separately with what was fetched._
 - https://www.theblock.co/post/278347/walmart-pudgy-penguins-expansion
 - https://www.theblock.co/post/282972/remilia-founder-charlotte-fang-claims-he-was-hacked-as-treasury-is-drained-of-millions
 - https://www.theblock.co/post/329935/cult-memecoin-from-milady-nft-creators-goes-live-at-over-600-million-fdv
+- https://www.theblock.co/post/331105/nft-collection-cyberkongz-says-it-has-received-a-wells-notice-from-sec
 - https://www.theblock.co/post/334203/arbitrum-azuki-backed-animecoin-unveils-tokenomics
 - https://www.theblock.co/post/354114/yuga-labs-sells-cryptopunks-ip-to-nonprofit-infinite-node-foundation
 - https://www.theblock.co/post/383446/moma-adds-cryptopunks-and-chromie-squiggles-nfts-to-permanent-collection-following-coordinated-donation
@@ -207,6 +210,7 @@ Data APIs and on-chain endpoints are listed separately with what was fetched._
 - https://nodefoundation.com/cryptopunks
 - https://nowmedia.co/posts/art-blocks-500-snowfro-generative-art-interview
 - https://phemex.com/news/article/pudgy-penguins-targets-50-million-revenue-eyes-ipo-by-2027-16063
+- https://playtoearn.com/news/cyberkongz-announces-kong-tge-for-september-10
 - https://seanbonner.com/2022/02/13/explaining-cryptopunks-versions/
 - https://thedigitalarttimes.substack.com/p/cryptopunks-after-the-20-million
 - https://thefader.com/2023/09/21/95-percent-of-nfts-worthless-study-finds (dappGambl 'Dead NFTs' study, as reported)
@@ -221,6 +225,7 @@ Data APIs and on-chain endpoints are listed separately with what was fetched._
 - https://www.anitrendz.com/news/2025/07/02/web3-company-azuki-sets-up-us-anime-studio-with-comisma-and-xenotoon
 - https://www.axios.com/2023/05/09/pudgy-penguins-nft-ip-brand
 - https://www.bitget.com/news/detail/12560603924492
+- https://www.bitget.com/news/detail/12560604959035
 - https://www.bitget.com/news/detail/12560605079403
 - https://www.bitrue.com/blog/what-is-cryptodickbutts-nft
 - https://www.blockchaingamer.biz/news/40300/faraway-sells-hv-mtl-adam-weitsman/
